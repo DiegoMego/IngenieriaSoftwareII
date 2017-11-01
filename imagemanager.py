@@ -16,18 +16,16 @@ class ImageManager:
         image.set_colorkey(WHITE)
         return image
 
-    def get_image(self, path, x, y, width, height):
-        spritesheet = pg.image.load(path).convert()
-        print(sys.getsizeof(spritesheet))
+    def get_image(self, spritesheet, x, y, width, height):
         image = self.create_surf(width, height)
         image.blit(spritesheet, (0, 0), (x, y, width, height))
         image.set_colorkey(WHITE)
         return image
 
-    def load_images(self, path, x_start, x_end, y, width, height):
+    def load_images(self, spritesheet, x_start, x_end, y, width, height):
         images = []
         for x in range(x_start, x_end, width):
-            images.append(self.get_image(path, x, y, width, height))
+            images.append(self.get_image(spritesheet, x, y, width, height))
         return images
 
     def format_images(self, imagelist, x, y):
