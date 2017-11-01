@@ -82,6 +82,8 @@ class Player(pg.sprite.Sprite):
 
 class PlayerState:
     def __init__(self, player):
+        self.spritesheet = SpriteSheet.get_instance()
+        self.spritesheet.add_sprite(player, PLAYER_CLASS_FOLDER, PLAYER_SPRITESHEET_GENERATOR % (PLAYER_CLASS, PLAYER_EQUIPMENT))
         self.game = player.game
         self.player = player
         self.image_manager = ImageManager.get_instance()

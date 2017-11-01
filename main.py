@@ -3,6 +3,7 @@ import pygame as pg
 from settings import *
 from spritesheet import *
 from button import *
+from playerstate import *
 
 class Game(object):
     """
@@ -86,6 +87,7 @@ class GameState(object):
         self.screen_rect = pg.display.get_surface().get_rect()
         self.persist = {}
         self.font = pg.font.Font(None, 24)
+        self.spritesheet = SpriteSheet.get_instance()
 
     def startup(self, persistent = {}):
         """
@@ -121,7 +123,6 @@ class GameState(object):
 class MainScreen(GameState):
     def __init__(self):
         super().__init__()
-        self.spritesheet = SpriteSheet.get_instance()
         self.image_bg_name = "Background.jpg"
         self.image_text_name = "Title.png"
         self.done = {"GAMEPLAY": False,
@@ -168,40 +169,41 @@ class MainScreen(GameState):
         for key, button in self.buttons.items():
             screen.blit(button.surface, button.rect)
 
-class Gameplay(GameState):
+class GamePlay(GameState):
     def __init__(self):
         super().__init__()
-        self.rect = pg.Rect((0, 0), (128, 128))
-        self.x_velocity = 1
+        self.all_sprites = pg.sprite.Group()
+        self.mob_sprites = pg.sprite.Group()
+        self.dead_sprites = pg.sprite.Group()
+        self.hud_sprites = pg.sprite.Group()
+        self.camera = Camera(self.map.width, self.map.height, self.screen)
+        self.hud = HUD()
+        self.hud_sprites.add(self.hud)
 
     def startup(self, persistent):
-        self.persist = persistent
-        color = self.persist["screen_color"]
-        self.screen_color = pg.Color(color)
-        if color == "dodgerblue":
-            text = "You clicked the mouse to get here"
-        elif color == "gold":
-            text = "You pressed a key to get here"
-        self.title = self.font.render(text, True, pg.Color("gray10"))
-        self.title_rect = self.title.get_rect(center=self.screen_rect.center)
+        x, y = self.map.find_player()
+        self.player = Player(self, x, y)
 
     def events(self, event):
         if event.type == pg.QUIT:
             self.quit = True
-        elif event.type == pg.MOUSEBUTTONUP:
-            self.title_rect.center = event.pos
+
+        for sprite in self.all_sprites:
+            sprite.events()
 
     def update(self, dt):
-        self.rect.move_ip(self.x_velocity, 0)
-        if (self.rect.right > self.screen_rect.right
-            or self.rect.left < self.screen_rect.left):
-            self.x_velocity *= -1
-            self.rect.clamp_ip(self.screen_rect)
+        self.all_sprites.update()
+        self.dead_sprites.update()
+        self.camera.update(self.player)
 
-    def draw(self, surface):
-        surface.fill(self.screen_color)
-        surface.blit(self.title, self.title_rect)
-        pg.draw.rect(surface, pg.Color("darkgreen"), self.rect)
+    def draw(self, screen):
+        screen.fill(WHITE)
+        for sprite in self.dead_sprites:
+            self.screen.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.all_sprites:
+            self.screen.blit(sprite.image, self.camera.apply(sprite))
+        self.hud_sprites.draw(self.screen)
+        pg.display.flip()
 
 
 if __name__ == "__main__":
@@ -209,7 +211,7 @@ if __name__ == "__main__":
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     #self.states["GAMEPLAY"]
     states = {"MAINSCREEN": MainScreen(),
-              "GAMEPLAY": Gameplay()}
+              "GAMEPLAY": GamePlay()}
     game = Game(screen, states, "MAINSCREEN")
     game.run()
     pg.quit()

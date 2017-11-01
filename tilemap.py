@@ -31,8 +31,7 @@ class Map:
                     return col, row
 
 class Camera:
-    def __init__(self, width, height, screen):
-        self.screen = screen
+    def __init__(self, width, height):
         self.pos = vec(0, 0)
         self.width = width
         self.height = height
