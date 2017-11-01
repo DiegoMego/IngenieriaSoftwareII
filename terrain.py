@@ -1,41 +1,30 @@
 import pygame as pg
 import os
 from settings import *
+from spritesheet import *
+vec = pg.math.Vector2
 
+class Terrain(pg.sprite.Sprite):
+    def __init__(self):
+        pg.sprite.Sprite.__init__(self)
+        self.spritesheet = SpriteSheet("Maps\\" + "Act_1", "Town\\0.png")
+        self.load_data()
 
-def mymap():
-    clock = pg.time.Clock()
-    TILE_WIDTH = 160
-    TILE_HEIGHT = 80
-    current_dir = os.path.dirname(__file__)
-    spritesheet = pg.image.load(os.path.join(current_dir, "img\\Maps\\Act_1\\Town\\0.png")).convert()
-    img1 = pg.Surface((160, 80))
-    img1.blit(spritesheet, (0,0), (3 * TILE_WIDTH, 5 * TILE_HEIGHT, 160, 80))
-    img1.set_colorkey((255, 0, 255))
-    img2 = pg.Surface((160, 80))
-    img2.blit(spritesheet, (0,0), (4 * TILE_WIDTH, 5 * TILE_HEIGHT, 160, 80))
-    img2.set_colorkey((255, 0, 255))
-    img3 = pg.Surface((160, 80))
-    img3.blit(spritesheet, (0,0), (0 * TILE_WIDTH, 6 * TILE_HEIGHT, 160, 80))
-    img3.set_colorkey((255, 0, 255))
-    img4 = pg.Surface((160, 80))
-    img4.blit(spritesheet, (0,0), (1 * TILE_WIDTH, 6 * TILE_HEIGHT, 160, 80))
-    img4.set_colorkey((255, 0, 255))
-    images = [img1, img2, img3, img4]
-    posx = 0
-    posy = 0
-    current_map = pg.Surface((960, 680))
-    for y in range(0, 680, 80):
-        posy = y + TILE_HEIGHT/2
-        for x in range(0, 960, 320):
-            posx = x + TILE_WIDTH/2
-            current_map.blit(img2, (x, y), (0, 0, 160, 80))
-            current_map.blit(img3, (x + TILE_WIDTH, y), (0, 0, 160, 80))
-            current_map.blit(img1, (posx, posy), (0, 0, 160, 80))
-            current_map.blit(img4, (posx + TILE_WIDTH, posy), (0, 0, 160, 80))
-
-    return current_map
-
-    #screen.fill(WHITE)
-    #screen.blit(current_map, (-80, -40), (0, 0, 960, 680))
-    #pg.display.update()
+    def load_data(self):
+        self.image = pg.Surface((2560, 2560))
+        self.terrain_image = pg.Surface((320, 160))
+        self.images = []
+        self.images.append(self.spritesheet.get_terrain(320, 80))
+        self.images.append(self.spritesheet.get_terrain(0, 80))
+        self.images.append(self.spritesheet.get_terrain(160, 80))
+        self.images.append(self.spritesheet.get_terrain(640, 0))
+        self.terrain_image.blit(self.images[0], (80, 0))
+        self.terrain_image.blit(self.images[1], (0, 40))
+        self.terrain_image.blit(self.images[2], (160, 40))
+        self.terrain_image.blit(self.images[3], (80, 80))
+        self.terrain_image.set_colorkey(BLACK)
+        for y in range(-80, 2560, 160):
+            for x in range(-160, 2560, 320):
+                self.image.blit(self.terrain_image, (x, y))
+                self.image.blit(self.terrain_image, (x + 160, y + 80))
+        self.rect = self.image.get_rect()

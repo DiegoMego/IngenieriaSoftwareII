@@ -1,7 +1,11 @@
-StandStill:
-961 x 1045
-96 x 96
-2881, 20 imagenes
+Idle (96 x 96):
+x: 0, 960
+y: 1045
 
-Collision:
-64, 77
+GetHit (96 x 96):
+x: 4420, 4996
+y: 1045
+
+Walk (96 x 96):
+x: 2882, 3650
+y: 1045
