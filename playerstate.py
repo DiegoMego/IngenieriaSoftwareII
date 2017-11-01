@@ -116,7 +116,7 @@ class Idle(PlayerState):
         x_start = 0
         x_end = 960
         y = 1045 + (self.image_size + 1) * index
-        image_list = self.image_manager.load_images(PLAYER_SPRITESHEET, x_start, x_end, y, self.image_size, self.image_size)
+        image_list = self.image_manager.load_images(self.spritesheet.get_sprite(self.player), x_start, x_end, y, self.image_size, self.image_size)
         self.player.images = self.image_manager.format_images(image_list, self.image_offset_x, self.image_offset_y)
 
     def events(self):

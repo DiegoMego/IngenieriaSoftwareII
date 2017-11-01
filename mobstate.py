@@ -16,7 +16,7 @@ class Mob(pg.sprite.Sprite):
         self.game = game
         self.hit_rect = copy.copy(MOB_HIT_RECT)
         self.classname = "Felltwin"
-        self.images_path = path.join(path.join(MOB_FOLDER, self.classname), MOB_FILETYPE % (self.classname))
+        #self.images_path = path.join(path.join(MOB_FOLDER, self.classname), MOB_FILETYPE % (self.classname))
         self.x = x
         self.y = y
         self.pos = vec(x, y) * TILESIZE

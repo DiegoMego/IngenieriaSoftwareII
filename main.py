@@ -169,6 +169,57 @@ class MainScreen(GameState):
         for key, button in self.buttons.items():
             screen.blit(button.surface, button.rect)
 
+class TutorialScreen(GameState):
+    def __init__(self):
+        super().__init__()
+        self.spritesheet = SpriteSheet.get_instance()
+        self.image_bg_name = "Tutorial.jpg"
+        #self.image_text_name = "Title.png"
+        #self.done = {"GAMEPLAY": False,
+        #             "TUTORIAL": False,
+        #             "QUIT": False}
+        self.done = { "MAINSCREEN": False}
+        self.load_button()
+
+    def load_button(self):
+        self.button = Button("Regresar")
+        x = 0.12
+        y = 0.93
+        self.button.set_pos(WIDTH * x, HEIGHT * y)
+        #for button in self.buttons.values():
+            #button.set_pos(WIDTH * x, HEIGHT * y)
+
+
+    def startup(self, persistent = {}):
+        self.spritesheet.clear_sprites()
+        self.spritesheet.add_sprite(self, INTRO_FOLDER, self.image_bg_name, True)
+        #self.text_image = pg.image.load(path.join(INTRO_FOLDER, self.image_text_name)).convert()
+        #self.text_image.set_colorkey(BLACK)
+        self.button.clicked = False
+
+    def events(self, event):
+        if event.type == pg.QUIT:
+            self.quit = True
+
+        #for key, button in self.button.items():
+        if self.button.clicked:
+            self.done["MAINSCREEN"] = True
+
+    def update(self, dt):
+        mouse = pg.mouse.get_pos()
+        click = pg.mouse.get_pressed()
+        #for key, button in self.button.items():
+        self.button.update(mouse, click)
+
+    def draw(self, screen):
+        screen.fill(WHITE)
+        screen.blit(self.spritesheet.get_sprite(self), (0, 0))
+        #screen.blit(self.text_image, (0, 0))
+        #for key, button in self.button.items():
+        #    screen.blit(button.surface, button.rect)
+
+        screen.blit(self.button.surface, self.button.rect)
+
 class GamePlay(GameState):
     def __init__(self):
         super().__init__()
@@ -211,7 +262,8 @@ if __name__ == "__main__":
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     #self.states["GAMEPLAY"]
     states = {"MAINSCREEN": MainScreen(),
-              "GAMEPLAY": GamePlay()}
+              "GAMEPLAY": GamePlay(),
+              "TUTORIAL": TutorialScreen()}
     game = Game(screen, states, "MAINSCREEN")
     game.run()
     pg.quit()
