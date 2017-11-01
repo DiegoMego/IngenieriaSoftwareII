@@ -13,8 +13,6 @@ class Button:
         self.height = HEIGHT * 0.1
         self.surface = pg.Surface((self.width, self.height))
         self.rect = self.surface.get_rect()
-
-    def load_text(self):
         self.textrect.center = self.rect.center
 
     def color(self, color):
@@ -24,10 +22,8 @@ class Button:
     def set_pos(self, x, y):
         self.rect.centerx = x
         self.rect.centery = y
-        self.load_text()
 
     def update(self, mouse, click):
-        self.clicked = False
         if self.rect.left <= mouse[0] <= self.rect.right and self.rect.top <= mouse[1] <= self.rect.bottom:
             self.color(DOWN_RED)
             if click[0] == 1:

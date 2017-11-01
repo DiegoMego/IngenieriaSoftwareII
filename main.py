@@ -31,10 +31,10 @@ class Game(object):
         self.state = self.states[self.state_name]
         self.state.startup()
 
-    def event_loop(self):
+    def events(self):
         """Events are passed for handling to the current state."""
         for event in pg.event.get():
-            self.state.get_event(event)
+            self.state.events(event)
 
     def flip_state(self, state_name):
         """Switch to the next game state."""
@@ -69,7 +69,7 @@ class Game(object):
         """
         while not self.done:
             dt = self.clock.tick(self.fps)
-            self.event_loop()
+            self.events()
             self.update(dt)
             self.draw()
             pg.display.update()
@@ -96,7 +96,7 @@ class GameState(object):
         """
         self.persist = persistent
 
-    def get_event(self, event):
+    def events(self, event):
         """
         Handle a single event passed by the Game object.
         """
@@ -130,11 +130,11 @@ class MainScreen(GameState):
         self.load_buttons()
 
     def load_buttons(self):
-        self.buttons = {"Game": Button("Nueva Partida"),
-                        "Tutorial": Button("Tutorial"),
-                        "Salir": Button("Salir")}
+        self.buttons = {"GAMEPLAY": Button("Nueva Partida"),
+                        "TUTORIAL": Button("Tutorial"),
+                        "SALIR": Button("Salir")}
         x = WIDTH / 2
-        y = 0.2
+        y = 0.3
         for button in self.buttons.values():
             button.set_pos(x, HEIGHT * y)
             y += 0.25
@@ -142,7 +142,8 @@ class MainScreen(GameState):
     def startup(self, persistent = {}):
         self.spritesheet.clear_sprites()
         self.spritesheet.add_sprite(self, INTRO_FOLDER, self.image_bg_name, True)
-        self.text_image = pg.image.load(path.join(INTRO_FOLDER, self.image_text_name))
+        self.text_image = pg.image.load(path.join(INTRO_FOLDER, self.image_text_name)).convert()
+        self.text_image.set_colorkey(BLACK)
         for button in self.buttons.values():
             button.clicked = False
 
@@ -163,34 +164,13 @@ class MainScreen(GameState):
     def draw(self, screen):
         screen.fill(WHITE)
         screen.blit(self.spritesheet.get_sprite(self), (0, 0))
+        screen.blit(self.text_image, (0, 0))
         for key, button in self.buttons.items():
             screen.blit(button.surface, button.rect)
 
-class SplashScreen(GameState):
-    def __init__(self):
-        super(SplashScreen, self).__init__()
-        self.title = self.font.render("Splash Screen", True, pg.Color("dodgerblue"))
-        self.title_rect = self.title.get_rect(center=self.screen_rect.center)
-        self.persist["screen_color"] = "black"
-        self.next_state = "GAMEPLAY"
-
-    def get_event(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
-        elif event.type == pg.KEYUP:
-            self.persist["screen_color"] = "gold"
-            self.done = True
-        elif event.type == pg.MOUSEBUTTONUP:
-            self.persist["screen_color"] = "dodgerblue"
-            self.done = True
-
-    def draw(self, surface):
-        surface.fill(pg.Color("black"))
-        surface.blit(self.title, self.title_rect)
-
 class Gameplay(GameState):
     def __init__(self):
-        super(Gameplay, self).__init__()
+        super().__init__()
         self.rect = pg.Rect((0, 0), (128, 128))
         self.x_velocity = 1
 
@@ -205,7 +185,7 @@ class Gameplay(GameState):
         self.title = self.font.render(text, True, pg.Color("gray10"))
         self.title_rect = self.title.get_rect(center=self.screen_rect.center)
 
-    def get_event(self, event):
+    def events(self, event):
         if event.type == pg.QUIT:
             self.quit = True
         elif event.type == pg.MOUSEBUTTONUP:
@@ -229,7 +209,7 @@ if __name__ == "__main__":
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     #self.states["GAMEPLAY"]
     states = {"MAINSCREEN": MainScreen(),
-                   "GAMEPLAY": Gameplay()}
+              "GAMEPLAY": Gameplay()}
     game = Game(screen, states, "MAINSCREEN")
     game.run()
     pg.quit()
