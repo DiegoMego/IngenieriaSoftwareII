@@ -1,6 +1,6 @@
 import pygame as pg
 from settings import *
-from imagemanager import *
+from spritesheet import *
 from keyhandler import *
 from mechanics import *
 import random
@@ -9,58 +9,45 @@ import copy
 vec = pg.math.Vector2
 
 class Mob(pg.sprite.Sprite):
-
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.mob_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.hit_rect = copy.copy(MOB_HIT_RECT)
-        self.classname = "Felltwin"
-        #self.images_path = path.join(path.join(MOB_FOLDER, self.classname), MOB_FILETYPE % (self.classname))
         self.x = x
         self.y = y
-        self.pos = vec(x, y) * TILESIZE
-        self.image_offset_x, self.image_offset_y = 0, -20
-        self.image_size = 128
-        self.images = []
+        self.hit_rect = copy.copy(MOB_HIT_RECT)
         self.load_data()
         self.load_attributes()
 
     def load_data(self):
-        self.states = {"Idle": Idle(self),
-                       "Walk": Walk(self),
+        self.states = {"Stand": Stand(self),
+                       "Move": Move(self),
                        "Attack": Attack(self),
                        "GetHit": GetHit(self),
                        "Die": Die(self)}
-
-        self.player_in_range = False
-        self.current_frame = 0
-        self.last_update = 0
-        self.direction = "down"
-        self.state_name = "Idle"
+        self.state_name = "Stand"
         self.state = self.states[self.state_name]
-        self.images_loaded = False
+        self.image = self.state.image
+        self.rect = self.state.rect
+        self.hit_rect.center = self.rect.center
 
     def load_attributes(self):
         self.health = Health(self.rect.width, 7)
         self.totalhealth = 200
         self.currenthealth = 200
         self.previoushealth = 200
-        self.damage = 10
+        self.damage = 40
         self.hit_rate = 100
         self.defense = 50
         self.level = 1
 
     def flip_state(self, state_name):
         """Switch to the next game state."""
-        self.images_loaded = False
-        self.current_frame = 0
         self.state.done[state_name] = False
         self.state_name = state_name
+        persistent = self.state.persistence
         self.state = self.states[self.state_name]
-
-    def events(self):
-        self.state.events()
+        self.state.start_up(persistent)
 
     def update(self):
         for key, value in self.state.done.items():
@@ -68,20 +55,9 @@ class Mob(pg.sprite.Sprite):
                 self.flip_state(key)
 
         self.state.update()
-        self.rect.center = self.hit_rect.center
-        self.animate()
-
-    def player_detected(self):
-        if self.pos.distance_to(self.game.player.state.pos) < 400:
-            self.player_in_range = True
-        if self.pos.distance_to(self.game.player.pos) > 1000:
-            self.player_in_range = False
-
-    def gets_hit(self):
-        if self.previoushealth > self.currenthealth:
-            self.previoushealth = self.currenthealth
-            return True
-        return False
+        self.image = self.state.image
+        self.rect = self.state.rect
+        self.hit_rect = self.state.hit_rect
 
     def draw_health(self):
         ratio = self.currenthealth / self.totalhealth
@@ -91,24 +67,62 @@ class Mob(pg.sprite.Sprite):
         self.health.get_color(ratio)
         self.game.screen.blit(self.health.image, self.game.camera.apply(self.health))
 
-    def animate(self):
-        now = pg.time.get_ticks()
-        if now - self.last_update > 100:
-            self.last_update = now
-            self.current_frame = (self.current_frame + 1) % len(self.images)
-            self.image = self.images[self.current_frame]
-
-class MobState:
+class MobState(pg.sprite.Sprite):
     def __init__(self, mob):
         pg.sprite.Sprite.__init__(self)
-        self.keyhandler = KeyHandler()
-        self.image_manager = ImageManager.get_instance()
+        self.keyhandler = KeyHandler.get_instance()
         self.game = mob.game
         self.mob = mob
         self.pos = vec(mob.x, mob.y) * TILESIZE
+        self.inbattle = False
+        self.mob_class = "Felltwin"
+        self.hit_rect = copy.copy(MOB_HIT_RECT)
+        self.inital_data()
+
+    def inital_data(self):
+        self.spritesheet = SpriteSheet(MOB_FOLDER + self.mob_class, MOB_SPRITESHEET_GENERATOR % (self.mob_class))
+        self.current_frame = 0
+        self.last_update = 0
+        self.direction = "down"
+        self.persistence = {"direction": self.direction,
+                            "pos": self.pos,
+                            "battle": self.inbattle}
+
+    def load_images(self, x_start, x_end, y_start, width, height, image_x = 0, image_y = -20):
+        action_dir = {"down": [],
+                      "downleft": [],
+                      "left": [],
+                      "upleft": [],
+                      "up": [],
+                      "upright": [],
+                      "right": [],
+                      "downright": []}
+
+        y = y_start
+
+        for key in action_dir:
+            for x in range(x_start, x_end, width):
+                action_dir[key].append(self.spritesheet.get_image(x, y, width, height, image_x, image_y))
+
+            y += height + 1
+
+        return action_dir
 
     def load_data(self):
         pass
+
+    def start_up(self, direction_persistence):
+        self.persistence = direction_persistence
+
+    def detect(self):
+        if self.pos.distance_to(self.game.player.state.pos) < 400:
+            self.inbattle = True
+
+    def ishit(self):
+        if self.mob.previoushealth > self.mob.currenthealth:
+            self.mob.previoushealth = self.mob.currenthealth
+            return True
+        return False
 
     def isdead(self):
         if self.mob.currenthealth <= 0:
@@ -116,67 +130,76 @@ class MobState:
             return True
         return False
 
-    def events(self):
-        pass
-
     def update(self):
         pass
 
-class Idle(MobState):
+    def action(self, action_type, action_dir):
+        self.last_dir = action_dir
+        now = pg.time.get_ticks()
+        if now - self.last_update > 100:
+            self.last_update = now
+            self.current_frame = (self.current_frame + 1) % len(action_type[action_dir])
+            self.image = action_type[action_dir][self.current_frame]
+            self.rect = self.image.get_rect()
+
+class Stand(MobState):
     def __init__(self, mob):
         super().__init__(mob)
-        self.done = {"Walk": False,
+        self.done = {"Move": False,
                      "Attack": False,
                      "GetHit": False,
                      "Die": False}
+        self.action_images = self.load_images(1403, 3073, 1045, 128, 128)
+        self.image = self.action_images[self.direction][0]
+        self.rect = self.image.get_rect()
+        self.hit_rect.center = self.rect.center
 
-        self.mob.image = self.image_manager.get_image(self.mob.images_path, 1409, 1045, self.mob.image_size, self.mob.image_size)
-        self.mob.rect = self.mob.image.get_rect()
+    def start_up(self, persistence):
+        self.persistence = persistence
+        self.action_images = None
+        self.action_images = self.load_images(1403, 3073, 1045, 128, 128)
+        self.current_frame = 0
+        self.inbattle = self.persistence["battle"]
+        self.direction = self.persistence["direction"]
+        self.pos = self.persistence["pos"]
 
-    def load_images(self):
-        self.mob.images.clear()
-        index = self.keyhandler.vel_directions[self.mob.direction][0]
-        x_start = 1409
-        x_end = 3073
-        y = 1045 + (self.mob.image_size + 1) * index
-        image_list = self.image_manager.load_images(self.mob.images_path, x_start, x_end, y, self.mob.image_size, self.mob.image_size)
-        self.mob.images = self.image_manager.format_images(image_list, self.mob.image_offset_x, self.mob.image_offset_y)
-
-    def events(self):
+    def update(self):
         if self.isdead():
             self.done["Die"] = True
         elif self.ishit():
             self.done["GetHit"] = True
-        elif self.mob.player_in_range or (self.mob.current_frame + 1) % len(self.mob.images) == 0:
-            self.done["Walk"] = True
+        else:
+            self.action(self.action_images, self.direction)
+            self.hit_rect.centerx = self.pos.x
+            self.hit_rect.centery = self.pos.y
+            self.rect.center = self.hit_rect.center
+            self.detect()
+            if self.inbattle == True or (self.current_frame + 1) % len(self.action_images[self.direction]) == 0:
+                self.persistence["battle"] = self.inbattle
+                self.done["Move"] = True
 
-    def update(self):
-        if not self.mob.images_loaded:
-            self.mob.images_loaded = True
-            self.load_images()
-
-class Walk(MobState):
+class Move(MobState):
     def __init__(self, mob):
         super().__init__(mob)
-        self.done = {"Idle": False,
+        self.done = {"Stand": False,
                      "Attack": False,
                      "GetHit": False,
                      "Die": False}
 
-    def load_images(self):
-        self.mob.images.clear()
+    def start_up(self, persistence):
+        self.action_images = None
+        self.action_images = self.load_images(3074, 4738, 1045, 128, 128)
+        self.isattacking = False
+        self.persistence = persistence
+        self.inbattle = self.persistence["battle"]
+        self.direction = self.persistence["direction"]
+        self.pos = self.persistence["pos"]
         self.random_direction = self.keyhandler.get_key(random.randint(0, 7))
-        self.distance = 0
-        index = self.keyhandler.vel_directions[self.mob.direction][0]
-        x_start = 3074
-        x_end = 4738
-        y = 1045 + (self.mob.image_size + 1) * index
-        image_list = self.image_manager.load_images(self.mob.images_path, x_start, x_end, y, self.mob.image_size, self.mob.image_size)
-        self.mob.images = self.image_manager.format_images(image_list, self.mob.image_offset_x, self.mob.image_offset_y)
+        self.distancia = 0
 
     def follow(self):
         direction = ""
-        distance_vector = (self.game.player.pos - self.mob.pos)
+        distance_vector = (self.game.player.state.pos - self.pos)
         distance_vector.x = round(distance_vector.x, 2)
         distance_vector.y = round(distance_vector.y, 2)
         for key, value in self.keyhandler.move_keys.items():
@@ -187,65 +210,97 @@ class Walk(MobState):
             if distance_vector.x != 0:
                 distance_vector.x = math.copysign(1, distance_vector.x)
                 direction += key if value[0] == distance_vector.x else ""
-        self.mob.vel = distance_vector * MOB_SPEED
+        self.vel = distance_vector * MOB_SPEED
 
         return direction
 
-    def events(self):
-        if self.mob.isdead():
-            self.done["Die"] = True
-        elif self.mob.gets_hit():
-            self.done["GetHit"] = True
-        elif collide_hit_rect(self.mob, self.game.player):
-            self.done["Attack"] = True
-        elif self.distance >= 160 and not self.mob.player_in_range:
-            self.done["Idle"] = True
+    def collide_hit_rect(self, one, two):
+        if one is two:
+            return False
+        return one.hit_rect.colliderect(two.hit_rect)
+
+    def detect_collision(self, group, dir):
+        # if self.mob.hit_rect.colliderect(self.game.player.hit_rect):
+        #     self.isattacking = True
+
+        if dir == "x":
+            hits = pg.sprite.spritecollide(self.mob, group, False, self.collide_hit_rect)
+            for hit in hits:
+                if hit is self.game.player:
+                    self.isattacking = True
+                if self.vel.x > 0:
+                    self.pos.x = hit.hit_rect.left - self.hit_rect.width / 2
+                if self.vel.x < 0:
+                    self.pos.x = hit.hit_rect.right + self.hit_rect.width / 2
+                self.vel.x = 0
+                self.hit_rect.centerx = self.pos.x
+
+        if dir == "y":
+            hits = pg.sprite.spritecollide(self.mob, group, False, self.collide_hit_rect)
+            for hit in hits:
+                if hit is self.game.player:
+                    self.isattacking = True
+                if self.vel.y > 0:
+                    self.pos.y = hit.hit_rect.top - self.hit_rect.height / 2
+                if self.vel.y < 0:
+                    self.pos.y = hit.hit_rect.bottom + self.hit_rect.height / 2
+                self.vel.y = 0
+                self.hit_rect.centery = self.pos.y
 
     def update(self):
-        self.mob.vel = vec(0, 0)
-        self.previous_direction = self.mob.direction
-        if not self.mob.player_in_range:
-            self.mob.direction = self.random_direction
-            self.vel.x += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED
-            self.vel.y += self.keyhandler.vel_directions[self.random_direction][2] * MOB_SPEED
-            self.distance += MOB_SPEED
+        if self.isdead():
+            self.done["Die"] = True
+        elif self.ishit():
+            self.done["GetHit"] = True
         else:
-            self.mob.direction = self.follow()
+            self.detect()
+            self.vel = vec(0, 0)
+            if not self.inbattle:
+                self.direction = self.random_direction
+                self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * MOB_SPEED
+                self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED
+                self.distancia += MOB_SPEED
+            else:
+                self.direction = self.follow()
 
-        if self.vel.x != 0 and self.vel.y != 0:
-            self.distance *= 1.4142
-            self.vel *= 0.7071
+            if self.vel.x != 0 and self.vel.y != 0:
+                self.distancia *= 1.4142
+                self.vel *= 0.7071
 
-        if self.previous_direction != self.mob.direction:
-            self.mob.images_loaded = False
+            self.action(self.action_images, self.direction)
+            self.pos.x += round(self.vel.x, 0)
+            self.pos.y += round(self.vel.y, 0)
+            self.hit_rect.centerx = self.pos.x
+            self.detect_collision(self.game.all_sprites, "x")
+            self.hit_rect.centery = self.pos.y
+            self.detect_collision(self.game.all_sprites, "y")
+            self.rect.center = self.hit_rect.center
 
-        if not self.mob.images_loaded:
-            self.mob.images_loaded = True
-            self.load_images()
-
-        self.mob.pos.x += round(self.mob.vel.x, 0)
-        self.mob.pos.y += round(self.mob.vel.y, 0)
-        self.mob.hit_rect.centerx = self.mob.pos.x
-        detect_collision(self.mob, self.game.mob_sprites, "x")
-        self.mob.hit_rect.centery = self.mob.pos.y
-        detect_collision(self.mob, self.game.mob_sprites, "y")
+            if self.distancia >= 160 and not self.inbattle:
+                self.persistence["direction"] = self.direction
+                self.persistence["pos"] = self.pos
+                self.done["Stand"] = True
+            elif self.isattacking:
+                self.persistence["direction"] = self.direction
+                self.persistence["pos"] = self.pos
+                self.done["Attack"] = True
 
 class Attack(MobState):
     def __init__(self, mob):
         super().__init__(mob)
-        self.done = {"Idle": False,
-                     "Walk": False,
+        self.done = {"Stand": False,
+                     "Move": False,
                      "GetHit": False,
                      "Die": False}
 
-    def load_images(self):
-        self.mob.images.clear()
-        index = self.keyhandler.vel_directions[self.mob.direction][0]
-        x_start = 0
-        x_end = 1920
-        y = 7 + (self.mob.image_size + 1) * index
-        image_list = self.image_manager.load_images(self.mob.images_path, x_start, x_end, y, self.mob.image_size, self.mob.image_size)
-        self.mob.images = self.image_manager.format_images(image_list, self.mob.image_offset_x, self.mob.image_offset_y)
+    def start_up(self, persistence):
+        self.action_images = None
+        self.action_images = self.load_images(0, 1920, 7, 128, 128)
+        self.persistence = persistence
+        self.current_frame = 0
+        self.inbattle = self.persistence["battle"]
+        self.direction = self.persistence["direction"]
+        self.pos = self.persistence["pos"]
 
     def apply_damage(self):
         if not self.try_hit:
@@ -255,27 +310,27 @@ class Attack(MobState):
                 n = 1 - self.game.player.currenthealth/self.game.player.totalhealth
                 self.game.hud.get_life(n)
 
-    def events(self):
+    def update(self):
         if self.isdead():
             self.done["Die"] = True
         elif self.ishit():
             self.done["GetHit"] = True
-        elif (self.current_frame + 1) % len(self.action_images[self.direction]) == 0 and not self.mob.player_in_range:
-            self.done["Idle"] = True
-
-    def update(self):
-        if not self.mob.images_loaded:
-            self.mob.images_loaded = True
-            self.load_images()
-        if self.current_frame == 0:
-            self.try_hit = False
-        if self.current_frame == 10:
-            self.apply_damage()
+        else:
+            if (self.current_frame + 1) % len(self.action_images[self.direction]) == 0 and self.persistence["pos"].distance_to(self.game.player.state.pos) > 32:
+                self.done["Stand"] = True
+            if self.current_frame == 0:
+                self.try_hit = False
+            if self.current_frame == 10:
+                self.apply_damage()
+            self.action(self.action_images, self.persistence["direction"])
+            self.hit_rect.centerx = self.pos.x
+            self.hit_rect.centery = self.pos.y
+            self.rect.center = self.hit_rect.center
 
 class GetHit(MobState):
     def __init__(self, mob):
         super().__init__(mob)
-        self.done = {"Idle": False}
+        self.done = {"Stand": False}
 
     def start_up(self, persistence):
         self.action_images = None
@@ -285,48 +340,41 @@ class GetHit(MobState):
         self.direction = self.persistence["direction"]
         self.pos = self.persistence["pos"]
 
-    def load_images(self):
-        self.mob.images.clear()
-        index = self.keyhandler.vel_directions[self.mob.direction][0]
-        x_start = 0
-        x_end = 1408
-        y = 1045 + (self.mob.image_size + 1) * index
-        image_list = self.image_manager.load_images(self.mob.images_path, x_start, x_end, y, self.mob.image_size, self.mob.image_size)
-        self.mob.images = self.image_manager.format_images(image_list, self.mob.image_offset_x, self.mob.image_offset_y)
-
-    def events(self):
-        if (self.current_frame + 1) % len(self.mob.images) == 0:
-            self.done["Idle"] = True
-
     def update(self):
-        if not self.mob.images_loaded:
-            self.mob.images_loaded = True
-            self.load_images()
-        if self.mob.gets_hit():
+        if self.ishit():
             self.current_frame = 0
+        if (self.current_frame + 1) % len(self.action_images[self.direction]) == 0:
+            self.done["Stand"] = True
+
+        self.action(self.action_images, self.direction)
+        self.hit_rect.centerx = self.pos.x
+        self.hit_rect.centery = self.pos.y
+        self.rect.center = self.hit_rect.center
 
 class Die(MobState):
     def __init__(self, mob):
         super().__init__(mob)
         self.hit_rect = pg.Surface((0, 0))
+        self.finish = False
         self.done = {"None": None}
 
-    def load_images(self):
-        self.mob.images.clear()
-        index = self.keyhandler.vel_directions[self.mob.direction][0]
-        x_start = 1921
-        x_end = 3969
-        y = 7 + (self.mob.image_size + 1) * index
-        image_list = self.image_manager.load_images(self.mob.images_path, x_start, x_end, y, self.mob.image_size, self.mob.image_size)
-        self.mob.images = self.image_manager.format_images(image_list, self.mob.image_offset_x, self.mob.image_offset_y)
+    def start_up(self, persistence):
+        self.action_images = None
+        self.action_images = self.load_images(1921, 3969, 7, 128, 128)
+        self.persistence = persistence
+        self.current_frame = 0
+        self.direction = self.persistence["direction"]
+        self.pos = self.persistence["pos"]
+        self.mob.remove(self.mob.groups)
+        self.mob.add(self.game.dead_sprites)
 
     def update(self):
-        if not self.mob.images_loaded:
-            self.mob.images_loaded = True
-            self.load_images()
+        if not self.finish:
+            self.action(self.action_images, self.direction)
+            self.rect.centerx = self.pos.x
+            self.rect.centery = self.pos.y
         if self.current_frame == len(self.action_images[self.direction]) - 1:
-            self.mob.remove(self.mob.groups)
-            self.mob.add(self.game.dead_sprites)
+            self.finish = True
 
 class Health:
     def __init__(self, width, height):

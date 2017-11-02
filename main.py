@@ -90,6 +90,7 @@ class GameState(object):
         self.persist = {}
         self.font = pg.font.Font(None, 24)
         self.spritesheet = SpriteSheet.get_instance()
+        self.image_manager = ImageManager.get_instance()
 
     def startup(self, persistent = {}):
         """
@@ -218,8 +219,10 @@ class GamePlay(GameState):
         self.camera = Camera(self.map.width, self.map.height)
         self.hud = HUD()
         self.hud_sprites.add(self.hud)
+        self.done = {"MainScreen": False}
 
     def startup(self, persistent):
+        self.image_manager.load_player_images()
         x, y = self.map.find_player()
         self.player = Player(self, x, y)
 
@@ -238,10 +241,10 @@ class GamePlay(GameState):
     def draw(self, screen):
         screen.fill(WHITE)
         for sprite in self.dead_sprites:
-            self.screen.blit(sprite.image, self.camera.apply(sprite))
+            screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.all_sprites:
-            self.screen.blit(sprite.image, self.camera.apply(sprite))
-        self.hud_sprites.draw(self.screen)
+            screen.blit(sprite.image, self.camera.apply(sprite))
+        self.hud_sprites.draw(screen)
         pg.display.flip()
 
 

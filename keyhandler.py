@@ -1,13 +1,13 @@
 import pygame as pg
 
 class KeyHandler:
-    _instance = None
-    
+    __instance = None
+
     @classmethod
     def get_instance(cls):
-        if cls._instance == None:
-            cls._instance = KeyHandler()
-        return cls._instance
+        if cls.__instance == None:
+            cls.__instance = KeyHandler()
+        return cls.__instance
 
     def __init__(self):
         self.previous_key = ""
