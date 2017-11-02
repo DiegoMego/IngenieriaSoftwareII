@@ -64,9 +64,9 @@ class PlayerState(pg.sprite.Sprite):
     def __init__(self, player):
         pg.sprite.Sprite.__init__(self)
         self.image_manager = ImageManager.get_instance()
+        self.keyhandler = KeyHandler.get_instance()
         self.game = player.game
         self.player = player
-        self.keyhandler = KeyHandler.get_instance()
         self.pos = vec(player.x, player.y) * TILESIZE
         self.hit_rect = PLAYER_HIT_RECT
         self.inital_data()

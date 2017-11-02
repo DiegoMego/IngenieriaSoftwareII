@@ -5,6 +5,7 @@ from settings import *
 
 class ImageManager:
     __instance = None
+    _mob_images = {}
 
     @classmethod
     def get_instance(cls):
@@ -28,6 +29,17 @@ class ImageManager:
         self.player_attack = self.create_action_dict(spritesheet, 0, 2048, 7, 128, 128, 0, -16)
         self.player_gethit = self.create_action_dict(spritesheet, 4420, 4996, 1045, 96, 96, 16, 16)
         self.player_die = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
+
+    def load_mob_images(self, mob_type):
+        if not hasattr(self, "mob"):
+            self.mob = {}
+        spritesheet = pg.image.load(path.join(MOB_FOLDER, MOB_FILETYPE % (mob_type)))
+        #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
+        self.mob[mob_type] = {"Idle": self.create_action_dict(spritesheet, 1403, 3073, 1045, 128, 128, 0, -20),
+                              "Walk": self.create_action_dict(spritesheet, 3074, 4738, 1045, 128, 128, 0, -20),
+                              "Attack": self.create_action_dict(spritesheet, 0, 1920, 7, 128, 128, 0, -20),
+                              "GetHit": self.create_action_dict(spritesheet, 0, 1408, 1045, 128, 128, 0, -20),
+                              "Die": self.create_action_dict(spritesheet, 1921, 3969, 7, 128, 128, 0, -20)}
 
     def get_image(self, spritesheet, x, y, width, height, img_x = 0, img_y = 0):
         image = pg.Surface((128, 128))

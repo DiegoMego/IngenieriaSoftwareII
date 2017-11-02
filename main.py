@@ -223,6 +223,7 @@ class GamePlay(GameState):
 
     def startup(self, persistent):
         self.image_manager.load_player_images()
+        self.image_manager.load_mob_images("Felltwin")
         x, y = self.map.find_player()
         self.player = Player(self, x, y)
 
