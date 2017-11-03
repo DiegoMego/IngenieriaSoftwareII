@@ -54,7 +54,7 @@ class Mob(pg.sprite.Sprite):
         self.state.start_up(persistent)
 
     def events(self):
-        pass
+        self.state.events()
 
     def update(self):
         for key, value in self.state.done.items():
@@ -149,21 +149,23 @@ class Idle(MobState):
         self.direction = self.persistence["direction"]
         self.pos = self.persistence["pos"]
 
-    def update(self):
-        self.vel = vec(0, 0)
+    def events(self):
         if self.isdead():
             self.done["Die"] = True
         elif self.gets_hit():
             self.done["GetHit"] = True
-        else:
-            self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
-            self.hit_rect.centerx = self.pos.x
-            self.hit_rect.centery = self.pos.y
-            self.rect.center = self.hit_rect.center
-            self.detect()
-            if self.inbattle == True or (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
-                self.persistence["battle"] = self.inbattle
-                self.done["Walk"] = True
+        elif self.inbattle or (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
+            self.persistence["battle"] = self.inbattle
+            self.done["Walk"] = True
+
+    def update(self):
+        self.vel = vec(0, 0)
+        self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
+        self.hit_rect.centerx = self.pos.x
+        self.hit_rect.centery = self.pos.y
+        self.rect.center = self.hit_rect.center
+        self.detect()
+
 
 class Walk(MobState):
     def __init__(self, mob):
@@ -199,45 +201,45 @@ class Walk(MobState):
 
         return direction
 
-    def update(self):
+    def events(self):
         if self.isdead():
             self.done["Die"] = True
         elif self.gets_hit():
             self.done["GetHit"] = True
+        elif self.distancia >= 160 and not self.inbattle:
+            self.persistence["direction"] = self.direction
+            self.persistence["pos"] = self.pos
+            self.done["Idle"] = True
+        elif self.isattacking:
+            self.persistence["direction"] = self.direction
+            self.persistence["pos"] = self.pos
+            self.done["Attack"] = True
+
+    def update(self):
+        self.detect()
+        self.vel = vec(0, 0)
+        if not self.inbattle:
+            self.direction = self.random_direction
+            self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * MOB_SPEED
+            self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED
+            self.distancia += MOB_SPEED
         else:
-            self.detect()
-            self.vel = vec(0, 0)
-            if not self.inbattle:
-                self.direction = self.random_direction
-                self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * MOB_SPEED
-                self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED
-                self.distancia += MOB_SPEED
-            else:
-                self.direction = self.follow()
+            self.direction = self.follow()
 
-            if self.vel.x != 0 and self.vel.y != 0:
-                self.distancia *= 1.4142
-                self.vel *= 0.7071
+        if self.vel.x != 0 and self.vel.y != 0:
+            self.distancia *= 1.4142
+            self.vel *= 0.7071
 
-            self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
-            self.pos.x += round(self.vel.x, 0)
-            self.pos.y += round(self.vel.y, 0)
-            self.hit_rect.centerx = self.pos.x
-            self.hit_rect.centery = self.pos.y
-            if collide_hit_rect(self.mob, self.game.player):
-                self.isattacking = True
-            detect_collision(self.mob, self.game.all_sprites, "x")
-            detect_collision(self.mob, self.game.all_sprites, "y")
-            self.rect.center = self.hit_rect.center
-
-            if self.distancia >= 160 and not self.inbattle:
-                self.persistence["direction"] = self.direction
-                self.persistence["pos"] = self.pos
-                self.done["Idle"] = True
-            elif self.isattacking:
-                self.persistence["direction"] = self.direction
-                self.persistence["pos"] = self.pos
-                self.done["Attack"] = True
+        self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
+        self.pos.x += round(self.vel.x, 0)
+        self.pos.y += round(self.vel.y, 0)
+        self.hit_rect.centerx = self.pos.x
+        self.hit_rect.centery = self.pos.y
+        if collide_hit_rect(self.mob, self.game.player):
+            self.isattacking = True
+        detect_collision(self.mob, self.game.all_sprites, "x")
+        detect_collision(self.mob, self.game.all_sprites, "y")
+        self.rect.center = self.hit_rect.center
 
 class Attack(MobState):
     def __init__(self, mob):
@@ -262,23 +264,24 @@ class Attack(MobState):
                 n = 1 - self.game.player.currenthealth/self.game.player.totalhealth
                 self.game.hud.get_life(n)
 
-    def update(self):
-        self.vel = vec(0, 0)
+    def events(self):
         if self.isdead():
             self.done["Die"] = True
         elif self.gets_hit():
             self.done["GetHit"] = True
-        else:
-            if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0 and self.persistence["pos"].distance_to(self.game.player.state.pos) > 32:
-                self.done["Idle"] = True
-            if self.current_frame == 0:
-                self.try_hit = False
-            if self.current_frame == 10:
-                self.apply_damage()
-            self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.persistence["direction"])
-            self.hit_rect.centerx = self.pos.x
-            self.hit_rect.centery = self.pos.y
-            self.rect.center = self.hit_rect.center
+
+    def update(self):
+        self.vel = vec(0, 0)
+        if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0 and self.persistence["pos"].distance_to(self.game.player.state.pos) > 32:
+            self.done["Idle"] = True
+        if self.current_frame == 0:
+            self.try_hit = False
+        if self.current_frame == 10:
+            self.apply_damage()
+        self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.persistence["direction"])
+        self.hit_rect.centerx = self.pos.x
+        self.hit_rect.centery = self.pos.y
+        self.rect.center = self.hit_rect.center
 
 class GetHit(MobState):
     def __init__(self, mob):
@@ -291,13 +294,14 @@ class GetHit(MobState):
         self.direction = self.persistence["direction"]
         self.pos = self.persistence["pos"]
 
+    def events(self):
+        if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
+            self.done["Idle"] = True
+
     def update(self):
         self.vel = vec(0, 0)
         if self.gets_hit():
             self.current_frame = 0
-        if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
-            self.done["Idle"] = True
-
         self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
         self.hit_rect.centerx = self.pos.x
         self.hit_rect.centery = self.pos.y
