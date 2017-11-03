@@ -63,8 +63,7 @@ class Mob(pg.sprite.Sprite):
 
         self.state.update()
         self.image = self.state.image
-        self.vel.x = round(self.state.vel.x, 0)
-        self.vel.y = round(self.state.vel.y, 0)
+        self.vel = self.state.vel
         self.pos = self.state.pos
         self.rect = self.state.rect
         self.hit_rect = self.state.hit_rect

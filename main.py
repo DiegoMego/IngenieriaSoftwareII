@@ -37,8 +37,7 @@ class Game(object):
 
     def events(self):
         """Events are passed for handling to the current state."""
-        for event in pg.event.get():
-            self.state.events(event)
+        self.state.events()
 
     def flip_state(self, state_name):
         """Switch to the next game state."""
@@ -152,9 +151,10 @@ class MainScreen(GameState):
         for button in self.buttons.values():
             button.clicked = False
 
-    def events(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+    def events(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                self.quit = True
 
         for key, button in self.buttons.items():
             if button.clicked:
@@ -193,9 +193,10 @@ class TutorialScreen(GameState):
         self.spritesheet.add_sprite(self, INTRO_FOLDER, self.image_bg_name, True)
         self.button.clicked = False
 
-    def events(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+    def events(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                self.quit = True
         if self.button.clicked:
             self.done["MAINSCREEN"] = True
 
@@ -232,9 +233,10 @@ class GamePlay(GameState):
                 if tile == "M":
                     Mob(self, col, row)
 
-    def events(self, event):
-        if event.type == pg.QUIT:
-            self.quit = True
+    def events(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                self.quit = True
 
         for sprite in self.all_sprites:
             sprite.events()
