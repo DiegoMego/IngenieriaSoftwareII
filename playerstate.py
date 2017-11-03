@@ -13,6 +13,8 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.x = x
         self.y = y
+        self.vel = vec(0, 0)
+        self.pos = vec(x, y) * TILESIZE
         self.load_data()
         self.load_attributes()
 
@@ -26,9 +28,9 @@ class Player(pg.sprite.Sprite):
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
         self.image = self.state.image
-        self.rect = self.state.rect
+        self.rect = self.image.get_rect()
         self.hit_rect = PLAYER_HIT_RECT
-        self.hit_rect.center = self.rect.center
+        #self.hit_rect.center = self.rect.center
 
     def load_attributes(self):
         self.totalhealth = 500
@@ -48,7 +50,7 @@ class Player(pg.sprite.Sprite):
         self.state.start_up(persistent)
 
     def events(self):
-        pass
+        self.state.events()
 
     def update(self):
         for key, value in self.state.done.items():
@@ -56,9 +58,15 @@ class Player(pg.sprite.Sprite):
                 self.flip_state(key)
 
         self.state.update()
+        self.vel = self.state.vel
         self.image = self.state.image
-        self.rect = self.state.rect
-        self.hit_rect = self.state.hit_rect
+        self.pos.x += round(self.vel.x, 0)
+        self.pos.y += round(self.vel.y, 0)
+        self.hit_rect.centerx = self.pos.x
+        detect_collision(self, self.game.mob_sprites, "x")
+        self.hit_rect.centery = self.pos.y
+        detect_collision(self, self.game.mob_sprites, "y")
+        self.rect.center = self.hit_rect.center
 
 class PlayerState(pg.sprite.Sprite):
     def __init__(self, player):
@@ -75,8 +83,7 @@ class PlayerState(pg.sprite.Sprite):
         self.current_frame = 0
         self.last_update = 0
         self.direction = "down"
-        self.persistence = {"direction": self.direction,
-                            "pos": self.pos}
+        self.persistence = {"direction": self.direction}
 
     def start_up(self, direction_persistence):
         self.persistence = direction_persistence
@@ -86,6 +93,9 @@ class PlayerState(pg.sprite.Sprite):
             self.player.previoushealth = self.player.currenthealth
             return True
         return False
+
+    def events(self):
+        pass
 
     def update(self):
         pass
@@ -105,30 +115,33 @@ class Idle(PlayerState):
                      "Attack": False,
                      "GetHit": False}
         self.image = self.image_manager.player_idle[self.direction][0]
-        self.rect = self.image.get_rect()
 
     def start_up(self, persistence):
         self.persistence = persistence
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
 
-    def update(self):
+    def events(self):
         keys = pg.key.get_pressed()
         if self.gets_hit():
             self.done["GetHit"] = True
-        else:
-            for key, value in self.keyhandler.move_keys.items():
-                if keys[value[2]]:
-                    self.done["Walk"] = True
+            return False
 
-            for key, value in self.keyhandler.action_keys.items():
-                if keys[value]:
-                    self.done["Attack"] = True
+        for key, value in self.keyhandler.move_keys.items():
+            if keys[value[2]]:
+                self.done["Walk"] = True
+                return False
 
-            self.hit_rect.centerx = self.pos.x
-            self.hit_rect.centery = self.pos.y
-            self.rect.center = self.hit_rect.center
-            self.action(self.image_manager.player_idle, self.direction)
+        for key, value in self.keyhandler.action_keys.items():
+            if keys[value]:
+                self.done["Attack"] = True
+                return False
+
+    def update(self):
+        self.vel = vec(0, 0)
+        # self.hit_rect.centerx = self.pos.x
+        # self.hit_rect.centery = self.pos.y
+        # self.rect.center = self.hit_rect.center
+        self.action(self.image_manager.player_idle, self.direction)
 
 class IdleTown(PlayerState):
     def __init__(self, player):
@@ -250,97 +263,70 @@ class Walk(PlayerState):
         self.done = {"Idle": False,
                      "Attack": False,
                      "GetHit": False}
-        self.image = self.image_manager.player_walk[self.persistence["direction"]][0]
-        self.rect = self.image.get_rect()
-        self.hit_rect.center = self.rect.center
+        # self.image = self.image_manager.player_walk[self.persistence["direction"]][0]
+        # self.rect = self.image.get_rect()
+        # self.hit_rect.center = self.rect.center
 
     def start_up(self, persistence):
         self.persistence = persistence
         self.keyhandler.move_keyspressed = []
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
+        # self.pos = self.persistence["pos"]
 
-    def collide_hit_rect(self, one, two):
-        if one != two:
-            return one.hit_rect.colliderect(two.hit_rect)
-
-        return False
-
-    def detect_collision(self, group, dir):
-        if dir == "x":
-            hits = pg.sprite.spritecollide(self, group, False, self.collide_hit_rect)
-            if hits:
-                if self.vel.x > 0:
-                    self.pos.x = hits[0].hit_rect.left - self.hit_rect.width / 2
-                if self.vel.x < 0:
-                    self.pos.x = hits[0].hit_rect.right + self.hit_rect.width / 2
-                self.vel.x = 0
-                self.hit_rect.centerx = self.pos.x
-        if dir == "y":
-            hits = pg.sprite.spritecollide(self, group, False, self.collide_hit_rect)
-            if hits:
-                if self.vel.y > 0:
-                    self.pos.y = hits[0].hit_rect.top - self.hit_rect.height / 2
-                if self.vel.y < 0:
-                    self.pos.y = hits[0].hit_rect.bottom + self.hit_rect.height / 2
-                self.vel.y = 0
-                self.hit_rect.centery = self.pos.y
+    def events(self):
+        keys = pg.key.get_pressed()
+        if self.gets_hit():
+            self.done["GetHit"] = True
+        elif len(self.keyhandler.move_keyspressed) == 0:
+            self.persistence["direction"] = self.direction
+            self.persistence["pos"] = self.pos
+            self.done["Idle"] = True
+        elif keys[pg.K_q]:
+            self.persistence["direction"] = self.direction
+            self.persistence["pos"] = self.pos
+            self.done["Attack"] = True
 
     def update(self):
         self.vel = vec(0, 0)
         keys = pg.key.get_pressed()
-        if self.gets_hit():
-            self.done["GetHit"] = True
-        else:
-            for key, value in self.keyhandler.move_keys.items():
-                if keys[value[2]]:
-                    self.keyhandler.insert_key(key)
-                    self.vel.x += value[0] * PLAYER_SPEED
-                    self.vel.y += value[1] * PLAYER_SPEED
-                else:
-                    self.keyhandler.remove_key(key)
+        for key, value in self.keyhandler.move_keys.items():
+            if keys[value[2]]:
+                self.keyhandler.insert_key(key)
+                self.vel.x += value[0] * PLAYER_SPEED
+                self.vel.y += value[1] * PLAYER_SPEED
+            else:
+                self.keyhandler.remove_key(key)
 
-            if self.vel.x != 0 and self.vel.y != 0:
-                self.vel *= 0.7071
+        if self.vel.x != 0 and self.vel.y != 0:
+            self.vel *= 0.7071
 
-            if len(self.keyhandler.move_keyspressed) == 0:
-                self.persistence["direction"] = self.direction
-                self.persistence["pos"] = self.pos
-                self.done["Idle"] = True
-            elif keys[pg.K_q]:
-                self.persistence["direction"] = self.direction
-                self.persistence["pos"] = self.pos
-                self.done["Attack"] = True
-
-            self.keyhandler.previous_key = self.direction
-            self.direction = self.keyhandler.get_move_direction()
-
-            self.action(self.image_manager.player_walk, self.direction)
-
-            self.pos.x += round(self.vel.x, 0)
-            self.pos.y += round(self.vel.y, 0)
-            self.hit_rect.centerx = self.pos.x
-            self.detect_collision(self.game.mob_sprites, "x")
-            self.hit_rect.centery = self.pos.y
-            self.detect_collision(self.game.mob_sprites, "y")
-            self.rect.center = self.hit_rect.center
+        self.keyhandler.previous_key = self.direction
+        self.direction = self.keyhandler.get_move_direction()
+        self.action(self.image_manager.player_walk, self.direction)
+        # self.pos.x += round(self.vel.x, 0)
+        # self.pos.y += round(self.vel.y, 0)
+        # self.hit_rect.centerx = self.pos.x
+        # detect_collision(self.player, self.game.mob_sprites, "x")
+        # self.hit_rect.centery = self.pos.y
+        # detect_collision(self.player, self.game.mob_sprites, "y")
+        # self.rect.center = self.hit_rect.center
 
 class Attack(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Idle": False,
                      "GetHit": False}
-        self.image = self.image_manager.player_attack[self.persistence["direction"]][0]
-        self.rect = self.image.get_rect()
+        # self.image = self.image_manager.player_attack[self.persistence["direction"]][0]
+        # self.rect = self.image.get_rect()
 
     def start_up(self, persistence):
         self.persistence = persistence
         self.current_frame = 0
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
-        self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
-        self.rect.center = self.hit_rect.center
+        # self.pos = self.persistence["pos"]
+        # self.hit_rect.centerx = self.pos.x
+        # self.hit_rect.centery = self.pos.y
+        # self.rect.center = self.hit_rect.center
 
     def check(self, direction):
         if not self.try_hit:
@@ -351,42 +337,45 @@ class Attack(PlayerState):
                 if mob.hit_rect.collidepoint(posx, posy) and hit(self.player.hit_rate, mob.defense, self.player.level, mob.level):
                     mob.currenthealth -= self.player.damage
 
-    def update(self):
+    def events(self):
         keys = pg.key.get_pressed()
         if self.gets_hit():
             self.done["GetHit"] = True
-        else:
-            if (self.current_frame + 1) % len(self.image_manager.player_attack[self.direction]) == 0:
-                for key, value in self.keyhandler.action_keys.items():
-                    if not keys[value]:
-                        self.done["Idle"] = True
-            if self.current_frame == 9:
-                self.check(self.direction)
-            if self.current_frame == 0:
-                self.try_hit = False
+        elif (self.current_frame + 1) % len(self.image_manager.player_attack[self.direction]) == 0:
+            for key, value in self.keyhandler.action_keys.items():
+                if not keys[value]:
+                    self.done["Idle"] = True
 
-            self.action(self.image_manager.player_attack, self.direction)
+    def update(self):
+        self.vel = vec(0, 0)
+        if self.current_frame == 9:
+            self.check(self.direction)
+        if self.current_frame == 0:
+            self.try_hit = False
+        self.action(self.image_manager.player_attack, self.direction)
 
 class GetHit(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Idle": False}
-        self.image = self.image_manager.player_gethit[self.persistence["direction"]][0]
-        self.rect = self.image.get_rect()
+        # self.image = self.image_manager.player_gethit[self.persistence["direction"]][0]
+        # self.rect = self.image.get_rect()
 
     def start_up(self, persistence):
         self.persistence = persistence
         self.current_frame = 0
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
-        self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
-        self.rect.center = self.hit_rect.center
+        # self.pos = self.persistence["pos"]
+        # self.hit_rect.centerx = self.pos.x
+        # self.hit_rect.centery = self.pos.y
+        # self.rect.center = self.hit_rect.center
 
-    def update(self):
-        if self.gets_hit():
-            self.current_frame = 0
+    def events(self):
         if (self.current_frame + 1) % len(self.image_manager.player_gethit[self.direction]) == 0:
             self.done["Idle"] = True
 
+    def update(self):
+        self.vel = vec(0, 0)
+        if self.gets_hit():
+            self.current_frame = 0
         self.action(self.image_manager.player_gethit, self.direction)

@@ -251,6 +251,8 @@ class GamePlay(GameState):
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.all_sprites:
+            if isinstance(sprite, Mob):
+                sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
         self.hud_sprites.draw(screen)
         pg.display.flip()

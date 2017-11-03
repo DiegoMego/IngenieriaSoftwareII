@@ -19,7 +19,6 @@ class Mob(pg.sprite.Sprite):
         self.y = y
         self.vel = vec(0, 0)
         self.pos = vec(x, y) * TILESIZE
-        self.hit_rect = copy.copy(MOB_HIT_RECT)
         self.load_data()
         self.load_attributes()
 
@@ -32,8 +31,9 @@ class Mob(pg.sprite.Sprite):
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
         self.image = self.state.image
-        self.rect = self.state.rect
-        self.hit_rect.center = self.rect.center
+        self.rect = self.image.get_rect()
+        self.hit_rect = copy.copy(MOB_HIT_RECT)
+        self.player_collision = False
 
     def load_attributes(self):
         self.health = Health(self.rect.width, 7)
@@ -64,17 +64,39 @@ class Mob(pg.sprite.Sprite):
         self.state.update()
         self.image = self.state.image
         self.vel = self.state.vel
-        self.pos = self.state.pos
-        self.rect = self.state.rect
-        self.hit_rect = self.state.hit_rect
+        self.pos.x += round(self.vel.x, 0)
+        self.pos.y += round(self.vel.y, 0)
+        self.hit_rect.centerx = self.pos.x
+        self.hit_rect.centery = self.pos.y
+        if collide_hit_rect(self, self.game.player):
+            self.player_collision = True
+        detect_collision(self, self.game.all_sprites, "x")
+        detect_collision(self, self.game.all_sprites, "y")
+        self.rect.center = self.hit_rect.center
 
-    def draw_health(self):
+    def detect_player(self):
+        if self.pos.distance_to(self.game.player.state.pos) < 400:
+            self.player_detected = True
+
+    def gets_hit(self):
+        if self.previoushealth > self.currenthealth:
+            self.previoushealth = self.currenthealth
+            return True
+        return False
+
+    def isdead(self):
+        if self.currenthealth <= 0:
+            self.previoushealth = self.currenthealth
+            return True
+        return False
+
+    def draw_health(self, screen):
         ratio = self.currenthealth / self.totalhealth
         width = int(self.rect.width * ratio)
         self.health.set_width(width, 7)
         self.health.set_pos(self.rect.x, self.rect.y)
         self.health.get_color(ratio)
-        self.game.screen.blit(self.health.image, self.game.camera.apply(self.health))
+        screen.blit(self.health.image, self.game.camera.apply(self.health))
 
 class MobState(pg.sprite.Sprite):
     def __init__(self, mob):
@@ -83,8 +105,6 @@ class MobState(pg.sprite.Sprite):
         self.keyhandler = KeyHandler.get_instance()
         self.game = mob.game
         self.mob = mob
-        self.pos = vec(mob.x, mob.y) * TILESIZE
-        self.inbattle = False
         self.mob_class = "Felltwin"
         self.hit_rect = copy.copy(MOB_HIT_RECT)
         self.inital_data()
@@ -93,28 +113,10 @@ class MobState(pg.sprite.Sprite):
         self.current_frame = 0
         self.last_update = 0
         self.direction = "down"
-        self.persistence = {"direction": self.direction,
-                            "pos": self.pos,
-                            "battle": self.inbattle}
+        self.persistence = {"direction": self.direction}
 
     def start_up(self, direction_persistence):
         self.persistence = direction_persistence
-
-    def detect(self):
-        if self.pos.distance_to(self.game.player.state.pos) < 400:
-            self.inbattle = True
-
-    def gets_hit(self):
-        if self.mob.previoushealth > self.mob.currenthealth:
-            self.mob.previoushealth = self.mob.currenthealth
-            return True
-        return False
-
-    def isdead(self):
-        if self.mob.currenthealth <= 0:
-            self.mob.previoushealth = self.mob.currenthealth
-            return True
-        return False
 
     def events(self):
         pass
@@ -139,33 +141,24 @@ class Idle(MobState):
                      "GetHit": False,
                      "Die": False}
         self.image = self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction][0]
-        self.rect = self.image.get_rect()
-        self.hit_rect.center = self.rect.center
 
     def start_up(self, persistence):
         self.persistence = persistence
         self.current_frame = 0
-        self.inbattle = self.persistence["battle"]
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
 
     def events(self):
-        if self.isdead():
+        if self.mob.isdead():
             self.done["Die"] = True
-        elif self.gets_hit():
+        elif self.mob.gets_hit():
             self.done["GetHit"] = True
-        elif self.inbattle or (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
-            self.persistence["battle"] = self.inbattle
+        elif self.mob.player_detected or (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
             self.done["Walk"] = True
 
     def update(self):
         self.vel = vec(0, 0)
+        self.mob.detect_player()
         self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
-        self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
-        self.rect.center = self.hit_rect.center
-        self.detect()
-
 
 class Walk(MobState):
     def __init__(self, mob):
@@ -176,17 +169,15 @@ class Walk(MobState):
                      "Die": False}
 
     def start_up(self, persistence):
-        self.isattacking = False
+        self.mob.player_collision = False
         self.persistence = persistence
-        self.inbattle = self.persistence["battle"]
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
         self.random_direction = self.keyhandler.get_key(random.randint(0, 7))
         self.distancia = 0
 
     def follow(self):
         direction = ""
-        distance_vector = (self.game.player.state.pos - self.pos)
+        distance_vector = (self.game.player.pos - self.mob.pos)
         distance_vector.x = round(distance_vector.x, 2)
         distance_vector.y = round(distance_vector.y, 2)
         for key, value in self.keyhandler.move_keys.items():
@@ -202,23 +193,21 @@ class Walk(MobState):
         return direction
 
     def events(self):
-        if self.isdead():
+        if self.mob.isdead():
             self.done["Die"] = True
-        elif self.gets_hit():
+        elif self.mob.gets_hit():
             self.done["GetHit"] = True
-        elif self.distancia >= 160 and not self.inbattle:
+        elif self.distancia >= 160 and not self.mob.player_detected:
             self.persistence["direction"] = self.direction
-            self.persistence["pos"] = self.pos
             self.done["Idle"] = True
-        elif self.isattacking:
+        elif self.mob.player_collision:
             self.persistence["direction"] = self.direction
-            self.persistence["pos"] = self.pos
             self.done["Attack"] = True
 
     def update(self):
-        self.detect()
+        self.mob.detect_player()
         self.vel = vec(0, 0)
-        if not self.inbattle:
+        if not self.mob.player_detected:
             self.direction = self.random_direction
             self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * MOB_SPEED
             self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED
@@ -229,17 +218,7 @@ class Walk(MobState):
         if self.vel.x != 0 and self.vel.y != 0:
             self.distancia *= 1.4142
             self.vel *= 0.7071
-
         self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
-        self.pos.x += round(self.vel.x, 0)
-        self.pos.y += round(self.vel.y, 0)
-        self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
-        if collide_hit_rect(self.mob, self.game.player):
-            self.isattacking = True
-        detect_collision(self.mob, self.game.all_sprites, "x")
-        detect_collision(self.mob, self.game.all_sprites, "y")
-        self.rect.center = self.hit_rect.center
 
 class Attack(MobState):
     def __init__(self, mob):
@@ -252,9 +231,7 @@ class Attack(MobState):
     def start_up(self, persistence):
         self.persistence = persistence
         self.current_frame = 0
-        self.inbattle = self.persistence["battle"]
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
 
     def apply_damage(self):
         if not self.try_hit:
@@ -265,23 +242,20 @@ class Attack(MobState):
                 self.game.hud.get_life(n)
 
     def events(self):
-        if self.isdead():
+        if self.mob.isdead():
             self.done["Die"] = True
-        elif self.gets_hit():
+        elif self.mob.gets_hit():
             self.done["GetHit"] = True
+        elif (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0 and self.mob.pos.distance_to(self.game.player.state.pos) > 32:
+            self.done["Idle"] = True
 
     def update(self):
         self.vel = vec(0, 0)
-        if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0 and self.persistence["pos"].distance_to(self.game.player.state.pos) > 32:
-            self.done["Idle"] = True
         if self.current_frame == 0:
             self.try_hit = False
         if self.current_frame == 10:
             self.apply_damage()
         self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.persistence["direction"])
-        self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
-        self.rect.center = self.hit_rect.center
 
 class GetHit(MobState):
     def __init__(self, mob):
@@ -292,7 +266,6 @@ class GetHit(MobState):
         self.persistence = persistence
         self.current_frame = 0
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
 
     def events(self):
         if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
@@ -300,12 +273,9 @@ class GetHit(MobState):
 
     def update(self):
         self.vel = vec(0, 0)
-        if self.gets_hit():
+        if self.mob.gets_hit():
             self.current_frame = 0
         self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
-        self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
-        self.rect.center = self.hit_rect.center
 
 class Die(MobState):
     def __init__(self, mob):
@@ -318,7 +288,6 @@ class Die(MobState):
         self.persistence = persistence
         self.current_frame = 0
         self.direction = self.persistence["direction"]
-        self.pos = self.persistence["pos"]
         self.mob.remove(self.mob.groups)
         self.mob.add(self.game.dead_sprites)
 
@@ -326,8 +295,6 @@ class Die(MobState):
         self.vel = vec(0, 0)
         if not self.finish:
             self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
-            self.rect.centerx = self.pos.x
-            self.rect.centery = self.pos.y
         if self.current_frame == len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) - 1:
             self.finish = True
 
