@@ -1,11 +1,13 @@
 import pygame as pg
+import random
+import math
+import copy
 from settings import *
 from spritesheet import *
 from keyhandler import *
 from mechanics import *
-import random
-import math
-import copy
+from imagemanager import *
+
 vec = pg.math.Vector2
 
 class Mob(pg.sprite.Sprite):
@@ -48,6 +50,9 @@ class Mob(pg.sprite.Sprite):
         persistent = self.state.persistence
         self.state = self.states[self.state_name]
         self.state.start_up(persistent)
+
+    def events(self):
+        pass
 
     def update(self):
         for key, value in self.state.done.items():
@@ -107,6 +112,9 @@ class MobState(pg.sprite.Sprite):
             return True
         return False
 
+    def events(self):
+        pass
+
     def update(self):
         pass
 
@@ -126,7 +134,7 @@ class Idle(MobState):
                      "Attack": False,
                      "GetHit": False,
                      "Die": False}
-        self.image = self.image_manager.mob[self.mob_class][self.__class__.__name__][0]
+        self.image = self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction][0]
         self.rect = self.image.get_rect()
         self.hit_rect.center = self.rect.center
 
@@ -192,9 +200,6 @@ class Walk(MobState):
         return one.hit_rect.colliderect(two.hit_rect)
 
     def detect_collision(self, group, dir):
-        # if self.mob.hit_rect.colliderect(self.game.player.hit_rect):
-        #     self.isattacking = True
-
         if dir == "x":
             hits = pg.sprite.spritecollide(self.mob, group, False, self.collide_hit_rect)
             for hit in hits:

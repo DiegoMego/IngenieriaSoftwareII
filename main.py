@@ -4,6 +4,7 @@ from settings import *
 from spritesheet import *
 from button import *
 from playerstate import *
+from mobstate import *
 from tilemap import *
 from hud import *
 
@@ -226,6 +227,10 @@ class GamePlay(GameState):
         self.image_manager.load_mob_images("Felltwin")
         x, y = self.map.find_player()
         self.player = Player(self, x, y)
+        for row, tiles in enumerate(self.map.data):
+            for col, tile in enumerate(tiles):
+                if tile == "M":
+                    Mob(self, col, row)
 
     def events(self, event):
         if event.type == pg.QUIT:
