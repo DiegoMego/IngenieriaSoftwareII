@@ -219,8 +219,8 @@ class GamePlay(GameState):
         self.hud_sprites = pg.sprite.Group()
         self.map = Map(path.join(game_folder, "map.txt"))
         self.camera = Camera(self.map.width, self.map.height)
-        self.hud = HUD()
-        self.hud_sprites.add(self.hud)
+        self.player_life = Life()
+        self.hud_sprites.add(self.player_life)
         self.done = {"MainScreen": False}
 
     def startup(self, persistent):

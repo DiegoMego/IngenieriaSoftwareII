@@ -239,7 +239,7 @@ class Attack(MobState):
             if hit(self.mob.hit_rate, self.game.player.defense, self.mob.level, self.game.player.level):
                 self.game.player.currenthealth -= self.mob.damage
                 n = 1 - self.game.player.currenthealth/self.game.player.totalhealth
-                self.game.hud.get_life(n)
+                self.game.player_life.get_life(n)
 
     def events(self):
         if self.mob.isdead():

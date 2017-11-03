@@ -14,11 +14,12 @@ class ImageManager:
         return cls.__instance
 
     def get_hud_images(self):
-        spritesheet = pg.image.load(path.join(HUD_FOLDER, "Life.png"))
+        spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png"))
         empty_life = pg.Surface((160, 128))
         full_life = pg.Surface((160, 128))
         empty_life.blit(spritesheet, (0, 0), (0, 0, 160, 128))
         full_life.blit(spritesheet, (0, 0), (0, 128, 160, 128))
+        self.hud_images = {"Life": (empty_life, full_life)}
         return empty_life, full_life
 
     def load_player_images(self):

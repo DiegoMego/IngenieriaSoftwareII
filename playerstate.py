@@ -53,8 +53,6 @@ class Player(pg.sprite.Sprite):
         self.state.events()
 
     def update(self):
-        mouse = pg.mouse.get_pos()
-        print(mouse)
         for key, value in self.state.done.items():
             if value:
                 self.flip_state(key)
@@ -140,9 +138,6 @@ class Idle(PlayerState):
 
     def update(self):
         self.vel = vec(0, 0)
-        # self.hit_rect.centerx = self.pos.x
-        # self.hit_rect.centery = self.pos.y
-        # self.rect.center = self.hit_rect.center
         self.action(self.image_manager.player_idle, self.direction)
 
 class IdleTown(PlayerState):
@@ -277,11 +272,9 @@ class Walk(PlayerState):
             self.done["GetHit"] = True
         elif len(self.keyhandler.move_keyspressed) == 0:
             self.persistence["direction"] = self.direction
-            self.persistence["pos"] = self.pos
             self.done["Idle"] = True
         elif keys[pg.K_q]:
             self.persistence["direction"] = self.direction
-            self.persistence["pos"] = self.pos
             self.done["Attack"] = True
 
     def update(self):
@@ -319,9 +312,7 @@ class Attack(PlayerState):
             posx = self.player.pos.x + self.keyhandler.vel_directions[self.direction][1] * (self.player.hit_rect.width / 2 + 1)
             posy = self.player.pos.y + self.keyhandler.vel_directions[self.direction][2] * (self.player.hit_rect.height / 2 + 1)
             for mob in self.game.mob_sprites.sprites():
-                print(mob.hit_rect.x, mob.hit_rect.y)
                 if mob.hit_rect.collidepoint(posx, posy) and hit(self.player.hit_rate, mob.defense, self.player.level, mob.level):
-                    print("hit mob")
                     mob.currenthealth -= self.player.damage
 
     def events(self):
