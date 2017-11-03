@@ -37,7 +37,7 @@ class Player(pg.sprite.Sprite):
         self.currenthealth = 500
         self.previoushealth = 500
         self.damage = 40
-        self.hit_rate = 80
+        self.hit_rate = 200
         self.defense = 75
         self.level = 1
 
@@ -53,6 +53,8 @@ class Player(pg.sprite.Sprite):
         self.state.events()
 
     def update(self):
+        mouse = pg.mouse.get_pos()
+        print(mouse)
         for key, value in self.state.done.items():
             if value:
                 self.flip_state(key)
@@ -263,15 +265,11 @@ class Walk(PlayerState):
         self.done = {"Idle": False,
                      "Attack": False,
                      "GetHit": False}
-        # self.image = self.image_manager.player_walk[self.persistence["direction"]][0]
-        # self.rect = self.image.get_rect()
-        # self.hit_rect.center = self.rect.center
 
     def start_up(self, persistence):
         self.persistence = persistence
         self.keyhandler.move_keyspressed = []
         self.direction = self.persistence["direction"]
-        # self.pos = self.persistence["pos"]
 
     def events(self):
         keys = pg.key.get_pressed()
@@ -303,38 +301,27 @@ class Walk(PlayerState):
         self.keyhandler.previous_key = self.direction
         self.direction = self.keyhandler.get_move_direction()
         self.action(self.image_manager.player_walk, self.direction)
-        # self.pos.x += round(self.vel.x, 0)
-        # self.pos.y += round(self.vel.y, 0)
-        # self.hit_rect.centerx = self.pos.x
-        # detect_collision(self.player, self.game.mob_sprites, "x")
-        # self.hit_rect.centery = self.pos.y
-        # detect_collision(self.player, self.game.mob_sprites, "y")
-        # self.rect.center = self.hit_rect.center
 
 class Attack(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Idle": False,
                      "GetHit": False}
-        # self.image = self.image_manager.player_attack[self.persistence["direction"]][0]
-        # self.rect = self.image.get_rect()
 
     def start_up(self, persistence):
         self.persistence = persistence
         self.current_frame = 0
         self.direction = self.persistence["direction"]
-        # self.pos = self.persistence["pos"]
-        # self.hit_rect.centerx = self.pos.x
-        # self.hit_rect.centery = self.pos.y
-        # self.rect.center = self.hit_rect.center
 
     def check(self, direction):
         if not self.try_hit:
             self.try_hit = True
-            posx = self.pos.x + self.keyhandler.vel_directions[self.direction][0] * (self.hit_rect.width / 2 + 1)
-            posy = self.pos.y + self.keyhandler.vel_directions[self.direction][1] * (self.hit_rect.height / 2 + 1)
+            posx = self.player.pos.x + self.keyhandler.vel_directions[self.direction][1] * (self.player.hit_rect.width / 2 + 1)
+            posy = self.player.pos.y + self.keyhandler.vel_directions[self.direction][2] * (self.player.hit_rect.height / 2 + 1)
             for mob in self.game.mob_sprites.sprites():
+                print(mob.hit_rect.x, mob.hit_rect.y)
                 if mob.hit_rect.collidepoint(posx, posy) and hit(self.player.hit_rate, mob.defense, self.player.level, mob.level):
+                    print("hit mob")
                     mob.currenthealth -= self.player.damage
 
     def events(self):
@@ -365,10 +352,6 @@ class GetHit(PlayerState):
         self.persistence = persistence
         self.current_frame = 0
         self.direction = self.persistence["direction"]
-        # self.pos = self.persistence["pos"]
-        # self.hit_rect.centerx = self.pos.x
-        # self.hit_rect.centery = self.pos.y
-        # self.rect.center = self.hit_rect.center
 
     def events(self):
         if (self.current_frame + 1) % len(self.image_manager.player_gethit[self.direction]) == 0:
