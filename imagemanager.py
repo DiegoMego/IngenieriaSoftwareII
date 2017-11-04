@@ -14,13 +14,30 @@ class ImageManager:
         return cls.__instance
 
     def get_hud_images(self):
-        spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png"))
+        spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png")).convert()
         empty_life = pg.Surface((160, 128))
         full_life = pg.Surface((160, 128))
         empty_life.blit(spritesheet, (0, 0), (0, 0, 160, 128))
         full_life.blit(spritesheet, (0, 0), (0, 128, 160, 128))
         self.hud_images = {"Life": (empty_life, full_life)}
         return empty_life, full_life
+
+    def load_terrain(self, act, part):
+        if not hasattr(self, "map"):
+            self.map = {"Act_1": {},
+                        "Act_2": {},
+                        "Act_3": {},
+                        "Act_4": {},
+                        "Act_5": {}}
+        spritesheet = pg.image.load(path.join(path.join(MAP_FOLDER, act), part + ".png")).convert()
+        rect = spritesheet.get_rect()
+        images = []
+        for y in range(0, rect.height, 80):
+            for x in range(0, rect.width, 160):
+                #spritesheet, x, y, width, height, img_x, img_y, color
+                images.append(self.get_image(spritesheet, x, y, 160, 80, 0, 0, 160, 80, FUCHSIA))
+
+        self.map[act][part] = images
 
     def load_player_images(self):
         spritesheet = pg.image.load(path.join(PLAYER_CLASS_FOLDER, PLAYER_SPRITESHEET_GENERATOR % (PLAYER_CLASS, PLAYER_EQUIPMENT))).convert()
@@ -42,11 +59,11 @@ class ImageManager:
                               "GetHit": self.create_action_dict(spritesheet, 0, 1408, 1045, 128, 128, 0, -20),
                               "Die": self.create_action_dict(spritesheet, 1921, 3969, 7, 128, 128, 0, -20)}
 
-    def get_image(self, spritesheet, x, y, width, height, img_x = 0, img_y = 0):
-        image = pg.Surface((128, 128))
-        image.fill(WHITE)
+    def get_image(self, spritesheet, x, y, width, height, img_x = 0, img_y = 0, img_width = 128, img_height = 128, color = WHITE):
+        image = pg.Surface((img_width, img_height))
+        image.fill(color)
         image.blit(spritesheet, (img_x, img_y), (x, y, width, height))
-        image.set_colorkey(WHITE)
+        image.set_colorkey(color)
         return image
 
     def create_action_dict(self, spritesheet, x_start, x_end, y_start, width, height, image_x, image_y):

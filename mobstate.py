@@ -18,7 +18,7 @@ class Mob(pg.sprite.Sprite):
         self.x = x
         self.y = y
         self.vel = vec(0, 0)
-        self.pos = vec(x, y) * TILESIZE
+        self.pos = vec(x * TILEWIDTH, y * TILEHEIGHT)
         self.load_data()
         self.load_attributes()
 

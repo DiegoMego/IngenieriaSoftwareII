@@ -6,6 +6,7 @@ from button import *
 from playerstate import *
 from mobstate import *
 from tilemap import *
+from terrain import *
 from hud import *
 
 class Game(object):
@@ -217,6 +218,7 @@ class GamePlay(GameState):
         self.mob_sprites = pg.sprite.Group()
         self.dead_sprites = pg.sprite.Group()
         self.hud_sprites = pg.sprite.Group()
+        self.terrain_sprites = pg.sprite.Group()
         self.map = Map(path.join(game_folder, "map.txt"))
         self.camera = Camera(self.map.width, self.map.height)
         self.player_life = Life()
@@ -226,6 +228,7 @@ class GamePlay(GameState):
     def startup(self, persistent):
         self.image_manager.load_player_images()
         self.image_manager.load_mob_images("Felltwin")
+        self.terrain = Terrain(self)
         x, y = self.map.find_player()
         self.player = Player(self, x, y)
         for row, tiles in enumerate(self.map.data):
@@ -248,6 +251,8 @@ class GamePlay(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
+        for sprite in self.terrain_sprites:
+            screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.all_sprites:

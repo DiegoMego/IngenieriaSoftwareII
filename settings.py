@@ -22,7 +22,8 @@ COLORKEY = (34, 177, 76)
 TITLE = "Zombie"
 WIDTH = 800 #1024
 HEIGHT = 640 #800
-TILESIZE = 32
+TILEWIDTH = 160
+TILEHEIGHT = 80
 BGCOLOR = DARK_GREY
 FPS = 60
 game_folder = path.dirname(__file__)
@@ -31,6 +32,9 @@ IMAGE_FOLDER = path.join(game_folder, "img")
 #Intro Settings
 INTRO_TITLE = "DOOM KINGDOM"
 INTRO_FOLDER = path.join(IMAGE_FOLDER, "Background")
+
+#Map Settings
+MAP_FOLDER = path.join(IMAGE_FOLDER, "Maps")
 
 # Player Settings
 PLAYER_SPEED = 2

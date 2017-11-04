@@ -1,30 +1,29 @@
 import pygame as pg
 import os
+import math
 from settings import *
 from spritesheet import *
+from imagemanager import *
 vec = pg.math.Vector2
 
 class Terrain(pg.sprite.Sprite):
-    def __init__(self):
-        pg.sprite.Sprite.__init__(self)
-        self.spritesheet = SpriteSheet("Maps\\" + "Act_1", "Town\\0.png")
-        self.load_data()
-
-    def load_data(self):
-        self.image = pg.Surface((2560, 2560))
-        self.terrain_image = pg.Surface((320, 160))
-        self.images = []
-        self.images.append(self.spritesheet.get_terrain(320, 80))
-        self.images.append(self.spritesheet.get_terrain(0, 80))
-        self.images.append(self.spritesheet.get_terrain(160, 80))
-        self.images.append(self.spritesheet.get_terrain(640, 0))
-        self.terrain_image.blit(self.images[0], (80, 0))
-        self.terrain_image.blit(self.images[1], (0, 40))
-        self.terrain_image.blit(self.images[2], (160, 40))
-        self.terrain_image.blit(self.images[3], (80, 80))
-        self.terrain_image.set_colorkey(BLACK)
-        for y in range(-80, 2560, 160):
-            for x in range(-160, 2560, 320):
-                self.image.blit(self.terrain_image, (x, y))
-                self.image.blit(self.terrain_image, (x + 160, y + 80))
+    def __init__(self, game):
+        self.groups = game.terrain_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.image_manager = ImageManager.get_instance()
+        self.acts = ("Act_1", "Act_2", "Act_3", "Act_4", "Act_5")
+        self.parts = ("Town", "")
+        self.image = self.load_terrain()
         self.rect = self.image.get_rect()
+
+    def load_terrain(self):
+        self.image_manager.load_terrain(self.acts[0], self.parts[0])
+        surf = pg.Surface((7840, 3920))
+        basic = self.image_manager.map[self.acts[0]][self.parts[0]][4]
+        halfwidth = int(TILEWIDTH / 2)
+        halfheight = int(TILEHEIGHT / 2)
+        for y in range(-halfheight, 3920 + halfheight, TILEHEIGHT):
+            for x in range(-halfwidth, 7840 + halfwidth, TILEWIDTH):
+                surf.blit(basic, (x, y))
+                surf.blit(basic, (x + halfwidth, y + halfheight))
+        return surf

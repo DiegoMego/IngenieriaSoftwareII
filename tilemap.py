@@ -13,8 +13,8 @@ class Map:
 
         self.tilewidth = len(self.data[0])
         self.tileheight = len(self.data)
-        self.width = self.tilewidth * TILESIZE
-        self.height = self.tileheight * TILESIZE
+        self.width = self.tilewidth * TILEWIDTH
+        self.height = self.tileheight * TILEHEIGHT
 
     def update(self, row, col, mod = "."):
         if mod != ".":
@@ -55,6 +55,6 @@ class Camera:
         return False
 
     def inside(self):
-        row = math.floor(-self.pos.y / TILESIZE)
-        col = math.floor(-self.pos.x / TILESIZE)
+        row = math.floor(-self.pos.y / TILEHEIGHT)
+        col = math.floor(-self.pos.x / TILEWIDTH)
         return row, col
