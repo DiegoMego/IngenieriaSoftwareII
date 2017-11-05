@@ -224,7 +224,9 @@ class GamePlay(GameState):
         self.map = Map(path.join(game_folder, "map.txt"))
         self.camera = Camera(self.map.width, self.map.height)
         self.player_life = Life()
+        self.player_mana = Mana()
         self.hud_sprites.add(self.player_life)
+        self.hud_sprites.add(self.player_mana)
         self.done = {"MainScreen": False}
 
     def startup(self, persistent):

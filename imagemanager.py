@@ -22,6 +22,17 @@ class ImageManager:
         self.hud_images = {"Life": (empty_life, full_life)}
         return empty_life, full_life
 
+    #AÑADIDO:------------------------------------------------------------------------------------------------
+    def get_hud_images_mana(self):
+        spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png")).convert()
+        empty_mana = pg.Surface((160, 128))
+        full_mana = pg.Surface((160, 128))
+        empty_mana.blit(spritesheet, (0, 0), (160, 0, 160, 128))
+        full_mana.blit(spritesheet, (0, 0), (160, 128, 160, 128))
+        self.hud_images = {"Mana": (empty_mana, full_mana)}
+        return empty_mana, full_mana
+    #--------------------------------------------------------------------------------------------------------
+
     def load_terrain(self, act, part):
         if not hasattr(self, "map"):
             self.map = {"Act_1": {},
