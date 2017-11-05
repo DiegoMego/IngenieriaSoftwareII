@@ -137,7 +137,7 @@ class MainScreen(GameState):
     def load_buttons(self):
         self.buttons = {"GAMEPLAY": Button("Nueva Partida"),
                         "TUTORIAL": Button("Tutorial"),
-                        "SALIR": Button("Salir")}
+                        "QUIT": Button("Salir")}
         x = WIDTH / 2
         y = 0.3
         for button in self.buttons.values():
@@ -159,6 +159,8 @@ class MainScreen(GameState):
 
         for key, button in self.buttons.items():
             if button.clicked:
+                if key == "QUIT":
+                    self.quit = True
                 self.done[key] = True
 
     def update(self, dt):
