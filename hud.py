@@ -33,24 +33,27 @@ class Mana(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image_manager = ImageManager.get_instance()
-        self.image = self.load_life()
+        self.image = self.load_mana()
         self.rect = self.image.get_rect()
         self.rect.bottomright = ((WIDTH, HEIGHT))
 
-    def load_life(self):
+    def load_mana(self):
         self.width = 160
         self.height = 128
-        backlife, frontlife = self.image_manager.get_hud_images()
-        self.backlife_sprite = backlife
-        self.frontlife_sprite = frontlife
-        self.frontlife_sprite.set_colorkey((0, 1, 0))
+        #backlife, frontlife = self.image_manager.get_hud_images()
+        #AÑADIDO:-----------------------------------------------------------------------------
+        backmana, frontmana = self.image_manager.get_hud_images_mana()
+        #-------------------------------------------------------------------------------------
+        self.backmana_sprite = backmana
+        self.frontmana_sprite = frontmana
+        self.frontmana_sprite.set_colorkey((0, 1, 0))
         image = pg.Surface((self.width, self.height))
-        image.blit(self.backlife_sprite, (0, 0))
-        image.blit(self.frontlife_sprite, (0, 0))
+        image.blit(self.backmana_sprite, (0, 0))
+        image.blit(self.frontmana_sprite, (0, 0))
         image.set_colorkey((BLACK))
         return image
 
-    def get_life(self, n):
+    def get_mana(self, n):
         self.image.fill((WHITE))
-        self.image.blit(self.backlife_sprite, (0, 0))
-        self.image.blit(self.frontlife_sprite, (0, self.height * n), (0, self.height * n, self.width, self.height))
+        self.image.blit(self.backmana_sprite, (0, 0))
+        self.image.blit(self.frontmana_sprite, (0, self.height * n), (0, self.height * n, self.width, self.height))
