@@ -11,8 +11,6 @@ class Terrain(pg.sprite.Sprite):
         self.groups = game.terrain_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.image_manager = ImageManager.get_instance()
-        self.acts = ("Act_1", "Act_2", "Act_3", "Act_4", "Act_5")
-        self.parts = ("Town", "")
         self.image = self.load_terrain()
         self.rect = self.image.get_rect()
 

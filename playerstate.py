@@ -63,8 +63,8 @@ class Player(pg.sprite.Sprite):
         self.pos.y += round(self.vel.y, 0)
         self.hit_rect.centerx = self.pos.x
         self.hit_rect.centery = self.pos.y
-        detect_collision(self, self.game.mob_sprites, "x")
-        detect_collision(self, self.game.mob_sprites, "y")
+        detect_collision(self, self.game.all_sprites, "x")
+        detect_collision(self, self.game.all_sprites, "y")
         self.rect.center = self.hit_rect.center
 
 class PlayerState(pg.sprite.Sprite):

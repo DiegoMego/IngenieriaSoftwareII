@@ -2,7 +2,6 @@ import pygame as pg
 from os import path
 from settings import *
 from spritesheet import *
-from Tutorial import *
 
 class Button:
     def __init__(self, text):

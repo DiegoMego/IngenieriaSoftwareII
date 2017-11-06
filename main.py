@@ -8,6 +8,7 @@ from mobstate import *
 from tilemap import *
 from terrain import *
 from hud import *
+from block import *
 
 class Game(object):
     """
@@ -239,6 +240,8 @@ class GamePlay(GameState):
             for col, tile in enumerate(tiles):
                 if tile == "M":
                     Mob(self, col, row)
+                if tile == "S":
+                    Block(self, col, row)
 
     def events(self):
         for event in pg.event.get():
@@ -263,7 +266,6 @@ class GamePlay(GameState):
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
-        print(self.camera.pos.x, self.camera.pos.y)
         pg.draw.line(screen, GREEN, (2500 + self.camera.pos.x, 1850 + self.camera.pos.y), (4200 + self.camera.pos.x, 1000 + self.camera.pos.y))
         self.hud_sprites.draw(screen)
         pg.display.flip()
