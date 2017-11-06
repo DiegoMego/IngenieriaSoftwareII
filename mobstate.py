@@ -19,6 +19,7 @@ class Mob(pg.sprite.Sprite):
         self.y = y
         self.vel = vec(0, 0)
         self.pos = vec(x * TILEWIDTH, y * TILEHEIGHT)
+        self.player_detected = False
         self.load_data()
         self.load_attributes()
 
@@ -75,7 +76,7 @@ class Mob(pg.sprite.Sprite):
         self.rect.center = self.hit_rect.center
 
     def detect_player(self):
-        if self.pos.distance_to(self.game.player.state.pos) < 400:
+        if self.pos.distance_to(self.game.player.pos) < 400:
             self.player_detected = True
 
     def gets_hit(self):
@@ -246,7 +247,7 @@ class Attack(MobState):
             self.done["Die"] = True
         elif self.mob.gets_hit():
             self.done["GetHit"] = True
-        elif (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0 and self.mob.pos.distance_to(self.game.player.state.pos) > 32:
+        elif (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0 and self.mob.pos.distance_to(self.game.player.pos) > 32:
             self.done["Idle"] = True
 
     def update(self):

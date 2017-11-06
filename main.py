@@ -137,7 +137,7 @@ class MainScreen(GameState):
     def load_buttons(self):
         self.buttons = {"GAMEPLAY": Button("Nueva Partida"),
                         "TUTORIAL": Button("Tutorial"),
-                        "SALIR": Button("Salir")}
+                        "QUIT": Button("Salir")}
         x = WIDTH / 2
         y = 0.3
         for button in self.buttons.values():
@@ -159,6 +159,8 @@ class MainScreen(GameState):
 
         for key, button in self.buttons.items():
             if button.clicked:
+                if key == "QUIT":
+                    self.quit = True
                 self.done[key] = True
 
     def update(self, dt):
@@ -222,7 +224,9 @@ class GamePlay(GameState):
         self.map = Map(path.join(game_folder, "map.txt"))
         self.camera = Camera(self.map.width, self.map.height)
         self.player_life = Life()
+        self.player_mana = Mana()
         self.hud_sprites.add(self.player_life)
+        self.hud_sprites.add(self.player_mana)
         self.done = {"MainScreen": False}
 
     def startup(self, persistent):
@@ -259,6 +263,8 @@ class GamePlay(GameState):
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
+        print(self.camera.pos.x, self.camera.pos.y)
+        pg.draw.line(screen, GREEN, (2500 + self.camera.pos.x, 1850 + self.camera.pos.y), (4200 + self.camera.pos.x, 1000 + self.camera.pos.y))
         self.hud_sprites.draw(screen)
         pg.display.flip()
 

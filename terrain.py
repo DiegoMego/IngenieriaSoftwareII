@@ -17,13 +17,14 @@ class Terrain(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def load_terrain(self):
-        self.image_manager.load_terrain(self.acts[0], self.parts[0])
-        surf = pg.Surface((7840, 3920))
-        basic = self.image_manager.map[self.acts[0]][self.parts[0]][4]
-        halfwidth = int(TILEWIDTH / 2)
-        halfheight = int(TILEHEIGHT / 2)
-        for y in range(-halfheight, 3920 + halfheight, TILEHEIGHT):
-            for x in range(-halfwidth, 7840 + halfwidth, TILEWIDTH):
-                surf.blit(basic, (x, y))
-                surf.blit(basic, (x + halfwidth, y + halfheight))
+        surf = pg.image.load(path.join(IMAGE_FOLDER, "Rogue Encampment.png")).convert()
+        # self.image_manager.load_terrain(self.acts[0], self.parts[0])
+        # surf = pg.Surface((7840, 3920))
+        # basic = self.image_manager.map[self.acts[0]][self.parts[0]][4]
+        # halfwidth = int(TILEWIDTH / 2)
+        # halfheight = int(TILEHEIGHT / 2)
+        # for y in range(-halfheight, 3920 + halfheight, TILEHEIGHT):
+        #     for x in range(-halfwidth, 7840 + halfwidth, TILEWIDTH):
+        #         surf.blit(basic, (x, y))
+        #         surf.blit(basic, (x + halfwidth, y + halfheight))
         return surf
