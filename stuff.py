@@ -1,9 +1,8 @@
 import pygame as pg
 from settings import *
 
-class Stuff(pg.sprite.Sprite):
+class Obj:
     def __init__(self, x, y, width, height):
-        pg.sprite.Sprite.__init__(self, self.groups)
         self.x = x
         self.y = y
         self.width = width
@@ -16,3 +15,16 @@ class Stuff(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
+
+class Fence:
+    def __init__(self, x, y, width, height):
+        self.image_manager = ImageManager.get_instance()
+        self.x = x
+        self.y = y
+        self.width = 160
+        self.height = 320
+        self.angle = 30
+
+    def load_image(self, i_start, i_end):
+        image = pg.Surface((160 ))
+        for i in range(i_start, i_end + 1):

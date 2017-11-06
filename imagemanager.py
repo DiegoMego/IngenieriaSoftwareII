@@ -33,6 +33,18 @@ class ImageManager:
         return empty_mana, full_mana
     #--------------------------------------------------------------------------------------------------------
 
+    def load_objects(self, act, width, y):
+        if not hasattr(self, "objects"):
+            self.objects = {}
+        spritesheet = pg.image.load(path.join(path.join(MAP_FOLDER, act), "Objects.png")).convert()
+
+        images = []
+        for x in range(0, width + 1, 160):
+            #spritesheet, x, y, width, height, img_x, img_y, color
+            images.append(self.get_image(spritesheet, x, y, 160, 320, 0, 0, 160, 320, FUCHSIA))
+
+        self.objects[act] = images
+
     def load_terrain(self, act, part):
         if not hasattr(self, "map"):
             self.map = {"Act_1": {},
