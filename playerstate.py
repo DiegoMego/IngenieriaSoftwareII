@@ -62,8 +62,8 @@ class Player(pg.sprite.Sprite):
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
         self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
         detect_collision(self, self.game.all_sprites, "x")
+        self.hit_rect.centery = self.pos.y
         detect_collision(self, self.game.all_sprites, "y")
         self.rect.center = self.hit_rect.center
 

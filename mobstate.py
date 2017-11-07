@@ -67,11 +67,11 @@ class Mob(pg.sprite.Sprite):
         self.vel = self.state.vel
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
-        self.hit_rect.centerx = self.pos.x
-        self.hit_rect.centery = self.pos.y
         if collide_hit_rect(self, self.game.player):
             self.player_collision = True
+        self.hit_rect.centerx = self.pos.x
         detect_collision(self, self.game.all_sprites, "x")
+        self.hit_rect.centery = self.pos.y
         detect_collision(self, self.game.all_sprites, "y")
         self.rect.center = self.hit_rect.center
 
