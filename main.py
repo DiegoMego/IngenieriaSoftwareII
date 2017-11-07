@@ -258,15 +258,19 @@ class GamePlay(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
+        print(self.player.pos.y, self.camera.pos.y)
         for sprite in self.terrain_sprites:
-            screen.blit(sprite.image, self.camera.apply(sprite))
+            screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, self.player.pos.y + self.player.hit_rect.height))
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.all_sprites:
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
-        pg.draw.line(screen, GREEN, (2500 + self.camera.pos.x, 1850 + self.camera.pos.y), (4200 + self.camera.pos.x, 1000 + self.camera.pos.y))
+        for sprite in self.terrain_sprites:
+            print(sprite.rect.height)
+            #screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, sprite.rect.height))
+            screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y + self.player.pos.y + self.player.hit_rect.height), (0, self.player.pos.y + self.player.hit_rect.height, sprite.rect.width, sprite.rect.height - self.player.pos.y + self.player.hit_rect.height))
         self.hud_sprites.draw(screen)
         pg.display.flip()
 

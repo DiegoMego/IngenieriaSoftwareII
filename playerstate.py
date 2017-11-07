@@ -14,7 +14,7 @@ class Player(pg.sprite.Sprite):
         self.x = x
         self.y = y
         self.vel = vec(0, 0)
-        self.pos = vec(x * TILEWIDTH, y * TILEHEIGHT)
+        self.pos = vec(x, y) * TILESIZE
         self.load_data()
         self.load_attributes()
 
@@ -29,7 +29,6 @@ class Player(pg.sprite.Sprite):
         self.image = self.state.image
         self.rect = self.image.get_rect()
         self.hit_rect = PLAYER_HIT_RECT
-        #self.hit_rect.center = self.rect.center
 
     def load_attributes(self):
         self.totalhealth = 500
