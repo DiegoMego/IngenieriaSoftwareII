@@ -26,8 +26,8 @@ class Player(pg.sprite.Sprite):
 
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
-        self.image = self.state.image
-        self.rect = self.image.get_rect()
+        #self.image = self.state.image
+        #self.rect = self.image.get_rect()
         self.hit_rect = PLAYER_HIT_RECT
 
     def load_attributes(self):
@@ -58,6 +58,8 @@ class Player(pg.sprite.Sprite):
         self.state.update()
         self.vel = self.state.vel
         self.image = self.state.image
+        if not hasattr(self, "rect"):
+            self.rect = self.image.get_rect()
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
         self.hit_rect.centerx = self.pos.x
@@ -111,7 +113,7 @@ class Idle(PlayerState):
         self.done = {"Walk": False,
                      "Attack": False,
                      "GetHit": False}
-        self.image = self.image_manager.player_idle[self.direction][0]
+        #self.image = self.image_manager.player_idle[self.direction][0]
 
     def start_up(self, persistence):
         self.persistence = persistence

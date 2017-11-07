@@ -62,7 +62,7 @@ class ImageManager:
 
         self.map[act][part] = images
 
-    def load_player_images(self):
+    def load_player_images(self, d):
         if not hasattr(self, "player"):
             self.player = {}
         self.player["Idle"] = {}
@@ -70,8 +70,6 @@ class ImageManager:
         self.player["Idle"]["down"].append(self.create_surface(128, 128, WHITE))
         spritesheet = pg.image.load(path.join(PLAYER_CLASS_FOLDER, PLAYER_SPRITESHEET_GENERATOR % (PLAYER_CLASS, PLAYER_EQUIPMENT))).convert()
         images = []
-
-
 
         #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
         self.player_idle = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
@@ -105,8 +103,13 @@ class ImageManager:
         return image
 
     def blit_rect(self, image, x, y, width, height):
-        
+        pass
 
+    def dict_init(self, keys, keys2):
+        for key1 in keys1:
+            d[key1] = {}
+            for key2 in keys2:
+                d[key1][key2] = []
     def create_action_dict(self, spritesheet, x_start, x_end, y_start, width, height, image_x, image_y):
         action_dir = {"down": [],
                       "downleft": [],

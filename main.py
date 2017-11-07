@@ -231,11 +231,11 @@ class GamePlay(GameState):
         self.done = {"MainScreen": False}
 
     def startup(self, persistent):
-        self.image_manager.load_player_images()
-        self.image_manager.load_mob_images("Felltwin")
         self.terrain = Terrain(self)
         x, y = self.map.find_player()
         self.player = Player(self, x, y)
+        self.image_manager.load_player_images()
+        self.image_manager.load_mob_images("Felltwin")
         for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
                 if tile == "M":
