@@ -33,17 +33,17 @@ class ImageManager:
         return empty_mana, full_mana
     #--------------------------------------------------------------------------------------------------------
 
-    def load_objects(self, act, width, y):
-        if not hasattr(self, "objects"):
-            self.objects = {}
-        spritesheet = pg.image.load(path.join(path.join(MAP_FOLDER, act), "Objects.png")).convert()
-
-        images = []
-        for x in range(0, width + 1, 160):
-            #spritesheet, x, y, width, height, img_x, img_y, color
-            images.append(self.get_image(spritesheet, x, y, 160, 320, 0, 0, 160, 320, FUCHSIA))
-
-        self.objects[act] = images
+    # def load_objects(self, act, width, y):
+    #     if not hasattr(self, "objects"):
+    #         self.objects = {}
+    #     spritesheet = pg.image.load(path.join(path.join(MAP_FOLDER, act), "Objects.png")).convert()
+    #
+    #     images = []
+    #     for x in range(0, width + 1, 160):
+    #         #spritesheet, x, y, width, height, img_x, img_y, color
+    #         images.append(self.get_image(spritesheet, x, y, 160, 320, 0, 0, 160, 320, FUCHSIA))
+    #
+    #     self.objects[act] = images
 
     def load_terrain(self, act, part):
         if not hasattr(self, "map"):
@@ -102,7 +102,7 @@ class ImageManager:
     def load_mob_images(self, mob_type, actions, keyhandler):
         if not hasattr(self, "mob"):
             self.mob = {}
-        if not self.mob.has_key(mob_type):
+        if mob_type not in self.mob:
             self.mob[mob_type] = {}
             t = ((13, 13, 15, 11, 16), (1049, 1045, 3074, 1045, 0, 7, 0, 1045, 1921, 7))
             generator = (n for n in t[0])
@@ -110,7 +110,7 @@ class ImageManager:
             self.dict_init(self.mob[mob_type], actions, keyhandler.vel_directions)
             spritesheet = pg.image.load(path.join(MOB_FOLDER, MOB_FILETYPE % (mob_type)))
             for action in self.mob[mob_type].values():
-                end = next(generator)
+                n = next(generator)
                 for direction in action.values():
                     for i in range(n):
                         direction.append(self.create_surface(128, 128))

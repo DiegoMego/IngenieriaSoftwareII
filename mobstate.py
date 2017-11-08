@@ -18,7 +18,7 @@ class Mob(pg.sprite.Sprite):
         self.x = x
         self.y = y
         self.vel = vec(0, 0)
-        self.pos = vec(x * TILEWIDTH, y * TILEHEIGHT)
+        self.pos = vec(x, y) * TILESIZE
         self.player_detected = False
         self.mob_class = "Felltwin"
         self.load_data()
@@ -40,7 +40,6 @@ class Mob(pg.sprite.Sprite):
         self.player_collision = False
 
     def load_attributes(self):
-        self.health = Health(self.rect.width, 7)
         self.totalhealth = 200
         self.currenthealth = 200
         self.previoushealth = 200
@@ -64,19 +63,23 @@ class Mob(pg.sprite.Sprite):
         for key, value in self.state.done.items():
             if value:
                 self.flip_state(key)
-
         self.state.update()
         self.image = self.state.image
+        if self.currenthealth <= 0:
+            return None
         if not hasattr(self, "rect"):
             self.rect = self.image.get_rect()
+            self.health = Health(self.rect.width, 7)
         self.vel = self.state.vel
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
+        self.hit_rect.centerx = self.pos.x
         if collide_hit_rect(self, self.game.player):
             self.player_collision = True
-        self.hit_rect.centerx = self.pos.x
         detect_collision(self, self.game.all_sprites, "x")
         self.hit_rect.centery = self.pos.y
+        if collide_hit_rect(self, self.game.player):
+            self.player_collision = True
         detect_collision(self, self.game.all_sprites, "y")
         self.rect.center = self.hit_rect.center
 
@@ -146,7 +149,7 @@ class Idle(MobState):
                      "Attack": False,
                      "GetHit": False,
                      "Die": False}
-        self.image = self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction][0]
+        #self.image = self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction][0]
 
     def start_up(self, persistence):
         self.persistence = persistence
@@ -294,8 +297,6 @@ class Die(MobState):
         self.persistence = persistence
         self.current_frame = 0
         self.direction = self.persistence["direction"]
-        self.mob.remove(self.mob.groups)
-        self.mob.add(self.game.dead_sprites)
 
     def update(self):
         self.vel = vec(0, 0)
@@ -303,6 +304,8 @@ class Die(MobState):
             self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
         if self.current_frame == len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) - 1:
             self.finish = True
+            self.mob.remove(self.mob.groups)
+            self.mob.add(self.game.dead_sprites)
 
 class Health:
     def __init__(self, width, height):

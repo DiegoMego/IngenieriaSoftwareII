@@ -251,7 +251,6 @@ class GamePlay(GameState):
 
     def update(self, dt):
         self.all_sprites.update()
-        self.dead_sprites.update()
         self.camera.update(self.player)
 
     def draw(self, screen):
