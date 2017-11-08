@@ -78,7 +78,7 @@ class ImageManager:
             end = next(positions)
             y = next(positions)
             for direction in action.values():
-                x = 0
+                x = end
                 if key == "Attack":
                     for image in direction:
                         surf = self.get_image(spritesheet, x, y, 128, 128)
@@ -104,8 +104,9 @@ class ImageManager:
             self.mob = {}
         if not self.mob.has_key(mob_type):
             self.mob[mob_type] = {}
-            t = (13, 13, 15, 11, 16)
-            generator = (n for n in t)
+            t = ((13, 13, 15, 11, 16), (1049, 1045, 3074, 1045, 0, 7, 0, 1045, 1921, 7))
+            generator = (n for n in t[0])
+            positions = (p for p in t[1])
             self.dict_init(self.mob[mob_type], actions, keyhandler.vel_directions)
             spritesheet = pg.image.load(path.join(MOB_FOLDER, MOB_FILETYPE % (mob_type)))
             for action in self.mob[mob_type].values():
@@ -114,9 +115,10 @@ class ImageManager:
                     for i in range(n):
                         direction.append(self.create_surface(128, 128))
             for key, action in self.mob[mob_type].items():
-                y = 0
+                end = next(positions)
+                y = next(positions)
                 for direction in action.values():
-                    x = 0
+                    x = end
                     for image in direction:
                         surf = self.get_image(spritesheet, x, y, 128, 128)
                         image.blit(surf, (0, -20))
