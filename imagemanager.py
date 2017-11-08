@@ -63,38 +63,67 @@ class ImageManager:
         self.map[act][part] = images
 
     def load_player_images(self, actions, keyhandler):
-        if not hasattr(self, "player"):
-            self.player = {}
-        self.dict_init(self.player, d, keyhandler.vel_directions)
+        self.player = {}
+        t = (10, 8, 16, 6, 10)
+        generator = (n for n in t)
+        self.dict_init(self.player, actions, keyhandler.vel_directions)
         spritesheet = pg.image.load(path.join(PLAYER_CLASS_FOLDER, PLAYER_SPRITESHEET_GENERATOR % (PLAYER_CLASS, PLAYER_EQUIPMENT))).convert()
         for action in self.player.values():
-            for direction in action:
-                pass
+            for direction in action.values():
+                for i in range(next(generator)):
+                    direction.append(self.create_surface(128, 128))
+        for key, action in self.player.items():
+            y = 0
+            for direction in action.values():
+                x = 0
+                if key = "Attack":
+                    for image in direction:
+                        surf = self.get_image(spritesheet, x, y, 128, 128)
+                        image.blit(surf, (0, -16))
+                        x += 128
+                    y += 129
+                else:
+                    for image in direction:
+                        surf = self.get_image(spritesheet, x, y, 96, 96)
+                        image.blit(surf, (16, 16))
+                        x += 96
+                    y += 97
 
         #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
-        self.player_idle = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
-        self.player_walk = self.create_action_dict(spritesheet, 2882, 3650, 1045, 96, 96, 16, 16)
-        self.player_attack = self.create_action_dict(spritesheet, 0, 2048, 7, 128, 128, 0, -16)
-        self.player_gethit = self.create_action_dict(spritesheet, 4420, 4996, 1045, 96, 96, 16, 16)
-        self.player_die = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
+        # self.player_idle = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
+        # self.player_walk = self.create_action_dict(spritesheet, 2882, 3650, 1045, 96, 96, 16, 16)
+        # self.player_attack = self.create_action_dict(spritesheet, 0, 2048, 7, 128, 128, 0, -16)
+        # self.player_gethit = self.create_action_dict(spritesheet, 4420, 4996, 1045, 96, 96, 16, 16)
+        # self.player_die = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
 
-    def load_mob_images(self, mob_type):
+    def load_mob_images(self, mob_type, actions, keyhandler):
         if not hasattr(self, "mob"):
             self.mob = {}
+        self.mob[mob_type] = {}
+        t = (13, 13, 15, 11, 16)
+        generator = (n for n in t)
+        self.dict_init(self.mob[mob_type], actions, keyhandler.vel_directions)
         spritesheet = pg.image.load(path.join(MOB_FOLDER, MOB_FILETYPE % (mob_type)))
-        #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
-        self.mob[mob_type] = {"Idle": self.create_action_dict(spritesheet, 1403, 3073, 1045, 128, 128, 0, -20),
-                              "Walk": self.create_action_dict(spritesheet, 3074, 4738, 1045, 128, 128, 0, -20),
-                              "Attack": self.create_action_dict(spritesheet, 0, 1920, 7, 128, 128, 0, -20),
-                              "GetHit": self.create_action_dict(spritesheet, 0, 1408, 1045, 128, 128, 0, -20),
-                              "Die": self.create_action_dict(spritesheet, 1921, 3969, 7, 128, 128, 0, -20)}
+        for action in self.mob[mob_type].values():
+            for direction in action.values():
+                for i in range(next(generator)):
+                    direction.append(self.create_surface(128, 128))
+        for key, action in self.mob[mob_type].items():
+            y = 0
+            for direction in action.values():
+                x = 0
+                for image in direction:
+                    surf = self.get_image(spritesheet, x, y, 128, 128)
+                    image.blit(surf, (0, -20))
+                    x += 128
+                y += 129
 
-    def get_image(self, spritesheet, x, y, width, height, img_x = 0, img_y = 0, img_width = 128, img_height = 128, color = WHITE):
-        image = pg.Surface((img_width, img_height))
-        image.fill(color)
-        image.blit(spritesheet, (img_x, img_y), (x, y, width, height))
-        image.set_colorkey(color)
-        return image
+        #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
+        # self.mob[mob_type] = {"Idle": self.create_action_dict(spritesheet, 1409, 3073, 1045, 128, 128, 0, -20),
+        #                       "Walk": self.create_action_dict(spritesheet, 3074, 4738, 1045, 128, 128, 0, -20),
+        #                       "Attack": self.create_action_dict(spritesheet, 0, 1920, 7, 128, 128, 0, -20),
+        #                       "GetHit": self.create_action_dict(spritesheet, 0, 1408, 1045, 128, 128, 0, -20),
+        #                       "Die": self.create_action_dict(spritesheet, 1921, 3969, 7, 128, 128, 0, -20)}
 
     def create_surface(self, width, height, color = WHITE):
         image = pg.Surface((width, height))
@@ -102,8 +131,10 @@ class ImageManager:
         image.set_colorkey(color)
         return image
 
-    def blit_rect(self, image, x, y, width, height):
-        pass
+    def get_image(self, spritesheet, x, y, width, height):
+        image = pg.Surface((width, height))
+        image.blit(spritesheet, (0, 0), (x, y, width, height))
+        return image
 
     def dict_init(self, d, keys, keys2):
         for key1 in keys1:
@@ -111,22 +142,22 @@ class ImageManager:
             for key2 in keys2:
                 d[key1][key2] = []
 
-    def create_action_dict(self, spritesheet, x_start, x_end, y_start, width, height, image_x, image_y):
-        action_dir = {"down": [],
-                      "downleft": [],
-                      "left": [],
-                      "upleft": [],
-                      "up": [],
-                      "upright": [],
-                      "right": [],
-                      "downright": []}
-
-        y = y_start
-
-        for key in action_dir:
-            for x in range(x_start, x_end, width):
-                action_dir[key].append(self.get_image(spritesheet, x, y, width, height, image_x, image_y))
-
-            y += height + 1
-
-        return action_dir
+    # def create_action_dict(self, spritesheet, x_start, x_end, y_start, width, height, image_x, image_y):
+    #     action_dir = {"down": [],
+    #                   "downleft": [],
+    #                   "left": [],
+    #                   "upleft": [],
+    #                   "up": [],
+    #                   "upright": [],
+    #                   "right": [],
+    #                   "downright": []}
+    #
+    #     y = y_start
+    #
+    #     for key in action_dir:
+    #         for x in range(x_start, x_end, width):
+    #             action_dir[key].append(self.get_image(spritesheet, x, y, width, height, image_x, image_y))
+    #
+    #         y += height + 1
+    #
+    #     return action_dir
