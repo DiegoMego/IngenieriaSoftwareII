@@ -64,19 +64,22 @@ class ImageManager:
 
     def load_player_images(self, actions, keyhandler):
         self.player = {}
-        t = (10, 8, 16, 6, 10)
-        generator = (n for n in t)
+        t = ((10, 8, 16, 6, 10), (0, 1045, 2882, 1045, 0, 7, 4420, 1045))
+        generator = (n for n in t[0])
+        positions = (p for p in t[1])
         self.dict_init(self.player, actions, keyhandler.vel_directions)
         spritesheet = pg.image.load(path.join(PLAYER_CLASS_FOLDER, PLAYER_SPRITESHEET_GENERATOR % (PLAYER_CLASS, PLAYER_EQUIPMENT))).convert()
         for action in self.player.values():
+            end = next(generator)
             for direction in action.values():
-                for i in range(next(generator)):
+                for i in range(end):
                     direction.append(self.create_surface(128, 128))
         for key, action in self.player.items():
-            y = 0
+            end = next(positions)
+            y = next(positions)
             for direction in action.values():
                 x = 0
-                if key = "Attack":
+                if key == "Attack":
                     for image in direction:
                         surf = self.get_image(spritesheet, x, y, 128, 128)
                         image.blit(surf, (0, -16))
@@ -99,24 +102,26 @@ class ImageManager:
     def load_mob_images(self, mob_type, actions, keyhandler):
         if not hasattr(self, "mob"):
             self.mob = {}
-        self.mob[mob_type] = {}
-        t = (13, 13, 15, 11, 16)
-        generator = (n for n in t)
-        self.dict_init(self.mob[mob_type], actions, keyhandler.vel_directions)
-        spritesheet = pg.image.load(path.join(MOB_FOLDER, MOB_FILETYPE % (mob_type)))
-        for action in self.mob[mob_type].values():
-            for direction in action.values():
-                for i in range(next(generator)):
-                    direction.append(self.create_surface(128, 128))
-        for key, action in self.mob[mob_type].items():
-            y = 0
-            for direction in action.values():
-                x = 0
-                for image in direction:
-                    surf = self.get_image(spritesheet, x, y, 128, 128)
-                    image.blit(surf, (0, -20))
-                    x += 128
-                y += 129
+        if not self.mob.has_key(mob_type):
+            self.mob[mob_type] = {}
+            t = (13, 13, 15, 11, 16)
+            generator = (n for n in t)
+            self.dict_init(self.mob[mob_type], actions, keyhandler.vel_directions)
+            spritesheet = pg.image.load(path.join(MOB_FOLDER, MOB_FILETYPE % (mob_type)))
+            for action in self.mob[mob_type].values():
+                end = next(generator)
+                for direction in action.values():
+                    for i in range(n):
+                        direction.append(self.create_surface(128, 128))
+            for key, action in self.mob[mob_type].items():
+                y = 0
+                for direction in action.values():
+                    x = 0
+                    for image in direction:
+                        surf = self.get_image(spritesheet, x, y, 128, 128)
+                        image.blit(surf, (0, -20))
+                        x += 128
+                    y += 129
 
         #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
         # self.mob[mob_type] = {"Idle": self.create_action_dict(spritesheet, 1409, 3073, 1045, 128, 128, 0, -20),
@@ -136,7 +141,7 @@ class ImageManager:
         image.blit(spritesheet, (0, 0), (x, y, width, height))
         return image
 
-    def dict_init(self, d, keys, keys2):
+    def dict_init(self, d, keys1, keys2):
         for key1 in keys1:
             d[key1] = {}
             for key2 in keys2:

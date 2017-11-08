@@ -234,8 +234,6 @@ class GamePlay(GameState):
         self.terrain = Terrain(self)
         x, y = self.map.find_player()
         self.player = Player(self, x, y)
-        self.image_manager.load_player_images()
-        self.image_manager.load_mob_images("Felltwin")
         for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
                 if tile == "M":
@@ -258,7 +256,6 @@ class GamePlay(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
-        print(self.player.pos.y, self.camera.pos.y)
         for sprite in self.terrain_sprites:
             screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, self.player.pos.y + self.player.hit_rect.height))
         for sprite in self.dead_sprites:
@@ -268,7 +265,6 @@ class GamePlay(GameState):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.terrain_sprites:
-            print(sprite.rect.height)
             #screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, sprite.rect.height))
             screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y + self.player.pos.y + self.player.hit_rect.height), (0, self.player.pos.y + self.player.hit_rect.height, sprite.rect.width, sprite.rect.height - self.player.pos.y + self.player.hit_rect.height))
         self.hud_sprites.draw(screen)

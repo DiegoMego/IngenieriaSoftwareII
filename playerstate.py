@@ -24,6 +24,9 @@ class Player(pg.sprite.Sprite):
                        "Attack": Attack(self),
                        "GetHit": GetHit(self)}
 
+        self.image_manager = ImageManager.get_instance()
+        self.keyhandler = KeyHandler.get_instance()
+        self.image_manager.load_player_images(self.states, self.keyhandler)
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
         #self.image = self.state.image
@@ -137,7 +140,7 @@ class Idle(PlayerState):
 
     def update(self):
         self.vel = vec(0, 0)
-        self.action(self.image_manager.player_idle, self.direction)
+        self.action(self.image_manager.player[self.__class__.__name__], self.direction)
 
 # class IdleTown(PlayerState):
 #
@@ -183,7 +186,7 @@ class Walk(PlayerState):
 
         self.keyhandler.previous_key = self.direction
         self.direction = self.keyhandler.get_move_direction()
-        self.action(self.image_manager.player_walk, self.direction)
+        self.action(self.image_manager.player[self.__class__.__name__], self.direction)
 
 class Attack(PlayerState):
     def __init__(self, player):
@@ -209,7 +212,7 @@ class Attack(PlayerState):
         keys = pg.key.get_pressed()
         if self.gets_hit():
             self.done["GetHit"] = True
-        elif (self.current_frame + 1) % len(self.image_manager.player_attack[self.direction]) == 0:
+        elif (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
             for key, value in self.keyhandler.action_keys.items():
                 if not keys[value]:
                     self.done["Idle"] = True
@@ -220,7 +223,7 @@ class Attack(PlayerState):
             self.check(self.direction)
         if self.current_frame == 0:
             self.try_hit = False
-        self.action(self.image_manager.player_attack, self.direction)
+        self.action(self.image_manager.player[self.__class__.__name__], self.direction)
 
 class GetHit(PlayerState):
     def __init__(self, player):
@@ -235,11 +238,11 @@ class GetHit(PlayerState):
         self.direction = self.persistence["direction"]
 
     def events(self):
-        if (self.current_frame + 1) % len(self.image_manager.player_gethit[self.direction]) == 0:
+        if (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
             self.done["Idle"] = True
 
     def update(self):
         self.vel = vec(0, 0)
         if self.gets_hit():
             self.current_frame = 0
-        self.action(self.image_manager.player_gethit, self.direction)
+        self.action(self.image_manager.player[self.__class__.__name__], self.direction)

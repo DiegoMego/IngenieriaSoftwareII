@@ -20,6 +20,7 @@ class Mob(pg.sprite.Sprite):
         self.vel = vec(0, 0)
         self.pos = vec(x * TILEWIDTH, y * TILEHEIGHT)
         self.player_detected = False
+        self.mob_class = "Felltwin"
         self.load_data()
         self.load_attributes()
 
@@ -29,10 +30,12 @@ class Mob(pg.sprite.Sprite):
                        "Attack": Attack(self),
                        "GetHit": GetHit(self),
                        "Die": Die(self)}
+
+        self.image_manager = ImageManager.get_instance()
+        self.keyhandler = KeyHandler.get_instance()
+        self.image_manager.load_mob_images(self.mob_class, self.states, self.keyhandler)
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
-        self.image = self.state.image
-        self.rect = self.image.get_rect()
         self.hit_rect = copy.copy(MOB_HIT_RECT)
         self.player_collision = False
 
@@ -64,6 +67,8 @@ class Mob(pg.sprite.Sprite):
 
         self.state.update()
         self.image = self.state.image
+        if not hasattr(self, "rect"):
+            self.rect = self.image.get_rect()
         self.vel = self.state.vel
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
@@ -106,7 +111,7 @@ class MobState(pg.sprite.Sprite):
         self.keyhandler = KeyHandler.get_instance()
         self.game = mob.game
         self.mob = mob
-        self.mob_class = "Felltwin"
+        self.mob_class = mob.mob_class
         self.hit_rect = copy.copy(MOB_HIT_RECT)
         self.inital_data()
 
