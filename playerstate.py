@@ -1,7 +1,6 @@
 import pygame as pg
 from settings import *
 from keyhandler import *
-from spritesheet import *
 from mechanics import *
 from imagemanager import *
 vec = pg.math.Vector2

@@ -3,7 +3,6 @@ import random
 import math
 import copy
 from settings import *
-from spritesheet import *
 from keyhandler import *
 from mechanics import *
 from imagemanager import *

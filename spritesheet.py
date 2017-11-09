@@ -12,20 +12,20 @@ class SpriteSheet:
         return cls._instance
 
     @classmethod
-    def add_sprite(cls, obj, folder, filename, fit_screen = False):
+    def add_sprite(cls, folder, filename, fit_screen = False):
         try:
             image = pg.image.load(path.join(folder, filename)).convert()
             if fit_screen:
-                cls._sprites[obj.__class__.__name__] = pg.transform.scale(image, (WIDTH, HEIGHT))
+                cls._sprites[filename[:-4]] = pg.transform.scale(image, (WIDTH, HEIGHT))
             else:
-                cls._sprites[obj.__class__.__name__] = image
+                cls._sprites[filename[:-4]] = image
         except Exception as e:
             print("Sprite already loaded")
 
     @classmethod
-    def get_sprite(cls, obj):
+    def get_sprite(cls, filename):
         try:
-            return cls._sprites[obj.__class__.__name__]
+            return cls._sprites[filename]
         except Exception as e:
             print("Sprite not loaded yet")
 
@@ -33,9 +33,9 @@ class SpriteSheet:
         cls._sprites.clear()
 
 
-    def get_terrain(self, x, y):
-        image = pg.Surface((160, 80))
-        image.fill(WHITE)
-        image.blit(self.image, (0, 0), (x, y, 160, 80))
-        image.set_colorkey(FUCHSIA)
-        return image
+    # def get_terrain(self, x, y):
+    #     image = pg.Surface((160, 80))
+    #     image.fill(WHITE)
+    #     image.blit(self.image, (0, 0), (x, y, 160, 80))
+    #     image.set_colorkey(FUCHSIA)
+    #     return image

@@ -128,7 +128,7 @@ class GameState(object):
 class MainScreen(GameState):
     def __init__(self):
         super().__init__()
-        self.image_bg_name = "Background.jpg"
+        self.image_name = "Background.jpg"
         self.image_text_name = "Title.png"
         self.done = {"GAMEPLAY": False,
                      "TUTORIAL": False,
@@ -147,9 +147,9 @@ class MainScreen(GameState):
 
     def startup(self, persistent = {}):
         self.spritesheet.clear_sprites()
-        self.spritesheet.add_sprite(self, INTRO_FOLDER, self.image_bg_name, True)
-        self.text_image = pg.image.load(path.join(INTRO_FOLDER, self.image_text_name)).convert()
-        self.text_image.set_colorkey(BLACK)
+        self.spritesheet.add_sprite(INTRO_FOLDER, self.image_name, True)
+        self.spritesheet.add_sprite(INTRO_FOLDER, self.image_text_name)
+        self.spritesheet.get_sprite(self.image_text_name).set_colorkey(BLACK)
         for button in self.buttons.values():
             button.clicked = False
 
@@ -172,8 +172,8 @@ class MainScreen(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
-        screen.blit(self.spritesheet.get_sprite(self), (0, 0))
-        screen.blit(self.text_image, (0, 0))
+        screen.blit(self.spritesheet.get_sprite(self.image_name[:-4]), (0, 0))
+        screen.blit(self.spritesheet.get_sprite(self.image_text_name[:-4]), , (0, 0))
         for key, button in self.buttons.items():
             screen.blit(button.surface, button.rect)
 
@@ -181,7 +181,7 @@ class TutorialScreen(GameState):
     def __init__(self):
         super().__init__()
         self.spritesheet = SpriteSheet.get_instance()
-        self.image_bg_name = "Tutorial.jpg"
+        self.image_name = "Tutorial.jpg"
         self.done = { "MAINSCREEN": False}
         self.load_button()
 
@@ -194,7 +194,7 @@ class TutorialScreen(GameState):
 
     def startup(self, persistent = {}):
         self.spritesheet.clear_sprites()
-        self.spritesheet.add_sprite(self, INTRO_FOLDER, self.image_bg_name, True)
+        self.spritesheet.add_sprite(self, INTRO_FOLDER, self.image_name, True)
         self.button.clicked = False
 
     def events(self):
@@ -211,7 +211,7 @@ class TutorialScreen(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
-        screen.blit(self.spritesheet.get_sprite(self), (0, 0))
+        screen.blit(self.spritesheet.get_sprite(self.image_name[:-4]), (0, 0))
         screen.blit(self.button.surface, self.button.rect)
 
 class GamePlay(GameState):
@@ -256,16 +256,13 @@ class GamePlay(GameState):
     def draw(self, screen):
         screen.fill(WHITE)
         for sprite in self.terrain_sprites:
-            screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, self.player.pos.y + self.player.hit_rect.height))
+            screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, sprite.rect.height))
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.all_sprites:
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
-        for sprite in self.terrain_sprites:
-            #screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, sprite.rect.height))
-            screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y + self.player.pos.y + self.player.hit_rect.height), (0, self.player.pos.y + self.player.hit_rect.height, sprite.rect.width, sprite.rect.height - self.player.pos.y + self.player.hit_rect.height))
         self.hud_sprites.draw(screen)
         pg.display.flip()
 

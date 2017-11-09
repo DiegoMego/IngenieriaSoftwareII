@@ -5,7 +5,6 @@ from settings import *
 
 class ImageManager:
     __instance = None
-    _mob_images = {}
 
     @classmethod
     def get_instance(cls):
@@ -33,18 +32,6 @@ class ImageManager:
         return empty_mana, full_mana
     #--------------------------------------------------------------------------------------------------------
 
-    # def load_objects(self, act, width, y):
-    #     if not hasattr(self, "objects"):
-    #         self.objects = {}
-    #     spritesheet = pg.image.load(path.join(path.join(MAP_FOLDER, act), "Objects.png")).convert()
-    #
-    #     images = []
-    #     for x in range(0, width + 1, 160):
-    #         #spritesheet, x, y, width, height, img_x, img_y, color
-    #         images.append(self.get_image(spritesheet, x, y, 160, 320, 0, 0, 160, 320, FUCHSIA))
-    #
-    #     self.objects[act] = images
-
     def load_terrain(self, act, part):
         if not hasattr(self, "map"):
             self.map = {"Act_1": {},
@@ -53,14 +40,6 @@ class ImageManager:
                         "Act_4": {},
                         "Act_5": {}}
         spritesheet = pg.image.load(path.join(path.join(MAP_FOLDER, act), part + ".png")).convert()
-        rect = spritesheet.get_rect()
-        images = []
-        for y in range(0, rect.height, 80):
-            for x in range(0, rect.width, 160):
-                #spritesheet, x, y, width, height, img_x, img_y, color
-                images.append(self.get_image(spritesheet, x, y, 160, 80, 0, 0, 160, 80, FUCHSIA))
-
-        self.map[act][part] = images
 
     def load_player_images(self, actions, keyhandler):
         self.player = {}
@@ -92,13 +71,6 @@ class ImageManager:
                         x += 96
                     y += 97
 
-        #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
-        # self.player_idle = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
-        # self.player_walk = self.create_action_dict(spritesheet, 2882, 3650, 1045, 96, 96, 16, 16)
-        # self.player_attack = self.create_action_dict(spritesheet, 0, 2048, 7, 128, 128, 0, -16)
-        # self.player_gethit = self.create_action_dict(spritesheet, 4420, 4996, 1045, 96, 96, 16, 16)
-        # self.player_die = self.create_action_dict(spritesheet, 0, 960, 1045, 96, 96, 16, 16)
-
     def load_mob_images(self, mob_type, actions, keyhandler):
         if not hasattr(self, "mob"):
             self.mob = {}
@@ -125,13 +97,6 @@ class ImageManager:
                         x += 128
                     y += 129
 
-        #spritesheet, x_start, x_end, y_start, width, height, image_x, image_y
-        # self.mob[mob_type] = {"Idle": self.create_action_dict(spritesheet, 1409, 3073, 1045, 128, 128, 0, -20),
-        #                       "Walk": self.create_action_dict(spritesheet, 3074, 4738, 1045, 128, 128, 0, -20),
-        #                       "Attack": self.create_action_dict(spritesheet, 0, 1920, 7, 128, 128, 0, -20),
-        #                       "GetHit": self.create_action_dict(spritesheet, 0, 1408, 1045, 128, 128, 0, -20),
-        #                       "Die": self.create_action_dict(spritesheet, 1921, 3969, 7, 128, 128, 0, -20)}
-
     def create_surface(self, width, height, color = WHITE):
         image = pg.Surface((width, height))
         image.fill(color)
@@ -148,23 +113,3 @@ class ImageManager:
             d[key1] = {}
             for key2 in keys2:
                 d[key1][key2] = []
-
-    # def create_action_dict(self, spritesheet, x_start, x_end, y_start, width, height, image_x, image_y):
-    #     action_dir = {"down": [],
-    #                   "downleft": [],
-    #                   "left": [],
-    #                   "upleft": [],
-    #                   "up": [],
-    #                   "upright": [],
-    #                   "right": [],
-    #                   "downright": []}
-    #
-    #     y = y_start
-    #
-    #     for key in action_dir:
-    #         for x in range(x_start, x_end, width):
-    #             action_dir[key].append(self.get_image(spritesheet, x, y, width, height, image_x, image_y))
-    #
-    #         y += height + 1
-    #
-    #     return action_dir
