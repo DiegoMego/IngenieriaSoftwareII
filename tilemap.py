@@ -49,11 +49,11 @@ class TiledMap:
                     except Exception as e:
                         pass
                     if tile:
+                        print(tile)
                         surface.blit(tile, (x * self.tmxdata.tilewidth, y * self.tmxdata.tileheight))
 
     def make_map(self):
         temp_surface = pg.Surface((self.width, self.height))
-        temp_surface.set_colorkey(BLACK)
         self.render(temp_surface)
         return temp_surface
 

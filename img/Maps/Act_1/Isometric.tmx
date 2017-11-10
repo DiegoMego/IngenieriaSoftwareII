@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="80" tileheight="40" nextobjectid="33">
  <tileset firstgid="1" source="Acto 1 Town.tsx"/>
- <tileset firstgid="731" source="Objects 160_320.tsx"/>
- <tileset firstgid="983" source="Acto 1 Town Smaller.tsx"/>
+ <tileset firstgid="181" source="Objects 160_320.tsx"/>
+ <tileset firstgid="433" source="Terrain Smaller.tsx"/>
+ <tileset firstgid="793" source="Terrain Horizontal Split.tsx"/>
  <layer name="Terrain Layer" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt0aENACAQBEHM998yghYQA9kzay+ZWWfzeIUPNyp8uFHhQx55qBU+5JGHWuFDHnmoFT7kkYda4UMeeagVPuSRh1rhQx55qBU+5JGHWuFDHnmoFT7kkYda4UMeeagVPuTxn8cGSicYaw==
+   eJzt0bENgAAMBLFQsP88MB0N7GCiS+O0r5vZcfcxc77/X70WbPish2U9LOthWQ/LeljWw7IelvWwrIdlPSzrYVkPy3pY1sOyHpb1sKyHZT0s62FZD8t6WNbDsh6WW3o87EQ73g==
   </data>
  </layer>
  <layer name="Town Bottom Layer" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1MsRQAAAQ0Gj/zJ9z7hrgpGJ3QryLhkGAID/uMavFzznLGo5ilr2opatqGUtavFjmfxYJj+WyY9l8mOZ/FimpaBlLmiYChoAAAB4xw2WHBOW
+   eJzt1LsNgDAAA1GkzEGT/WfglzqwEhITpLBkE91r3F7lWpZP/fkCAACMeNwBQrc7QKi7A4SaO0DocgcIne4AIX4sEz+WiR/LxI9l4scy8WOZDneAwO4OENjcAQAAAAAwobXMsS8ZCxcL
   </data>
  </layer>
  <objectgroup name="Object Layer">
