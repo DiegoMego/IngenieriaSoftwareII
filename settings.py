@@ -36,6 +36,7 @@ INTRO_FOLDER = path.join(IMAGE_FOLDER, "Background")
 
 #Map Settings
 MAP_FOLDER = path.join(IMAGE_FOLDER, "Maps")
+TILEDMAP_FOLDER = path.join(MAP_FOLDER, "Act_1")
 
 # Player Settings
 PLAYER_SPEED = 2

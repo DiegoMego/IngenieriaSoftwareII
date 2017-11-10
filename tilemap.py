@@ -1,6 +1,7 @@
 import pygame as pg
 import math
 from settings import *
+import pytmx
 vec = pg.math.Vector2
 
 class Map:
@@ -30,6 +31,32 @@ class Map:
                 if tile == PLAYER_LETTER:
                     return col, row
 
+class TiledMap:
+    def __init__(self, filename):
+        tm = pytmx.load_pygame(filename, pixelalpha = True)
+        self.width = tm.width * tm.tilewidth
+        self.height = tm.height * tm.tileheight
+        self.tmxdata = tm
+
+    def render(self, surface):
+        ti = self.tmxdata.get_tile_image_by_gid
+        for layer in self.tmxdata.visible_layers:
+            if isinstance(layer, pytmx.TiledTileLayer):
+                for x, y, gid, in layer:
+                    tile = ti(gid)
+                    try:
+                        tile.set_colorkey((255, 0, 255))
+                    except Exception as e:
+                        pass
+                    if tile:
+                        surface.blit(tile, (x * self.tmxdata.tilewidth, y * self.tmxdata.tileheight))
+
+    def make_map(self):
+        temp_surface = pg.Surface((self.width, self.height))
+        temp_surface.set_colorkey(BLACK)
+        self.render(temp_surface)
+        return temp_surface
+
 class Camera:
     def __init__(self, width, height):
         self.pos = vec(0, 0)
@@ -38,6 +65,9 @@ class Camera:
 
     def apply(self, entity):
         return entity.rect.move(self.pos)
+
+    def apply_rect(self, rect):
+        return rect.move(self.pos)
 
     def update(self, target):
         x = -target.rect.centerx + int(WIDTH / 2)

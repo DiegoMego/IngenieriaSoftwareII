@@ -149,7 +149,7 @@ class MainScreen(GameState):
         self.spritesheet.clear_sprites()
         self.spritesheet.add_sprite(INTRO_FOLDER, self.image_name, True)
         self.spritesheet.add_sprite(INTRO_FOLDER, self.image_text_name)
-        self.spritesheet.get_sprite(self.image_text_name).set_colorkey(BLACK)
+        self.spritesheet.get_sprite(self.image_text_name[:-4]).set_colorkey(BLACK)
         for button in self.buttons.values():
             button.clicked = False
 
@@ -173,7 +173,7 @@ class MainScreen(GameState):
     def draw(self, screen):
         screen.fill(WHITE)
         screen.blit(self.spritesheet.get_sprite(self.image_name[:-4]), (0, 0))
-        screen.blit(self.spritesheet.get_sprite(self.image_text_name[:-4]), , (0, 0))
+        screen.blit(self.spritesheet.get_sprite(self.image_text_name[:-4]), (0, 0))
         for key, button in self.buttons.items():
             screen.blit(button.surface, button.rect)
 
@@ -222,8 +222,6 @@ class GamePlay(GameState):
         self.dead_sprites = pg.sprite.Group()
         self.hud_sprites = pg.sprite.Group()
         self.terrain_sprites = pg.sprite.Group()
-        self.map = Map(path.join(game_folder, "map.txt"))
-        self.camera = Camera(self.map.width, self.map.height)
         self.player_life = Life()
         self.player_mana = Mana()
         self.hud_sprites.add(self.player_life)
@@ -231,15 +229,19 @@ class GamePlay(GameState):
         self.done = {"MainScreen": False}
 
     def startup(self, persistent):
-        self.terrain = Terrain(self)
-        x, y = self.map.find_player()
-        self.player = Player(self, x, y)
-        for row, tiles in enumerate(self.map.data):
-            for col, tile in enumerate(tiles):
-                if tile == "M":
-                    Mob(self, col, row)
-                if tile == "S":
-                    Block(self, col, row)
+        #self.terrain = Terrain(self)
+        # x, y = self.map.find_player()
+        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Isometric.tmx"))
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
+        self.camera = Camera(self.map.width, self.map.height)
+        self.player = Player(self, 5, 5)
+        # for row, tiles in enumerate(self.map.data):
+        #     for col, tile in enumerate(tiles):
+        #         if tile == "M":
+        #             Mob(self, col, row)
+        #         if tile == "S":
+        #             Block(self, col, row)
 
     def events(self):
         for event in pg.event.get():
@@ -255,8 +257,9 @@ class GamePlay(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
-        for sprite in self.terrain_sprites:
-            screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, sprite.rect.height))
+        # for sprite in self.terrain_sprites:
+        #     screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, sprite.rect.height))
+        screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.all_sprites:

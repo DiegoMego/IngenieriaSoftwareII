@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="80" tileheight="40" nextobjectid="33">
+ <tileset firstgid="1" source="Acto 1 Town.tsx"/>
+ <tileset firstgid="731" source="Objects 160_320.tsx"/>
+ <tileset firstgid="983" source="Acto 1 Town Smaller.tsx"/>
+ <layer name="Terrain Layer" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0aENACAQBEHM998yghYQA9kzay+ZWWfzeIUPNyp8uFHhQx55qBU+5JGHWuFDHnmoFT7kkYda4UMeeagVPuSRh1rhQx55qBU+5JGHWuFDHnmoFT7kkYda4UMeeagVPuTxn8cGSicYaw==
+  </data>
+ </layer>
+ <layer name="Town Bottom Layer" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1MsRQAAAQ0Gj/zJ9z7hrgpGJ3QryLhkGAID/uMavFzznLGo5ilr2opatqGUtavFjmfxYJj+WyY9l8mOZ/FimpaBlLmiYChoAAAB4xw2WHBOW
+  </data>
+ </layer>
+ <objectgroup name="Object Layer">
+  <object id="5" name="Block" x="2080" y="400" width="80" height="40"/>
+  <object id="7" name="Block" x="2080" y="360" width="80" height="40"/>
+  <object id="8" name="Block" x="2560" y="600" width="80" height="40"/>
+  <object id="9" name="Block" x="2480" y="600" width="80" height="40"/>
+  <object id="10" name="Block" x="2480" y="560" width="80" height="40"/>
+  <object id="11" name="Block" x="2400" y="560" width="80" height="40"/>
+  <object id="12" name="Block" x="2400" y="520" width="80" height="40"/>
+  <object id="13" name="Block" x="2320" y="520" width="80" height="40"/>
+  <object id="14" name="Block" x="2320" y="480" width="80" height="40"/>
+  <object id="15" name="Block" x="2240" y="480" width="80" height="40"/>
+  <object id="16" name="Block" x="2240" y="440" width="80" height="40"/>
+  <object id="17" name="Block" x="2160" y="440" width="80" height="40"/>
+  <object id="18" name="Block" x="2160" y="400" width="80" height="40"/>
+  <object id="19" name="Block" x="2640" y="680" width="80" height="40"/>
+  <object id="20" name="Block" x="2800" y="720" width="80" height="40"/>
+  <object id="21" name="Block" x="3040" y="880" width="80" height="40"/>
+  <object id="22" name="Block" x="2800" y="760" width="80" height="40"/>
+  <object id="23" name="Block" x="3040" y="840" width="80" height="40"/>
+  <object id="24" name="Block" x="2640" y="640" width="80" height="40"/>
+  <object id="25" name="Block" x="2720" y="680" width="80" height="40"/>
+  <object id="26" name="Block" x="2880" y="800" width="80" height="40"/>
+  <object id="27" name="Block" x="2880" y="760" width="80" height="40"/>
+  <object id="28" name="Block" x="2960" y="840" width="80" height="40"/>
+  <object id="29" name="Block" x="2720" y="720" width="80" height="40"/>
+  <object id="30" name="Block" x="2960" y="800" width="80" height="40"/>
+  <object id="31" name="Block" x="3120" y="880" width="80" height="40"/>
+  <object id="32" name="Block" x="2560" y="640" width="80" height="40"/>
+ </objectgroup>
+</map>
