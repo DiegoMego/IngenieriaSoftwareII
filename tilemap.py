@@ -4,38 +4,12 @@ from settings import *
 import pytmx
 vec = pg.math.Vector2
 
-class Map:
-    def __init__(self, filename):
-        self.data = []
-        self.saved_data = []
-        with open(filename, "rt") as f:
-            for line in f:
-                self.data.append(list(line.strip()))
-
-        self.tilewidth = len(self.data[0])
-        self.tileheight = len(self.data)
-        self.width = self.tilewidth * TILEWIDTH
-        self.height = self.tileheight * TILEHEIGHT
-
-    def update(self, row, col, mod = "."):
-        if mod != ".":
-            self.saved_data.remove((mod, row, col))
-            self.data[row].pop(col)
-        else:
-            self.saved_data.append((self.data[row].pop(col), row, col))
-        self.data[row].insert(col, mod)
-
-    def find_player(self):
-        for row, tiles in enumerate(self.data):
-            for col, tile in enumerate(tiles):
-                if tile == PLAYER_LETTER:
-                    return col, row
-
 class TiledMap:
     def __init__(self, filename):
         tm = pytmx.load_pygame(filename, pixelalpha = True)
         self.width = tm.width * tm.tilewidth
         self.height = tm.height * tm.tileheight
+        print(self.width, self.height)
         self.tmxdata = tm
 
     def render(self, surface):
@@ -49,7 +23,6 @@ class TiledMap:
                     except Exception as e:
                         pass
                     if tile:
-                        print(tile)
                         surface.blit(tile, (x * self.tmxdata.tilewidth, y * self.tmxdata.tileheight))
 
     def make_map(self):
@@ -88,3 +61,30 @@ class Camera:
         row = math.floor(-self.pos.y / TILEHEIGHT)
         col = math.floor(-self.pos.x / TILEWIDTH)
         return row, col
+
+# class Map:
+#     def __init__(self, filename):
+#         self.data = []
+#         self.saved_data = []
+#         with open(filename, "rt") as f:
+#             for line in f:
+#                 self.data.append(list(line.strip()))
+#
+#         self.tilewidth = len(self.data[0])
+#         self.tileheight = len(self.data)
+#         self.width = self.tilewidth * TILEWIDTH
+#         self.height = self.tileheight * TILEHEIGHT
+#
+#     def update(self, row, col, mod = "."):
+#         if mod != ".":
+#             self.saved_data.remove((mod, row, col))
+#             self.data[row].pop(col)
+#         else:
+#             self.saved_data.append((self.data[row].pop(col), row, col))
+#         self.data[row].insert(col, mod)
+#
+#     def find_player(self):
+#         for row, tiles in enumerate(self.data):
+#             for col, tile in enumerate(tiles):
+#                 if tile == PLAYER_LETTER:
+#                     return col, row

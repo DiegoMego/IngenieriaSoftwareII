@@ -11,13 +11,13 @@ vec = pg.math.Vector2
 
 class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.mob_sprites
+        self.groups = game.all_sprites, game.rect_sprites, game.mob_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.x = x
         self.y = y
         self.vel = vec(0, 0)
-        self.pos = vec(x, y) * TILESIZE
+        self.pos = vec(x, y)
         self.player_detected = False
         self.mob_class = "Felltwin"
         self.load_data()
@@ -75,11 +75,11 @@ class Mob(pg.sprite.Sprite):
         self.hit_rect.centerx = self.pos.x
         if collide_hit_rect(self, self.game.player):
             self.player_collision = True
-        detect_collision(self, self.game.all_sprites, "x")
+        detect_collision(self, self.game.rect_sprites, "x")
         self.hit_rect.centery = self.pos.y
         if collide_hit_rect(self, self.game.player):
             self.player_collision = True
-        detect_collision(self, self.game.all_sprites, "y")
+        detect_collision(self, self.game.rect_sprites, "y")
         self.rect.center = self.hit_rect.center
 
     def detect_player(self):
@@ -247,7 +247,7 @@ class Attack(MobState):
             if hit(self.mob.hit_rate, self.game.player.defense, self.mob.level, self.game.player.level):
                 self.game.player.currenthealth -= self.mob.damage
                 n = 1 - self.game.player.currenthealth/self.game.player.totalhealth
-                self.game.player_life.get_life(n)
+                self.game.hud.update(n, "Life")
 
     def events(self):
         if self.mob.isdead():

@@ -1,36 +1,22 @@
 import pygame as pg
 import sys
+from spritesheet import *
 from os import path
 from settings import *
 
 class ImageManager:
-    __instance = None
+    _instance = None
 
     @classmethod
     def get_instance(cls):
-        if cls.__instance == None:
-            cls.__instance = ImageManager()
-        return cls.__instance
+        if cls._instance == None:
+            cls._instance = ImageManager()
+        return cls._instance
 
-    def get_hud_images(self):
+    def load_hud_images(self):
         spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png")).convert()
-        empty_life = pg.Surface((160, 128))
-        full_life = pg.Surface((160, 128))
-        empty_life.blit(spritesheet, (0, 0), (0, 0, 160, 128))
-        full_life.blit(spritesheet, (0, 0), (0, 128, 160, 128))
-        self.hud_images = {"Life": (empty_life, full_life)}
-        return empty_life, full_life
-
-    #AÑADIDO:------------------------------------------------------------------------------------------------
-    def get_hud_images_mana(self):
-        spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png")).convert()
-        empty_mana = pg.Surface((160, 128))
-        full_mana = pg.Surface((160, 128))
-        empty_mana.blit(spritesheet, (0, 0), (160, 0, 160, 128))
-        full_mana.blit(spritesheet, (0, 0), (160, 128, 160, 128))
-        self.hud_images = {"Mana": (empty_mana, full_mana)}
-        return empty_mana, full_mana
-    #--------------------------------------------------------------------------------------------------------
+        self.hud = {"Life": (0, self.get_image(spritesheet, 0, 0, 160, 128), self.get_image(spritesheet, 0, 128, 160, 128)),
+                    "Mana": (1, self.get_image(spritesheet, 160, 0, 160, 128), self.get_image(spritesheet, 160, 128, 160, 128))}
 
     def load_terrain(self, act, part):
         if not hasattr(self, "map"):

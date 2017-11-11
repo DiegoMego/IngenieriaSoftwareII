@@ -8,7 +8,7 @@ from mobstate import *
 from tilemap import *
 from terrain import *
 from hud import *
-from block import *
+from obstacle import *
 
 class Game(object):
     """
@@ -218,24 +218,28 @@ class GamePlay(GameState):
     def __init__(self):
         super().__init__()
         self.all_sprites = pg.sprite.Group()
+        self.rect_sprites = pg.sprite.Group()
         self.mob_sprites = pg.sprite.Group()
         self.dead_sprites = pg.sprite.Group()
         self.hud_sprites = pg.sprite.Group()
-        self.terrain_sprites = pg.sprite.Group()
-        self.player_life = Life()
-        self.player_mana = Mana()
-        self.hud_sprites.add(self.player_life)
-        self.hud_sprites.add(self.player_mana)
         self.done = {"MainScreen": False}
 
     def startup(self, persistent):
         #self.terrain = Terrain(self)
         # x, y = self.map.find_player()
+        self.hud = HUD(self)
         self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Isometric.tmx"))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
+        for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == "Player":
+                self.player = Player(self, tile_object.x, tile_object.y)
+            if tile_object.name == "Obstacle":
+                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+            if tile_object.name == "Mob":
+                Mob(self, tile_object.x, tile_object.y)
+
         self.camera = Camera(self.map.width, self.map.height)
-        self.player = Player(self, 5, 5)
         # for row, tiles in enumerate(self.map.data):
         #     for col, tile in enumerate(tiles):
         #         if tile == "M":
@@ -257,8 +261,6 @@ class GamePlay(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
-        # for sprite in self.terrain_sprites:
-        #     screen.blit(sprite.image, (self.camera.pos.x, self.camera.pos.y), (0, 0, sprite.rect.width, sprite.rect.height))
         screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
@@ -266,7 +268,7 @@ class GamePlay(GameState):
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
-        self.hud_sprites.draw(screen)
+
         pg.display.flip()
 
 

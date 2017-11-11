@@ -7,13 +7,13 @@ vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites
+        self.groups = game.all_sprites, game.rect_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.x = x
         self.y = y
         self.vel = vec(0, 0)
-        self.pos = vec(x, y) * TILESIZE
+        self.pos = vec(x, y)
         self.load_data()
         self.load_attributes()
 
@@ -65,9 +65,9 @@ class Player(pg.sprite.Sprite):
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
         self.hit_rect.centerx = self.pos.x
-        detect_collision(self, self.game.all_sprites, "x")
+        detect_collision(self, self.game.rect_sprites, "x")
         self.hit_rect.centery = self.pos.y
-        detect_collision(self, self.game.all_sprites, "y")
+        detect_collision(self, self.game.rect_sprites, "y")
         self.rect.center = self.hit_rect.center
 
 class PlayerState(pg.sprite.Sprite):
