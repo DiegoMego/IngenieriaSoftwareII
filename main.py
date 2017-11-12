@@ -6,7 +6,6 @@ from button import *
 from playerstate import *
 from mobstate import *
 from tilemap import *
-from terrain import *
 from hud import *
 from obstacle import *
 
