@@ -146,7 +146,6 @@ class Idle(MobState):
                      "Attack": False,
                      "GetHit": False,
                      "Die": False}
-        #self.image = self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction][0]
 
     def start_up(self, persistence):
         self.persistence = persistence

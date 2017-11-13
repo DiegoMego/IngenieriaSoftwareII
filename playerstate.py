@@ -29,8 +29,6 @@ class Player(pg.sprite.Sprite):
         self.image_manager.load_player_images(self.states, self.keyhandler)
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
-        #self.image = self.state.image
-        #self.rect = self.image.get_rect()
         self.hit_rect = PLAYER_HIT_RECT
 
     def load_attributes(self):
@@ -123,7 +121,6 @@ class Idle(PlayerState):
                      "Attack": False,
                      "GetHit": False,
                      "Die": False}
-        #self.image = self.image_manager.player_idle[self.direction][0]
 
     def start_up(self, persistence):
         self.persistence = persistence
@@ -245,8 +242,6 @@ class GetHit(PlayerState):
         super().__init__(player)
         self.done = {"Idle": False,
                      "Die": False}
-        # self.image = self.image_manager.player_gethit[self.persistence["direction"]][0]
-        # self.rect = self.image.get_rect()
 
     def start_up(self, persistence):
         self.persistence = persistence

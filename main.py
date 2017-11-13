@@ -227,7 +227,7 @@ class GamePlay(GameState):
         for group in self.sprite_groups:
             group.empty()
         self.hud = HUD(self)
-        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Campamento4.tmx"))
+        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Mapa_Cueva.tmx"))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
         for tile_object in self.map.tmxdata.objects:
@@ -239,12 +239,6 @@ class GamePlay(GameState):
                 Mob(self, tile_object.x, tile_object.y)
 
         self.camera = Camera(self.map.width, self.map.height)
-        # for row, tiles in enumerate(self.map.data):
-        #     for col, tile in enumerate(tiles):
-        #         if tile == "M":
-        #             Mob(self, col, row)
-        #         if tile == "S":
-        #             Block(self, col, row)
 
     def events(self):
         for event in pg.event.get():
@@ -304,7 +298,6 @@ class GameOver(GameState):
 if __name__ == "__main__":
     pg.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT))
-    #self.states["GAMEPLAY"]
     states = {"MAINSCREEN": MainScreen(),
               "GAMEPLAY": GamePlay(),
               "TUTORIAL": TutorialScreen(),
