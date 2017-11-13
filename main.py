@@ -223,7 +223,9 @@ class GamePlay(GameState):
                      "GAMEOVER": False}
 
     def startup(self, persistent):
+        screen = pg.display.get_surface()
         self.gameover = False
+        print(x)
         for group in self.sprite_groups:
             group.empty()
         self.hud = HUD(self)
