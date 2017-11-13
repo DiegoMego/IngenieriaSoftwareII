@@ -21,7 +21,8 @@ class Player(pg.sprite.Sprite):
         self.states = {"Idle": Idle(self),
                        "Walk": Walk(self),
                        "Attack": Attack(self),
-                       "GetHit": GetHit(self)}
+                       "GetHit": GetHit(self),
+                       "Die": Die(self)}
 
         self.image_manager = ImageManager.get_instance()
         self.keyhandler = KeyHandler.get_instance()
@@ -70,6 +71,12 @@ class Player(pg.sprite.Sprite):
         detect_collision(self, self.game.rect_sprites, "y")
         self.rect.center = self.hit_rect.center
 
+    def isdead(self):
+        if self.currenthealth <= 0:
+            self.previoushealth = self.currenthealth
+            return True
+        return False
+
 class PlayerState(pg.sprite.Sprite):
     def __init__(self, player):
         pg.sprite.Sprite.__init__(self)
@@ -114,7 +121,8 @@ class Idle(PlayerState):
         super().__init__(player)
         self.done = {"Walk": False,
                      "Attack": False,
-                     "GetHit": False}
+                     "GetHit": False,
+                     "Die": False}
         #self.image = self.image_manager.player_idle[self.direction][0]
 
     def start_up(self, persistence):
@@ -123,7 +131,9 @@ class Idle(PlayerState):
 
     def events(self):
         keys = pg.key.get_pressed()
-        if self.gets_hit():
+        if self.player.isdead():
+            self.done["Die"] = True
+        elif self.gets_hit():
             self.done["GetHit"] = True
             return False
 
@@ -151,7 +161,8 @@ class Walk(PlayerState):
         super().__init__(player)
         self.done = {"Idle": False,
                      "Attack": False,
-                     "GetHit": False}
+                     "GetHit": False,
+                     "Die": False}
 
     def start_up(self, persistence):
         self.persistence = persistence
@@ -160,7 +171,9 @@ class Walk(PlayerState):
 
     def events(self):
         keys = pg.key.get_pressed()
-        if self.gets_hit():
+        if self.player.isdead():
+            self.done["Die"] = True
+        elif self.gets_hit():
             self.done["GetHit"] = True
         elif len(self.keyhandler.move_keyspressed) == 0:
             self.persistence["direction"] = self.direction
@@ -191,7 +204,8 @@ class Attack(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Idle": False,
-                     "GetHit": False}
+                     "GetHit": False,
+                     "Die": False}
 
     def start_up(self, persistence):
         self.persistence = persistence
@@ -209,7 +223,9 @@ class Attack(PlayerState):
 
     def events(self):
         keys = pg.key.get_pressed()
-        if self.gets_hit():
+        if self.player.isdead():
+            self.done["Die"] = True
+        elif self.gets_hit():
             self.done["GetHit"] = True
         elif (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
             for key, value in self.keyhandler.action_keys.items():
@@ -227,7 +243,8 @@ class Attack(PlayerState):
 class GetHit(PlayerState):
     def __init__(self, player):
         super().__init__(player)
-        self.done = {"Idle": False}
+        self.done = {"Idle": False,
+                     "Die": False}
         # self.image = self.image_manager.player_gethit[self.persistence["direction"]][0]
         # self.rect = self.image.get_rect()
 
@@ -237,7 +254,9 @@ class GetHit(PlayerState):
         self.direction = self.persistence["direction"]
 
     def events(self):
-        if (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
+        if self.player.isdead():
+            self.done["Die"] = True
+        elif (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
             self.done["Idle"] = True
 
     def update(self):
@@ -245,3 +264,25 @@ class GetHit(PlayerState):
         if self.gets_hit():
             self.current_frame = 0
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
+
+class Die(PlayerState):
+    def __init__(self, player):
+        super().__init__(player)
+        self.finish = False
+        self.done = {"None": None}
+
+    def start_up(self, persistence):
+        self.persistence = persistence
+        self.current_frame = 0
+        self.direction = self.persistence["direction"]
+
+    def update(self):
+        self.vel = vec(0, 0)
+        if not self.finish:
+            self.action(self.image_manager.player[self.__class__.__name__], self.direction)
+        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]) - 1:
+            print(len(self.image_manager.player[self.__class__.__name__][self.direction]) - 1)
+            self.finish = True
+            self.player.remove(self.player.groups)
+            self.player.add(self.game.dead_sprites)
+            self.game.gameover = True

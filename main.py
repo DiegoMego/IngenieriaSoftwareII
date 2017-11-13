@@ -177,7 +177,6 @@ class MainScreen(GameState):
 class TutorialScreen(GameState):
     def __init__(self):
         super().__init__()
-        self.spritesheet = SpriteSheet.get_instance()
         self.image_name = "Tutorial.jpg"
         self.done = { "MAINSCREEN": False}
         self.load_button()
@@ -191,7 +190,7 @@ class TutorialScreen(GameState):
 
     def startup(self, persistent = {}):
         self.spritesheet.clear_sprites()
-        self.spritesheet.add_sprite(self, INTRO_FOLDER, self.image_name, True)
+        self.spritesheet.add_sprite(INTRO_FOLDER, self.image_name, True)
         self.button.clicked = False
 
     def events(self):
@@ -220,10 +219,11 @@ class GamePlay(GameState):
         self.dead_sprites = pg.sprite.Group()
         self.hud_sprites = pg.sprite.Group()
         self.sprite_groups = (self.all_sprites, self.rect_sprites, self.mob_sprites, self.dead_sprites, self.hud_sprites)
-        self.done = {"MainScreen": False,
-                     "GameOver": False}
+        self.done = {"MAINSCREEN": False,
+                     "GAMEOVER": False}
 
     def startup(self, persistent):
+        self.gameover = False
         for group in self.sprite_groups:
             group.empty()
         self.hud = HUD(self)
@@ -254,6 +254,9 @@ class GamePlay(GameState):
         for sprite in self.all_sprites:
             sprite.events()
 
+        if self.gameover:
+            self.done["GAMEOVER"] = True
+
     def update(self, dt):
         self.all_sprites.update()
         self.camera.update(self.player)
@@ -273,23 +276,29 @@ class GamePlay(GameState):
 class GameOver(GameState):
     def __init__(self):
         super().__init__()
-        self.done = {"GamePlay": False}
+        self.image_name = "Game Over.png"
+        self.done = {"GAMEPLAY": False}
 
     def startup(self, persistent = {}):
-        self.text_displayed = False
+        self.spritesheet.clear_sprites()
+        self.spritesheet.add_sprite(INTRO_FOLDER, self.image_name, True)
 
-    def events(self, event):
-        pg.event.wait()
+    def events(self):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.quit = True
             elif event.type == pg.KEYDOWN:
-                self.done["GamePlay"] = True
+                if event.key == pg.K_RETURN:
+                    self.done["GAMEPLAY"] = True
+                if event.key == pg.K_ESCAPE:
+                    self.quit = True
 
     def update(self, dt):
         pass
 
-    def draw(self, surface):
+    def draw(self, screen):
+        screen.fill(WHITE)
+        screen.blit(self.spritesheet.get_sprite(self.image_name[:-4]), (0, 0))
         pg.display.flip()
 
 if __name__ == "__main__":
@@ -298,7 +307,8 @@ if __name__ == "__main__":
     #self.states["GAMEPLAY"]
     states = {"MAINSCREEN": MainScreen(),
               "GAMEPLAY": GamePlay(),
-              "TUTORIAL": TutorialScreen()}
+              "TUTORIAL": TutorialScreen(),
+              "GAMEOVER": GameOver()}
     game = Game(screen, states, "MAINSCREEN")
     game.run()
     pg.quit()

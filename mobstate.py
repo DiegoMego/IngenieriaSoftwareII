@@ -40,8 +40,8 @@ class Mob(pg.sprite.Sprite):
 
     def load_attributes(self):
         self.totalhealth = self.currenthealth = self.previoushealth = 200
-        self.damage = 40
-        self.hit_rate = 100
+        self.damage = 100
+        self.hit_rate = 500
         self.defense = 50
         self.level = 1
 

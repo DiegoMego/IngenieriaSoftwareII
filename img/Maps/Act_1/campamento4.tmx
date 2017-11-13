@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="40" tileheight="40" nextobjectid="1163">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="40" tileheight="40" nextobjectid="1166">
  <tileset firstgid="1" source="terreno.tsx"/>
  <tileset firstgid="1461" source="objetos1.tsx"/>
  <tileset firstgid="3765" source="walls1.tsx"/>
@@ -3198,5 +3198,7 @@
   <object id="1160" name="Obstacle" x="3200" y="3240" width="40" height="40"/>
   <object id="1161" name="Obstacle" x="3240" y="3240" width="40" height="40"/>
   <object id="1162" name="Obstacle" x="1760" y="3720" width="40" height="40"/>
+  <object id="1163" name="Mob" x="1920" y="1200" width="40" height="40"/>
+  <object id="1164" name="Mob" x="2120" y="1160" width="40" height="40"/>
  </objectgroup>
 </map>
