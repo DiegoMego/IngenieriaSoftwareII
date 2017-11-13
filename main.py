@@ -227,7 +227,7 @@ class GamePlay(GameState):
         #self.terrain = Terrain(self)
         # x, y = self.map.find_player()
         self.hud = HUD(self)
-        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Isometric.tmx"))
+        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Mapa_Cueva.tmx"))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
         for tile_object in self.map.tmxdata.objects:
