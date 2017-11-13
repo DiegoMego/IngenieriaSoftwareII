@@ -39,9 +39,7 @@ class Mob(pg.sprite.Sprite):
         self.player_collision = False
 
     def load_attributes(self):
-        self.totalhealth = 200
-        self.currenthealth = 200
-        self.previoushealth = 200
+        self.totalhealth = self.currenthealth = self.previoushealth = 200
         self.damage = 40
         self.hit_rate = 100
         self.defense = 50
