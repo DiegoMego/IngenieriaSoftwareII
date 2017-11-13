@@ -29,6 +29,8 @@ class Life(pg.sprite.Sprite):
         self.image = pg.Surface((w, h))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
+        self.width = self.rect.width
+        self.height = self.rect.height
         self.rect.bottomleft = ((0, HEIGHT))
 
     def get_life(self, n, manager):
@@ -44,6 +46,8 @@ class Mana(pg.sprite.Sprite):
         self.image = pg.Surface((w, h))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
+        self.width = self.rect.width
+        self.height = self.rect.height
         self.rect.bottomright = ((WIDTH, HEIGHT))
 
     def get_mana(self, n, manager):

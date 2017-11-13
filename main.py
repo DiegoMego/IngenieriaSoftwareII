@@ -87,9 +87,7 @@ class GameState(object):
         self.done = False
         self.quit = False
         self.next_state = None
-        self.screen_rect = pg.display.get_surface().get_rect()
         self.persist = {}
-        self.font = pg.font.Font(None, 24)
         self.spritesheet = SpriteSheet.get_instance()
         self.image_manager = ImageManager.get_instance()
 
@@ -221,13 +219,15 @@ class GamePlay(GameState):
         self.mob_sprites = pg.sprite.Group()
         self.dead_sprites = pg.sprite.Group()
         self.hud_sprites = pg.sprite.Group()
-        self.done = {"MainScreen": False}
+        self.sprite_groups = (self.all_sprites, self.rect_sprites, self.mob_sprites, self.dead_sprites, self.hud_sprites)
+        self.done = {"MainScreen": False,
+                     "GameOver": False}
 
     def startup(self, persistent):
-        #self.terrain = Terrain(self)
-        # x, y = self.map.find_player()
+        for group in self.sprite_groups:
+            group.empty()
         self.hud = HUD(self)
-        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Isometric.tmx"))
+        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Campamento4.tmx"))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
         for tile_object in self.map.tmxdata.objects:
@@ -267,9 +267,30 @@ class GamePlay(GameState):
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
-
+        self.hud_sprites.draw(screen)
         pg.display.flip()
 
+class GameOver(GameState):
+    def __init__(self):
+        super().__init__()
+        self.done = {"GamePlay": False}
+
+    def startup(self, persistent = {}):
+        self.text_displayed = False
+
+    def events(self, event):
+        pg.event.wait()
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                self.quit = True
+            elif event.type == pg.KEYDOWN:
+                self.done["GamePlay"] = True
+
+    def update(self, dt):
+        pass
+
+    def draw(self, surface):
+        pg.display.flip()
 
 if __name__ == "__main__":
     pg.init()
