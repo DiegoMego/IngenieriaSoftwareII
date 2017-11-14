@@ -105,3 +105,14 @@ class ImageManager:
             d[key1] = {}
             for key2 in keys2:
                 d[key1][key2] = []
+
+    def loading_screen(self, n, screen):
+        bg = pg.image.load(path.join(INTRO_FOLDER, "Loading House.png")).convert()
+        screen.blit(bg, (0, 0))
+        bar = pg.Surface((674, 37))
+        bar.fill(GREEN)
+        rect = bar.get_rect()
+        for i in range(n):
+            screen.blit(bar, (63, 558), (0, 0, rect.width * i / (n - 1), rect.height))
+            pg.display.flip()
+            yield None

@@ -11,11 +11,10 @@ class TiledMap:
         self.height = tm.height * tm.tileheight
         self.tmxdata = tm
 
-    def render(self, surface):
+    def render(self, surface, generator):
         ti = self.tmxdata.get_tile_image_by_gid
         for layer in self.tmxdata.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
-                #print(layer.offsetx)
                 for x, y, gid, in layer:
                     tile = ti(gid)
                     try:
@@ -24,11 +23,12 @@ class TiledMap:
                         pass
                     if tile:
                         #tile.set_alpha(100)
+                        next(generator)
                         surface.blit(tile, (x * self.tmxdata.tilewidth + layer.offsetx, y * self.tmxdata.tileheight + layer.offsety))
 
-    def make_map(self):
+    def make_map(self, generator):
         temp_surface = pg.Surface((self.width, self.height))
-        self.render(temp_surface)
+        self.render(temp_surface, generator)
         return temp_surface
 
 class Camera:

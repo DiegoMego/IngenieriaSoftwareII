@@ -224,13 +224,14 @@ class GamePlay(GameState):
 
     def startup(self, persistent):
         screen = pg.display.get_surface()
+        generator = self.image_manager.loading_screen(7440, screen)
         self.gameover = False
-        print(x)
         for group in self.sprite_groups:
             group.empty()
         self.hud = HUD(self)
+        next(generator)
         self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Mapa_Cueva.tmx"))
-        self.map_img = self.map.make_map()
+        self.map_img = self.map.make_map(generator)
         self.map_rect = self.map_img.get_rect()
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == "Player":
@@ -239,6 +240,7 @@ class GamePlay(GameState):
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Mob":
                 Mob(self, tile_object.x, tile_object.y)
+            next(generator)
 
         self.camera = Camera(self.map.width, self.map.height)
 
