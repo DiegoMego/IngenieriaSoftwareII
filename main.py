@@ -3,7 +3,7 @@ import pygame as pg
 from settings import *
 from spritesheet import *
 from button import *
-from playerstate import *
+from warrior import *
 from mobstate import *
 from tilemap import *
 from hud import *
@@ -235,7 +235,7 @@ class GamePlay(GameState):
         self.map_rect = self.map_img.get_rect()
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == "Player":
-                self.player = Player(self, tile_object.x, tile_object.y)
+                self.player = Warrior(self, tile_object.x, tile_object.y)
             if tile_object.name == "Obstacle":
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Mob":

@@ -29,7 +29,7 @@ class ImageManager:
 
     def load_player_images(self, actions, keyhandler):
         self.player = {}
-        t = ((10, 8, 16, 6, 21, 10), (0, 1045, 2882, 1045, 0, 7, 4420, 1045, 2049, 7))
+        t = ((10, 8, 16, 6, 21), (0, 1045, 2882, 1045, 0, 7, 4420, 1045, 2049, 7))
         generator = (n for n in t[0])
         positions = (p for p in t[1])
         self.dict_init(self.player, actions, keyhandler.vel_directions)

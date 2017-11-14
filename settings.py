@@ -1,5 +1,6 @@
 # game options/settings
 import pygame as pg
+import json
 from os import path
 
 # define colors
@@ -25,8 +26,13 @@ HEIGHT = 640 #800
 TILESIZE = 40
 BGCOLOR = DARK_GREY
 FPS = 60
-game_folder = path.dirname(__file__)
-IMAGE_FOLDER = path.join(game_folder, "img")
+GAME_FOLDER = path.dirname(__file__)
+IMAGE_FOLDER = path.join(GAME_FOLDER, "img")
+
+#Load Data
+DATAFILE = path.join(path.join(GAME_FOLDER, "data"), "data.json")
+with open(DATAFILE) as json_data:
+    GAMEDATA = json.load(json_data)
 
 #Intro Settings
 INTRO_TITLE = "DOOM KINGDOM"

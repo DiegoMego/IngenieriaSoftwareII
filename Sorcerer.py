@@ -44,9 +44,9 @@ class Player(pg.sprite.Sprite):
         """Switch to the next game state."""
         self.state.done[state_name] = False
         self.state_name = state_name
-        direction = self.state.direction
+        persistent = self.state.persistence
         self.state = self.states[self.state_name]
-        self.state.start_up(direction)
+        self.state.start_up(persistent)
 
     def events(self):
         self.state.events()
@@ -69,34 +69,36 @@ class Player(pg.sprite.Sprite):
         detect_collision(self, self.game.rect_sprites, "y")
         self.rect.center = self.hit_rect.center
 
-    def gets_hit(self):
-        if self.previoushealth > self.currenthealth:
-            self.previoushealth = self.currenthealth
-            return True
-        return False
-
     def isdead(self):
         if self.currenthealth <= 0:
             self.previoushealth = self.currenthealth
             return True
         return False
 
-class State:
+class PlayerState(pg.sprite.Sprite):
     def __init__(self, player):
         pg.sprite.Sprite.__init__(self)
         self.image_manager = ImageManager.get_instance()
         self.keyhandler = KeyHandler.get_instance()
         self.game = player.game
         self.player = player
+        self.hit_rect = PLAYER_HIT_RECT
         self.inital_data()
 
     def inital_data(self):
         self.current_frame = 0
         self.last_update = 0
         self.direction = "down"
+        self.persistence = {"direction": self.direction}
 
-    def start_up(self, direction):
-        self.direction = direction
+    def start_up(self, direction_persistence):
+        self.persistence = direction_persistence
+
+    def gets_hit(self):
+        if self.player.previoushealth > self.player.currenthealth:
+            self.player.previoushealth = self.player.currenthealth
+            return True
+        return False
 
     def events(self):
         pass
@@ -112,7 +114,7 @@ class State:
             self.current_frame = (self.current_frame + 1) % len(action_type[action_dir])
             self.image = action_type[action_dir][self.current_frame]
 
-class Idle(State):
+class Idle(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Walk": False,
@@ -120,14 +122,15 @@ class Idle(State):
                      "GetHit": False,
                      "Die": False}
 
-    def start_up(self, direction):
-        self.direction = direction
+    def start_up(self, persistence):
+        self.persistence = persistence
+        self.direction = self.persistence["direction"]
 
     def events(self):
         keys = pg.key.get_pressed()
         if self.player.isdead():
             self.done["Die"] = True
-        elif self.player.gets_hit():
+        elif self.gets_hit():
             self.done["GetHit"] = True
             return False
 
@@ -145,12 +148,12 @@ class Idle(State):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
 
-# class IdleTown(State):
+# class IdleTown(PlayerState):
 #
-# class TownWalk(State):
+# class TownWalk(PlayerState):
 
 
-class Walk(State):
+class Walk(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Idle": False,
@@ -158,19 +161,22 @@ class Walk(State):
                      "GetHit": False,
                      "Die": False}
 
-    def start_up(self, direction):
+    def start_up(self, persistence):
+        self.persistence = persistence
         self.keyhandler.move_keyspressed = []
-        self.direction = direction
+        self.direction = self.persistence["direction"]
 
     def events(self):
         keys = pg.key.get_pressed()
         if self.player.isdead():
             self.done["Die"] = True
-        elif self.player.gets_hit():
+        elif self.gets_hit():
             self.done["GetHit"] = True
         elif len(self.keyhandler.move_keyspressed) == 0:
+            self.persistence["direction"] = self.direction
             self.done["Idle"] = True
         elif keys[pg.K_q]:
+            self.persistence["direction"] = self.direction
             self.done["Attack"] = True
 
     def update(self):
@@ -191,16 +197,17 @@ class Walk(State):
         self.direction = self.keyhandler.get_move_direction()
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
 
-class Attack(State):
+class Attack(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Idle": False,
                      "GetHit": False,
                      "Die": False}
 
-    def start_up(self, direction):
+    def start_up(self, persistence):
+        self.persistence = persistence
         self.current_frame = 0
-        self.direction = direction
+        self.direction = self.persistence["direction"]
 
     def check(self, direction):
         if not self.try_hit:
@@ -215,7 +222,7 @@ class Attack(State):
         keys = pg.key.get_pressed()
         if self.player.isdead():
             self.done["Die"] = True
-        elif self.player.gets_hit():
+        elif self.gets_hit():
             self.done["GetHit"] = True
         elif (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
             for key, value in self.keyhandler.action_keys.items():
@@ -230,15 +237,16 @@ class Attack(State):
             self.try_hit = False
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
 
-class GetHit(State):
+class GetHit(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.done = {"Idle": False,
                      "Die": False}
 
-    def start_up(self, direction):
+    def start_up(self, persistence):
+        self.persistence = persistence
         self.current_frame = 0
-        self.direction = direction
+        self.direction = self.persistence["direction"]
 
     def events(self):
         if self.player.isdead():
@@ -248,19 +256,20 @@ class GetHit(State):
 
     def update(self):
         self.vel = vec(0, 0)
-        if self.player.gets_hit():
+        if self.gets_hit():
             self.current_frame = 0
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
 
-class Die(State):
+class Die(PlayerState):
     def __init__(self, player):
         super().__init__(player)
         self.finish = False
         self.done = {"None": None}
 
     def start_up(self, persistence):
+        self.persistence = persistence
         self.current_frame = 0
-        self.direction = direction
+        self.direction = self.persistence["direction"]
 
     def update(self):
         self.vel = vec(0, 0)
