@@ -81,6 +81,9 @@ class Player(pg.sprite.Sprite):
             return True
         return False
 
+    def buff(self, attribute):
+        pass
+
 class State:
     def __init__(self, player):
         pg.sprite.Sprite.__init__(self)
@@ -198,7 +201,7 @@ class Attack(State):
                      "Attack": False,
                      "GetHit": False,
                      "Die": False,
-                     "1": False,
+                     "Fire": False,
                      "2": False,
                      "3": False}
 
@@ -285,9 +288,73 @@ class Fire(State):
                      "Attack": False,
                      "GetHit": False,
                      "Die": False,
-                     "1": False,
-                     "2": False,
-                     "3": False}
+                     "Fire": False,
+                     "Lightning": False,
+                     "Smoke": False}
+
+    def start_up(self, direction):
+        self.current_frame = 0
+        self.direction = direction
+
+    def events(self):
+        keys = pg.key.get_pressed()
+        if self.player.isdead():
+            self.done["Die"] = True
+        elif self.player.gets_hit():
+            self.done["GetHit"] = True
+        elif (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
+            for key, value in self.keyhandler.action_keys.items():
+                if keys[value]:
+                    self.done[key] = True
+                else:
+                    self.done["Idle"] = True
+
+    def update(self):
+        self.vel = vec(0, 0)
+        self.action(self.image_manager.player[self.__class__.__name__], self.direction)
+
+class Lightning(State):
+    def __init__(self, player):
+        super().__init__(player)
+        self.done = {"Idle": False,
+                     "Attack": False,
+                     "GetHit": False,
+                     "Die": False,
+                     "Fire": False,
+                     "Lightning": False,
+                     "Smoke": False}
+
+    def start_up(self, direction):
+        self.current_frame = 0
+        self.direction = direction
+
+    def events(self):
+        keys = pg.key.get_pressed()
+        if self.player.isdead():
+            self.done["Die"] = True
+        elif self.player.gets_hit():
+            self.done["GetHit"] = True
+        elif (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
+            for key, value in self.keyhandler.action_keys.items():
+                if keys[value]:
+                    self.done[key] = True
+                else:
+                    self.done["Idle"] = True
+
+    def update(self):
+        self.vel = vec(0, 0)
+        self.action(self.image_manager.player[self.__class__.__name__], self.direction)
+
+class Smoke(State):
+    def __init__(self, player):
+        super().__init__(player)
+        self.done = {"Idle": False,
+                     "Attack": False,
+                     "GetHit": False,
+                     "Die": False,
+                     "Fire": False,
+                     "Lightning": False,
+                     "Smoke": False}
 
     def start_up(self, direction):
         self.current_frame = 0
