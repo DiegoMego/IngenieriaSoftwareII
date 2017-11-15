@@ -18,18 +18,10 @@ class ImageManager:
         self.hud = {"Life": (0, self.get_image(spritesheet, 0, 0, 160, 128), self.get_image(spritesheet, 0, 128, 160, 128)),
                     "Mana": (1, self.get_image(spritesheet, 160, 0, 160, 128), self.get_image(spritesheet, 160, 128, 160, 128))}
 
-    def load_terrain(self, act, part):
-        if not hasattr(self, "map"):
-            self.map = {"Act_1": {},
-                        "Act_2": {},
-                        "Act_3": {},
-                        "Act_4": {},
-                        "Act_5": {}}
-        spritesheet = pg.image.load(path.join(path.join(MAP_FOLDER, act), part + ".png")).convert()
 
     def load_player_images(self, actions, keyhandler):
         self.player = {}
-        t = ((10, 8, 16, 6, 21), (0, 1045, 2882, 1045, 0, 7, 4420, 1045, 2049, 7))
+        t = ((10, 8, 16, 6, 21, 20), (0, 1045, 2882, 1045, 0, 7, 4420, 1045, 2049, 7, 0, 1827))
         generator = (n for n in t[0])
         positions = (p for p in t[1])
         self.dict_init(self.player, actions, keyhandler.vel_directions)

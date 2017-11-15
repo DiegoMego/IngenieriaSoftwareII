@@ -25,7 +25,10 @@ class KeyHandler:
                                "right": (6, 1, 0),
                                "downright": (7, 1, 1)}
         self.move_keyspressed = []
-        self.action_keys = {"q": pg.K_q}
+        self.action_keys = {"q": pg.K_q,
+                            "1": pg.K_1,
+                            "2": pg.K_2,
+                            "3": pg.K_3}
 
     def get_key(self, n):
         i = -1
