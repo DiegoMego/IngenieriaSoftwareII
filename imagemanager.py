@@ -21,65 +21,48 @@ class ImageManager:
 
     def load_player_images(self, actions, keyhandler):
         self.player = {}
-        t = ((10, 8, 16, 6, 21, 20), (0, 1045, 2882, 1045, 0, 7, 4420, 1045, 2049, 7, 0, 1827))
-        generator = (n for n in t[0])
-        positions = (p for p in t[1])
-        self.dict_init(self.player, actions, keyhandler.vel_directions)
+        data = GAMEDATA[PLAYER_KEY][PLAYER_CLASS][IMAGE_KEY]
+        self.dtry_init(self.player, actions, keyhandler.vel_directions)
         spritesheet = pg.image.load(path.join(PLAYER_CLASS_FOLDER, PLAYER_SPRITESHEET_GENERATOR % (PLAYER_CLASS, PLAYER_EQUIPMENT))).convert()
-        for action in self.player.values():
-            end = next(generator)
+        for actionkey, action in self.player.items():
+            end = data[actionkey]["n"]
             for direction in action.values():
                 for i in range(end):
-                    direction.append(self.create_surface(128, 128))
+                    direction.append(self.create_surface(data["BaseSurface"][0], data["BaseSurface"][1]))
         for key, action in self.player.items():
-            end = next(positions)
-            y = next(positions)
+            end = data[key]["x"]
+            y = data[key]["y"]
             for direction in action.values():
                 x = end
-                if key == "Attack":
-                    for image in direction:
-                        surf = self.get_image(spritesheet, x, y, 128, 128)
-                        image.blit(surf, (0, -16))
-                        x += 128
-                    y += 129
-                elif key == "Die":
-                    for image in direction:
-                        surf = self.get_image(spritesheet, x, y, 128, 96)
-                        image.blit(surf, (0, 16))
-                        x += 128
-                    y += 97
-                else:
-                    for image in direction:
-                        surf = self.get_image(spritesheet, x, y, 96, 96)
-                        image.blit(surf, (16, 16))
-                        x += 96
-                    y += 97
+                for image in direction:
+                    surf = self.get_image(spritesheet, x, y, data[key]["w"], data[key]["h"])
+                    image.blit(surf, (data[key]["offsetx"], data[key]["offsety"]))
+                    x += data[key]["w"]
+                y += data[key]["h"] + 1
 
     def load_mob_images(self, mob_type, actions, keyhandler):
         if not hasattr(self, "mob"):
             self.mob = {}
         if mob_type not in self.mob:
             self.mob[mob_type] = {}
-            t = ((13, 13, 15, 11, 16), (1049, 1045, 3074, 1045, 0, 7, 0, 1045, 1921, 7))
-            generator = (n for n in t[0])
-            positions = (p for p in t[1])
-            self.dict_init(self.mob[mob_type], actions, keyhandler.vel_directions)
+            data = GAMEDATA[MOB_KEY][mob_type][IMAGE_KEY]
+            self.dtry_init(self.mob[mob_type], actions, keyhandler.vel_directions)
             spritesheet = pg.image.load(path.join(MOB_FOLDER, MOB_FILETYPE % (mob_type)))
-            for action in self.mob[mob_type].values():
-                n = next(generator)
+            for actionkey, action in self.mob[mob_type].items():
+                end = data[actionkey]["n"]
                 for direction in action.values():
-                    for i in range(n):
-                        direction.append(self.create_surface(128, 128))
+                    for i in range(end):
+                        direction.append(self.create_surface(data["BaseSurface"][0], data["BaseSurface"][1]))
             for key, action in self.mob[mob_type].items():
-                end = next(positions)
-                y = next(positions)
+                end = data[key]["x"]
+                y = data[key]["y"]
                 for direction in action.values():
                     x = end
                     for image in direction:
-                        surf = self.get_image(spritesheet, x, y, 128, 128)
-                        image.blit(surf, (0, -20))
-                        x += 128
-                    y += 129
+                        surf = self.get_image(spritesheet, x, y, data[key]["w"], data[key]["h"])
+                        image.blit(surf, (data[key]["offsetx"], data[key]["offsety"]))
+                        x += data[key]["w"]
+                    y += data[key]["h"] + 1
 
     def create_surface(self, width, height, color = WHITE):
         image = pg.Surface((width, height))
@@ -92,11 +75,11 @@ class ImageManager:
         image.blit(spritesheet, (0, 0), (x, y, width, height))
         return image
 
-    def dict_init(self, d, keys1, keys2):
-        for key1 in keys1:
-            d[key1] = {}
-            for key2 in keys2:
-                d[key1][key2] = []
+    def dtry_init(self, dtry, actions, directions):
+        for action_key in actions:
+            dtry[action_key] = {}
+            for direction_key in directions:
+                dtry[action_key][direction_key] = []
 
     def loading_screen(self, n, screen):
         bg = pg.image.load(path.join(INTRO_FOLDER, "Loading House.png")).convert()

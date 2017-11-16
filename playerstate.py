@@ -23,7 +23,10 @@ class Player(pg.sprite.Sprite):
                        "Walk": Walk(self),
                        "Attack": Attack(self),
                        "GetHit": GetHit(self),
-                       "Die": Die(self)}
+                       "Die": Die(self),
+                       "Fire": Fire(self),
+                       "Lightning": Lightning(self),
+                       "Smoke": Smoke(self)}
 
         self.image_manager = ImageManager.get_instance()
         self.keyhandler = KeyHandler.get_instance()
@@ -33,13 +36,15 @@ class Player(pg.sprite.Sprite):
         self.hit_rect = PLAYER_HIT_RECT
 
     def load_attributes(self):
-        self.totalhealth = 500
-        self.currenthealth = 500
-        self.previoushealth = 500
-        self.damage = 40
-        self.hit_rate = 200
-        self.defense = 75
-        self.level = 1
+        data = GAMEDATA[PLAYER_KEY][PLAYER_CLASS]["Stats"]
+        self.totalhealth = data["Health"]
+        self.currenthealth = self.totalhealth
+        self.previoushealth = self.totalhealth
+        self.damage = data["Damage"]
+        self.hit_rate = data["Hit Rate"]
+        self.defense = data["Defense"]
+        self.block = data["Block"]
+        self.level = data["Level"]
 
     def flip_state(self, state_name):
         """Switch to the next game state."""

@@ -28,6 +28,7 @@ BGCOLOR = DARK_GREY
 FPS = 60
 GAME_FOLDER = path.dirname(__file__)
 IMAGE_FOLDER = path.join(GAME_FOLDER, "img")
+IMAGE_KEY = "Images"
 
 #Load Data
 DATAFILE = path.join(path.join(GAME_FOLDER, "data"), "data.json")
@@ -43,6 +44,7 @@ MAP_FOLDER = path.join(IMAGE_FOLDER, "Maps")
 TILEDMAP_FOLDER = path.join(MAP_FOLDER, "Act_1")
 
 # Player Settings
+PLAYER_KEY = "Player"
 PLAYER_SPEED = 2
 PLAYER_HIT_RECT = pg.Rect(0, 0, 32, 32)
 PLAYER_CLASS = "Warrior"
@@ -55,6 +57,7 @@ PLAYER_FOLDER = path.join(IMAGE_FOLDER, "Class")
 PLAYER_CLASS_FOLDER = path.join(PLAYER_FOLDER, PLAYER_CLASS)
 
 # Mob Settings
+MOB_KEY = "Mob"
 MOB_SPEED = 1
 MOB_HIT_RECT = pg.Rect(0, 0, 32, 32)
 MOB_LETTER = "M"

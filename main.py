@@ -273,7 +273,6 @@ class GamePlay(GameState):
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
-        print(self.player.pos.x, self.player.pos.y)
         self.hud_sprites.draw(screen)
         pg.display.flip()
 

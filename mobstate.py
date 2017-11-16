@@ -112,7 +112,6 @@ class MobState(pg.sprite.Sprite):
         self.game = mob.game
         self.mob = mob
         self.mob_class = mob.mob_class
-        #self.hit_rect = copy.copy(MOB_HIT_RECT)
         self.inital_data()
 
     def inital_data(self):
