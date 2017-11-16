@@ -73,7 +73,7 @@ class Game(object):
         spent inside this while loop.
         """
         while not self.done:
-            dt = self.clock.tick(self.fps)
+            dt = self.clock.tick(self.fps) / 1000
             self.events()
             self.update(dt)
             self.draw()
@@ -261,7 +261,7 @@ class GamePlay(GameState):
             self.done["GAMEOVER"] = True
 
     def update(self, dt):
-        self.all_sprites.update()
+        self.all_sprites.update(dt)
         self.camera.update(self.player)
 
     def draw(self, screen):

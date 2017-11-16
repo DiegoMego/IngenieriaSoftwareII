@@ -49,35 +49,36 @@
                     "offsety": 16
                 },
                 "Fire": {
-                  "n": 20,
-                  "x": 3842,
-                  "y": 1827,
-                  "w": 96,
-                  "h": 96,
-                  "offsetx": 16,
-                  "offsety": 16
+                    "n": 20,
+                    "x": 0,
+                    "y": 1827,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 16,
+                    "offsety": 16
                 },
                 "Lightning": {
-                  "n": 20,
-                  "x": 0,
-                  "y": 1827,
-                  "w": 96,
-                  "h": 96,
-                  "offsetx": 16,
-                  "offsety": 16
+                    "n": 20,
+                    "x": 1921,
+                    "y": 1827,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 16,
+                    "offsety": 16
                 },
                 "Smoke": {
-                  "n": 20,
-                  "x": 1921,
-                  "y": 1827,
-                  "w": 96,
-                  "h": 96,
-                  "offsetx": 16,
-                  "offsety": 16
+                    "n": 20,
+                    "x": 3842,
+                    "y": 1827,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 16,
+                    "offsety": 16
                 }
             },
             "Stats": {
                 "Health": 500,
+                "Mana": 200,
                 "Damage": 40,
                 "Hit Rate": 200,
                 "Defense": 75,

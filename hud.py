@@ -26,6 +26,7 @@ class Life(pg.sprite.Sprite):
     def __init__(self, game, w, h):
         self.groups = game.hud_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
+        self.y = (0, h * 0.875)
         self.image = pg.Surface((w, h))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
@@ -36,13 +37,13 @@ class Life(pg.sprite.Sprite):
     def get_life(self, n, manager):
         self.image.fill(WHITE)
         self.image.blit(manager.hud["Life"][1], (0, 0))
-        self.image.blit(manager.hud["Life"][2], (0, self.height * n), (0, self.height * n, self.width, self.height))
+        self.image.blit(manager.hud["Life"][2], (0, self.y[1] * n), (0, self.y[1] * n, self.width, self.height))
 
 class Mana(pg.sprite.Sprite):
     def __init__(self, game, w, h):
         self.groups = game.hud_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
-        self.image_manager = ImageManager.get_instance()
+        self.y = (h * 0.125, h * 0.875)
         self.image = pg.Surface((w, h))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
@@ -53,4 +54,4 @@ class Mana(pg.sprite.Sprite):
     def get_mana(self, n, manager):
         self.image.fill(WHITE)
         self.image.blit(manager.hud["Mana"][1], (0, 0))
-        self.image.blit(manager.hud["Mana"][2], (0, self.height * n), (0, self.height * n, self.width, self.height))
+        self.image.blit(manager.hud["Mana"][2], (0, self.y[0] + self.y[1] * n), (0, self.y[0] + self.y[1] * n, self.width, self.height))

@@ -56,11 +56,11 @@ class Mob(pg.sprite.Sprite):
     def events(self):
         self.state.events()
 
-    def update(self):
+    def update(self, dt):
         for key, value in self.state.done.items():
             if value:
                 self.flip_state(key)
-        self.state.update()
+        self.state.update(dt)
         self.image = self.state.image
         if self.currenthealth <= 0:
             return None
@@ -126,7 +126,7 @@ class MobState(pg.sprite.Sprite):
     def events(self):
         pass
 
-    def update(self):
+    def update(self, dt):
         pass
 
     def action(self, action_type, action_dir):
@@ -159,7 +159,7 @@ class Idle(MobState):
         elif self.mob.player_detected or (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
             self.done["Walk"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         self.mob.detect_player()
         self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
@@ -179,7 +179,7 @@ class Walk(MobState):
         self.random_direction = self.keyhandler.get_key(random.randint(0, 7))
         self.distancia = 0
 
-    def follow(self):
+    def follow(self, dt):
         direction = ""
         distance_vector = (self.game.player.pos - self.mob.pos)
         distance_vector.x = round(distance_vector.x, 2)
@@ -192,7 +192,7 @@ class Walk(MobState):
             if distance_vector.x != 0:
                 distance_vector.x = math.copysign(1, distance_vector.x)
                 direction += key if value[0] == distance_vector.x else ""
-        self.vel = distance_vector * MOB_SPEED
+        self.vel = distance_vector * MOB_SPEED * dt
 
         return direction
 
@@ -208,16 +208,16 @@ class Walk(MobState):
             self.persistence["direction"] = self.direction
             self.done["Attack"] = True
 
-    def update(self):
+    def update(self, dt):
         self.mob.detect_player()
         self.vel = vec(0, 0)
         if not self.mob.player_detected:
             self.direction = self.random_direction
-            self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * MOB_SPEED
-            self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED
+            self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * MOB_SPEED * dt
+            self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED * dt
             self.distancia += MOB_SPEED
         else:
-            self.direction = self.follow()
+            self.direction = self.follow(dt)
 
         if self.vel.x != 0 and self.vel.y != 0:
             self.distancia *= 1.4142
@@ -253,7 +253,7 @@ class Attack(MobState):
         elif (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0 and self.mob.pos.distance_to(self.game.player.pos) > 32:
             self.done["Idle"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         if self.current_frame == 0:
             self.try_hit = False
@@ -275,7 +275,7 @@ class GetHit(MobState):
         if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
             self.done["Idle"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         if self.mob.gets_hit():
             self.current_frame = 0
@@ -293,7 +293,7 @@ class Die(MobState):
         self.current_frame = 0
         self.direction = self.persistence["direction"]
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         if not self.finish:
             self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)

@@ -13,6 +13,7 @@ class Player(pg.sprite.Sprite):
         self.lines = game.lines
         self.x = x
         self.y = y
+        self.last_update = 0
         self.vel = vec(0, 0)
         self.pos = vec(x, y)
         self.load_data()
@@ -34,16 +35,28 @@ class Player(pg.sprite.Sprite):
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
         self.hit_rect = PLAYER_HIT_RECT
+        self.clock = pg.time.Clock()
+        self.buffs = {"Fire": 0,
+                      "Lightning": 0,
+                      "Smoke": 0}
 
     def load_attributes(self):
         data = GAMEDATA[PLAYER_KEY][PLAYER_CLASS]["Stats"]
-        self.totalhealth = data["Health"]
+        self.basehealth = data["Health"]
+        self.totalhealth = self.basehealth
         self.currenthealth = self.totalhealth
         self.previoushealth = self.totalhealth
-        self.damage = data["Damage"]
-        self.hit_rate = data["Hit Rate"]
-        self.defense = data["Defense"]
-        self.block = data["Block"]
+        self.basemana = data["Mana"]
+        self.totalmana = self.basemana
+        self.currentmana = self.totalmana
+        self.basedamage = data["Damage"]
+        self.damage = self.basedamage
+        self.base_hit_rate = data["Hit Rate"]
+        self.hit_rate = self.base_hit_rate
+        self.basedefense = data["Defense"]
+        self.defense = self.basedefense
+        self.baseblock = data["Block"]
+        self.block = self.baseblock
         self.level = data["Level"]
 
     def flip_state(self, state_name):
@@ -57,12 +70,13 @@ class Player(pg.sprite.Sprite):
     def events(self):
         self.state.events()
 
-    def update(self):
+    def update(self, dt):
+        self.buff()
         for key, value in self.state.done.items():
             if value:
                 self.flip_state(key)
 
-        self.state.update()
+        self.state.update(dt)
         self.vel = self.state.vel
         self.image = self.state.image
         if not hasattr(self, "rect"):
@@ -89,8 +103,33 @@ class Player(pg.sprite.Sprite):
             return True
         return False
 
-    def buff(self, attribute):
-        pass
+    def buff(self):
+        self.clock.tick(FPS)
+        now = pg.time.get_ticks() / 1000
+        if self.totalhealth != self.basehealth:
+            self.buffs["Fire"] -= self.clock.get_time() / 1000
+            if self.buffs["Fire"] <= 0:
+                self.totalhealth = self.basehealth
+        if self.damage != self.basedamage:
+            self.buffs["Lightning"] -= self.clock.get_time() / 1000
+            if self.buffs["Lightning"] <= 0:
+                self.damage = self.basedamage
+        if self.defense != self.basedefense:
+            self.buffs["Fire"] -= self.clock.get_time() / 1000
+            if self.buffs["Fire"] <= 0:
+                self.defense = self.basedefense
+
+        if now - self.last_update > 5:
+            self.last_update = now
+            if self.totalhealth != self.currenthealth:
+                self.currenthealth += 5
+            if self.totalmana != self.currentmana:
+                self.currentmana += 5
+
+        n = 1 - self.currenthealth / self.totalhealth
+        self.game.hud.update(n, "Life")
+        n = 1 - self.currentmana / self.totalmana
+        self.game.hud.update(n, "Mana")
 
 class State:
     def __init__(self, player):
@@ -112,7 +151,7 @@ class State:
     def events(self):
         pass
 
-    def update(self):
+    def update(self, dt):
         pass
 
     def action(self, action_type, action_dir):
@@ -129,7 +168,10 @@ class Idle(State):
         self.done = {"Walk": False,
                      "Attack": False,
                      "GetHit": False,
-                     "Die": False}
+                     "Die": False,
+                     "Fire": False,
+                     "Lightning": False,
+                     "Smoke": False}
 
     def start_up(self, direction):
         self.direction = direction
@@ -149,17 +191,12 @@ class Idle(State):
 
         for key, value in self.keyhandler.action_keys.items():
             if keys[value]:
-                self.done["Attack"] = True
+                self.done[key] = True
                 return False
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
-
-# class IdleTown(State):
-#
-# class TownWalk(State):
-
 
 class Walk(State):
     def __init__(self, player):
@@ -167,7 +204,10 @@ class Walk(State):
         self.done = {"Idle": False,
                      "Attack": False,
                      "GetHit": False,
-                     "Die": False}
+                     "Die": False,
+                     "Fire": False,
+                     "Lightning": False,
+                     "Smoke": False}
 
     def start_up(self, direction):
         self.keyhandler.move_keyspressed = []
@@ -181,17 +221,19 @@ class Walk(State):
             self.done["GetHit"] = True
         elif len(self.keyhandler.move_keyspressed) == 0:
             self.done["Idle"] = True
-        elif keys[pg.K_q]:
-            self.done["Attack"] = True
+        else:
+            for key, value in self.keyhandler.action_keys.items():
+                if keys[value]:
+                    self.done[key] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         keys = pg.key.get_pressed()
         for key, value in self.keyhandler.move_keys.items():
             if keys[value[2]]:
                 self.keyhandler.insert_key(key)
-                self.vel.x += value[0] * PLAYER_SPEED
-                self.vel.y += value[1] * PLAYER_SPEED
+                self.vel.x += value[0] * PLAYER_SPEED * dt
+                self.vel.y += value[1] * PLAYER_SPEED * dt
             else:
                 self.keyhandler.remove_key(key)
 
@@ -210,8 +252,8 @@ class Attack(State):
                      "GetHit": False,
                      "Die": False,
                      "Fire": False,
-                     "2": False,
-                     "3": False}
+                     "Lightning": False,
+                     "Smoke": False}
 
     def start_up(self, direction):
         self.current_frame = 0
@@ -239,7 +281,7 @@ class Attack(State):
                 else:
                     self.done["Idle"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         if self.current_frame == 9:
             self.check(self.direction)
@@ -263,7 +305,7 @@ class GetHit(State):
         elif (self.current_frame + 1) % len(self.image_manager.player[self.__class__.__name__][self.direction]) == 0:
             self.done["Idle"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         if self.player.gets_hit():
             self.current_frame = 0
@@ -279,7 +321,7 @@ class Die(State):
         self.current_frame = 0
         self.direction = direction
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         if not self.finish:
             self.action(self.image_manager.player[self.__class__.__name__], self.direction)
@@ -292,6 +334,9 @@ class Die(State):
 class Fire(State):
     def __init__(self, player):
         super().__init__(player)
+        self.duration = 60
+        self.bonus = 100
+        self.manacost = 20
         self.done = {"Idle": False,
                      "Attack": False,
                      "GetHit": False,
@@ -317,13 +362,22 @@ class Fire(State):
                 else:
                     self.done["Idle"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
+        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]) - 1:
+            self.player.totalhealth = self.player.basehealth + self.bonus
+            self.player.buffs[self.__class__.__name__] += self.duration
+            self.player.currentmana -= self.manacost
+            n = 1 - self.game.player.currentmana/self.game.player.totalmana
+            self.game.hud.update(n, "Mana")
 
 class Lightning(State):
     def __init__(self, player):
         super().__init__(player)
+        self.duration = 60
+        self.bonus = 20
+        self.manacost = 20
         self.done = {"Idle": False,
                      "Attack": False,
                      "GetHit": False,
@@ -349,13 +403,22 @@ class Lightning(State):
                 else:
                     self.done["Idle"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
+        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
+            self.player.damage = self.player.basedamage + self.bonus
+            self.player.buffs[self.__class__.__name__] += self.duration
+            self.player.currentmana -= self.manacost
+            n = 1 - self.game.player.currentmana/self.game.player.totalmana
+            self.game.hud.update(n, "Mana")
 
 class Smoke(State):
     def __init__(self, player):
         super().__init__(player)
+        self.duration = 60
+        self.bonus = 100
+        self.manacost = 20
         self.done = {"Idle": False,
                      "Attack": False,
                      "GetHit": False,
@@ -381,6 +444,12 @@ class Smoke(State):
                 else:
                     self.done["Idle"] = True
 
-    def update(self):
+    def update(self, dt):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
+        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
+            self.player.defense = self.player.basedefense + self.bonus
+            self.player.buffs[self.__class__.__name__] += self.duration
+            self.player.currentmana -= self.manacost
+            n = 1 - self.game.player.currentmana/self.game.player.totalmana
+            self.game.hud.update(n, "Mana")
