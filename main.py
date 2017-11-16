@@ -7,6 +7,7 @@ from warrior import *
 from mobstate import *
 from tilemap import *
 from hud import *
+from line import *
 from obstacle import *
 
 class Game(object):
@@ -213,6 +214,7 @@ class TutorialScreen(GameState):
 class GamePlay(GameState):
     def __init__(self):
         super().__init__()
+        self.lines = []
         self.all_sprites = pg.sprite.Group()
         self.rect_sprites = pg.sprite.Group()
         self.mob_sprites = pg.sprite.Group()
@@ -234,6 +236,9 @@ class GamePlay(GameState):
         self.map_img = self.map.make_map(generator)
         self.map_rect = self.map_img.get_rect()
         for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == "Line":
+                if tile_object.properties["Slope"] == "-1":
+                    self.lines.append(Line(tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y))
             if tile_object.name == "Player":
                 self.player = Warrior(self, tile_object.x, tile_object.y)
             if tile_object.name == "Obstacle":
@@ -268,6 +273,7 @@ class GamePlay(GameState):
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
+        print(self.player.pos.x, self.player.pos.y)
         self.hud_sprites.draw(screen)
         pg.display.flip()
 

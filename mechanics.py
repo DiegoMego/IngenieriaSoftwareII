@@ -1,6 +1,13 @@
 import pygame as pg
 import random
 
+def collide_line(sprite, lines, axis):
+    if axis == "x":
+        for line in lines:
+            line.check_collision(sprite, axis)
+    if axis == "y":
+        for line in lines:
+            line.check_collision(sprite, axis)
 def collide_hit_rect(one, two):
     if one != two:
         return one.hit_rect.colliderect(two.hit_rect)
