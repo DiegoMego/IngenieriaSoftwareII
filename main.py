@@ -74,6 +74,8 @@ class Game(object):
         """
         while not self.done:
             dt = self.clock.tick(self.fps) / 1000
+            print(int(self.clock.get_fps()))
+            pg.display.set_caption(str(self.clock.get_fps())[0:2])
             self.events()
             self.update(dt)
             self.draw()
@@ -239,6 +241,8 @@ class GamePlay(GameState):
             if tile_object.name == "Line":
                 if tile_object.properties["Slope"] == "-1":
                     self.lines.append(Line(tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y))
+                else:
+                    self.lines.append(Line(tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height))
             if tile_object.name == "Player":
                 self.player = Warrior(self, tile_object.x, tile_object.y)
             if tile_object.name == "Obstacle":

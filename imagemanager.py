@@ -13,6 +13,9 @@ class ImageManager:
             cls._instance = ImageManager()
         return cls._instance
 
+    def load_effect_images(self):
+        pass
+
     def load_hud_images(self):
         spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png")).convert()
         self.hud = {"Life": (0, self.get_image(spritesheet, 0, 0, 160, 128), self.get_image(spritesheet, 0, 128, 160, 128)),

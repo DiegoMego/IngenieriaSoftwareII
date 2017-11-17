@@ -35,10 +35,6 @@ class Player(pg.sprite.Sprite):
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
         self.hit_rect = PLAYER_HIT_RECT
-        self.clock = pg.time.Clock()
-        self.buffs = {"Fire": 0,
-                      "Lightning": 0,
-                      "Smoke": 0}
 
     def load_attributes(self):
         data = GAMEDATA[PLAYER_KEY][PLAYER_CLASS]["Stats"]
@@ -71,7 +67,7 @@ class Player(pg.sprite.Sprite):
         self.state.events()
 
     def update(self, dt):
-        self.buff()
+        self.regeneration()
         for key, value in self.state.done.items():
             if value:
                 self.flip_state(key)
@@ -103,22 +99,8 @@ class Player(pg.sprite.Sprite):
             return True
         return False
 
-    def buff(self):
-        self.clock.tick(FPS)
+    def regeneration(self):
         now = pg.time.get_ticks() / 1000
-        if self.totalhealth != self.basehealth:
-            self.buffs["Fire"] -= self.clock.get_time() / 1000
-            if self.buffs["Fire"] <= 0:
-                self.totalhealth = self.basehealth
-        if self.damage != self.basedamage:
-            self.buffs["Lightning"] -= self.clock.get_time() / 1000
-            if self.buffs["Lightning"] <= 0:
-                self.damage = self.basedamage
-        if self.defense != self.basedefense:
-            self.buffs["Fire"] -= self.clock.get_time() / 1000
-            if self.buffs["Fire"] <= 0:
-                self.defense = self.basedefense
-
         if now - self.last_update > 5:
             self.last_update = now
             if self.totalhealth != self.currenthealth:
@@ -365,12 +347,6 @@ class Fire(State):
     def update(self, dt):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
-        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]) - 1:
-            self.player.totalhealth = self.player.basehealth + self.bonus
-            self.player.buffs[self.__class__.__name__] += self.duration
-            self.player.currentmana -= self.manacost
-            n = 1 - self.game.player.currentmana/self.game.player.totalmana
-            self.game.hud.update(n, "Mana")
 
 class Lightning(State):
     def __init__(self, player):
@@ -406,12 +382,6 @@ class Lightning(State):
     def update(self, dt):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
-        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
-            self.player.damage = self.player.basedamage + self.bonus
-            self.player.buffs[self.__class__.__name__] += self.duration
-            self.player.currentmana -= self.manacost
-            n = 1 - self.game.player.currentmana/self.game.player.totalmana
-            self.game.hud.update(n, "Mana")
 
 class Smoke(State):
     def __init__(self, player):
@@ -447,9 +417,3 @@ class Smoke(State):
     def update(self, dt):
         self.vel = vec(0, 0)
         self.action(self.image_manager.player[self.__class__.__name__], self.direction)
-        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
-            self.player.defense = self.player.basedefense + self.bonus
-            self.player.buffs[self.__class__.__name__] += self.duration
-            self.player.currentmana -= self.manacost
-            n = 1 - self.game.player.currentmana/self.game.player.totalmana
-            self.game.hud.update(n, "Mana")

@@ -7,3 +7,4 @@ class Fireball(pg.sprite.Sprite):
         self.groups = game.effect_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.pos = vec(pos)
+        self.direction = direction
