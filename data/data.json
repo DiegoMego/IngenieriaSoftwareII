@@ -85,6 +85,92 @@
                 "Block": 0,
                 "Level": 1
             }
+        },
+        "Sorcerer":{
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 8,
+                    "x": 0,
+                    "y": 1045,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 16,
+                    "offsety": 16
+                },
+                "Walk": {
+                    "n": 8,
+                    "x": 2690,
+                    "y": 1045,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 16,
+                    "offsety": 16
+                },
+                "Attack": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 7,
+                    "w": 128,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -16
+                },
+                "GetHit": {
+                    "n": 8,
+                    "x": 4228,
+                    "y": 1045,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 16,
+                    "offsety": 16
+                },
+                "Die": {
+                    "n": 20,
+                    "x": 2049,
+                    "y": 7,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": 16
+                },
+                "Fire": {
+                    "n": 12,
+                    "x": 0,
+                    "y": 1827,
+                    "w": 128,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -16
+                },
+                "Lightning": {
+                    "n": 12,
+                    "x": 1537,
+                    "y": 1827,
+                    "w": 128,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -16
+                },
+                "Smoke": {
+                    "n": 12,
+                    "x": 3074,
+                    "y": 1827,
+                    "w": 128,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -16
+                }
+            },
+            "Stats": {
+                "Health": 500,
+                "Mana": 200,
+                "Damage": 100,
+                "Hit Rate": 500,
+                "Defense": 75,
+                "Block": 0,
+                "Level": 1
+            }
         }
     },
     "Mob": {

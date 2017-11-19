@@ -46,15 +46,20 @@ TILEDMAP_FOLDER = path.join(MAP_FOLDER, "Act_1")
 # Item Settings
 ITEM_FOLDER = path.join(IMAGE_FOLDER, "Items")
 
+# Effects Settings
+MISSILE_SPEED = 300
+EFFECT_FOLDER = path.join(IMAGE_FOLDER, "Effects")
+EFFECT_RECT = pg.Rect(0, 0, 30, 30)
+
 # Player Settings
 PLAYER_KEY = "Player"
 PLAYER_SPEED = 200
-PLAYER_HIT_RECT = pg.Rect(0, 0, 32, 32)
-PLAYER_CLASS = "Warrior"
+PLAYER_HIT_RECT = pg.Rect(0, 0, 25, 16)
+PLAYER_CLASS = "Sorcerer"
 PLAYER_LETTER = "P"
 
 #Player Image Settings
-PLAYER_EQUIPMENT = "Light Armor with Sword & Shield"
+PLAYER_EQUIPMENT = "Light Armor with Staff"
 PLAYER_SPRITESHEET_GENERATOR = "%s in %s.png"
 PLAYER_FOLDER = path.join(IMAGE_FOLDER, "Class")
 PLAYER_CLASS_FOLDER = path.join(PLAYER_FOLDER, PLAYER_CLASS)
@@ -62,7 +67,7 @@ PLAYER_CLASS_FOLDER = path.join(PLAYER_FOLDER, PLAYER_CLASS)
 # Mob Settings
 MOB_KEY = "Mob"
 MOB_SPEED = 100
-MOB_HIT_RECT = pg.Rect(0, 0, 32, 32)
+MOB_HIT_RECT = pg.Rect(0, 0, 25, 16)
 MOB_LETTER = "M"
 
 # Mob Image Settings

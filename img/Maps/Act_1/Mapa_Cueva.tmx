@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="547">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="553">
  <tileset firstgid="1" source="T_Cave.tsx"/>
  <tileset firstgid="1921" source="O_Cave2.tsx"/>
  <tileset firstgid="2617" source="O_Cave.tsx"/>
@@ -691,25 +691,6 @@
   <object id="209" name="Obstacle" x="760" y="1160" width="40" height="40"/>
   <object id="210" name="Obstacle" x="720" y="1160" width="40" height="40"/>
   <object id="211" name="Obstacle" x="760" y="1120" width="40" height="40"/>
-  <object id="212" name="Obstacle" x="320" y="1160" width="40" height="40"/>
-  <object id="213" name="Obstacle" x="320" y="1200" width="40" height="40"/>
-  <object id="214" name="Obstacle" x="320" y="1240" width="40" height="40"/>
-  <object id="215" name="Obstacle" x="360" y="1240" width="40" height="40"/>
-  <object id="216" name="Obstacle" x="360" y="1200" width="40" height="40"/>
-  <object id="217" name="Obstacle" x="400" y="1200" width="40" height="40"/>
-  <object id="218" name="Obstacle" x="360" y="1160" width="40" height="40"/>
-  <object id="219" name="Obstacle" x="400" y="1160" width="40" height="40"/>
-  <object id="220" name="Obstacle" x="360" y="1120" width="40" height="40"/>
-  <object id="221" name="Obstacle" x="400" y="1120" width="40" height="40"/>
-  <object id="222" name="Obstacle" x="440" y="1120" width="40" height="40"/>
-  <object id="223" name="Obstacle" x="440" y="1160" width="40" height="40"/>
-  <object id="224" name="Obstacle" x="440" y="1200" width="40" height="40"/>
-  <object id="225" name="Obstacle" x="480" y="1160" width="40" height="40"/>
-  <object id="226" name="Obstacle" x="480" y="1200" width="40" height="40"/>
-  <object id="227" name="Obstacle" x="440" y="1240" width="40" height="40"/>
-  <object id="228" name="Obstacle" x="480" y="1240" width="40" height="40"/>
-  <object id="229" name="Obstacle" x="520" y="1240" width="40" height="40"/>
-  <object id="230" name="Obstacle" x="520" y="1280" width="40" height="40"/>
   <object id="231" name="Obstacle" x="560" y="1280" width="40" height="40"/>
   <object id="232" name="Obstacle" x="600" y="1280" width="40" height="40"/>
   <object id="233" name="Obstacle" x="560" y="1240" width="40" height="40"/>
@@ -721,7 +702,6 @@
   <object id="239" name="Obstacle" x="800" y="1320" width="40" height="40"/>
   <object id="240" name="Obstacle" x="840" y="1320" width="40" height="40"/>
   <object id="241" name="Obstacle" x="880" y="1360" width="40" height="40"/>
-  <object id="242" name="Obstacle" x="520" y="1200" width="40" height="40"/>
   <object id="243" name="Obstacle" x="560" y="1200" width="40" height="40"/>
   <object id="244" name="Obstacle" x="640" y="1280" width="40" height="40"/>
   <object id="245" name="Obstacle" x="600" y="1240" width="40" height="40"/>
@@ -982,7 +962,7 @@
   <object id="537" name="Obstacle" x="480" y="760" width="40" height="40"/>
   <object id="538" name="Obstacle" x="771.333" y="714.667" width="40" height="40"/>
   <object id="539" name="Obstacle" x="810.667" y="734" width="40" height="40"/>
-  <object id="545" name="Line" x="212" y="141" width="479" height="229">
+  <object id="550" name="Line" x="265" y="200" width="396" height="193">
    <properties>
     <property name="Slope" type="int" value="-1"/>
    </properties>

@@ -30,26 +30,14 @@ class Inventory(pg.sprite.Sprite):
         for row in self.space:
             for col in row:
                 if self.space[row][col] == 0:
-                    if self.check(col, row, item.width, item.height):
-                        self.addItem(col, row, item.width, item.height)
-
-    def check(self, col, row, item):
-        for j in range(row, row + item.width):
-            for i in range(col, col + item.height):
-                if self.space[j][i] != 0:
-                    return False
-        return True
+                    self.addItem(col, row, item)
 
     def addItem(self, col, row, item):
         self.items[item.id] = (item, col, row)
-        for j in range(row, row + item.width):
-            for i in range(col, col + item.height):
-                self.space[j][i] = item.ID
+        self.space[col][row] = item.ID
 
     def deleteItem(self, item):
         col = self.items[item.id][1]
         row = self.items[item.id][2]
-        for j in range(row, row + item.width):
-            for i in range(col, col + item.height):
-                self.space[j][i] = 0
+        self.space[col][row] = 0
         del self.items[item.id]

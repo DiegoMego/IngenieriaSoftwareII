@@ -23,7 +23,7 @@ class ImageManager:
         self.bag = pg.transform.scale(spritesheet, (int(WIDTH * 0.01), int(HEIGHT / 64)))
 
     def load_effect_images(self):
-        pass
+        spritesheet = pg.image.load(path.join(EFFECT_FOLDER, "Flare Red.png")).convert()
 
     def load_hud_images(self):
         spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png")).convert()

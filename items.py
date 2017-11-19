@@ -1,11 +1,25 @@
 import pygame as pg
 from imagemanager import *
 
-class Item:
-    def __init__(self, ID, width, height):
+class Item(pg.sprite.Sprite):
+    def __init__(self, game, ID, width, height):
+        self.groups = game.inventory_sprites
+        super().__init__(self.groups)
         self.ID = ID
         self.width = width
         self.height = height
+        self.drag = False
+
+    def update(self):
+        mouse = pg.mouse.get_pos()
+
+class Weapon(Item):
+    def __init__(self, game, ID, x, y, width, height):
+        super().__init__(game, ID, width, height)
+        self.image = None
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
 class Bag(pg.sprite.Sprite):
     def __init__(self, game, x, y):

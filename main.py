@@ -219,6 +219,7 @@ class GamePlay(GameState):
         self.inventory = Inventory.get_instance()
         self.all_sprites = pg.sprite.Group()
         self.inventory_sprites = pg.sprite.Group()
+        self.effect_sprites = pg.sprite.Group()
         self.bags = pg.sprite.Group()
         self.rect_sprites = pg.sprite.Group()
         self.mob_sprites = pg.sprite.Group()
@@ -257,6 +258,9 @@ class GamePlay(GameState):
             next(generator)
 
         self.camera = Camera(self.map.width, self.map.height)
+        self.surf = pg.Surface((25, 16))
+        self.surf.fill(GREEN)
+        self.rect = self.surf.get_rect()
 
     def events(self):
         for event in pg.event.get():
@@ -294,6 +298,9 @@ class GamePlay(GameState):
         self.hud_sprites.draw(screen)
         if self.inventory.on:
             self.inventory_sprites.draw(screen)
+        self.rect.x = self.player.hit_rect.x
+        self.rect.y = self.player.hit_rect.y
+        screen.blit(self.surf, (self.rect.x + self.camera.pos.x, self.rect.y + self.camera.pos.y))
         pg.display.flip()
 
 class GameOver(GameState):

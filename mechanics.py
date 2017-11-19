@@ -20,6 +20,11 @@ def collide_hit_rect(one, two):
         return one.hit_rect.colliderect(two.hit_rect)
     return False
 
+def collide_effect(sprite, group):
+    hits = pg.sprite.spritecollide(sprite, group, False, collide_hit_rect)
+    if hits:
+        sprite.kill()
+
 def detect_collision(sprite, group, dir):
     if dir == 'x':
         hits = pg.sprite.spritecollide(sprite, group, False, collide_hit_rect)

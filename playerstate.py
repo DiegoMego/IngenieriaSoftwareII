@@ -88,7 +88,8 @@ class Player(pg.sprite.Sprite):
         self.hit_rect.centery = self.pos.y
         detect_collision(self, self.game.rect_sprites, "y")
         collide_line(self, self.lines, "y")
-        self.rect.center = self.hit_rect.center
+        self.rect.centerx = self.hit_rect.centerx
+        self.rect.centery = self.hit_rect.centery - 30
 
     def gets_hit(self):
         if self.previoushealth > self.currenthealth:

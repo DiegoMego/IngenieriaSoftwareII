@@ -15,6 +15,7 @@ class Mob(pg.sprite.Sprite):
         self.groups = game.all_sprites, game.rect_sprites, game.mob_sprites
         super().__init__(self.groups)
         self.game = game
+        self.lines = game.lines
         self.x = x
         self.y = y
         self.vel = vec(0, 0)
@@ -75,11 +76,14 @@ class Mob(pg.sprite.Sprite):
         if collide_hit_rect(self, self.game.player):
             self.player_collision = True
         detect_collision(self, self.game.rect_sprites, "x")
+        collide_line(self, self.lines, "x")
         self.hit_rect.centery = self.pos.y
         if collide_hit_rect(self, self.game.player):
             self.player_collision = True
         detect_collision(self, self.game.rect_sprites, "y")
-        self.rect.center = self.hit_rect.center
+        collide_line(self, self.lines, "y")
+        self.rect.centerx = self.hit_rect.centerx
+        self.rect.centery = self.hit_rect.centery - 30
 
     def detect_player(self):
         if self.pos.distance_to(self.game.player.pos) < 400:
