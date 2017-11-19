@@ -24,6 +24,17 @@ class ImageManager:
 
     def load_effect_images(self):
         spritesheet = pg.image.load(path.join(EFFECT_FOLDER, "Flare Red.png")).convert()
+        data = GAMEDATA[EFFECT_KEY]["FlareRed"]
+        self.effects = {}
+        for key, value in data.items():
+            x = value["x"]
+            y = value["y"]
+            self.effects[key] = []
+            for i in range(value["n"]):
+                self.effects[key].append(self.get_image(spritesheet, x, y, value["w"], value["h"]))
+                self.effects[key][i].set_colorkey(GREY)
+                x += 129
+
 
     def load_hud_images(self):
         spritesheet = pg.image.load(path.join(HUD_FOLDER, "hud.png")).convert()

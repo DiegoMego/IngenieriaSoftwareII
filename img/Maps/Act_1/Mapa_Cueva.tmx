@@ -505,15 +505,6 @@
   <object id="23" name="Obstacle" x="400" y="760" width="40" height="40"/>
   <object id="24" name="Obstacle" x="440" y="800" width="40" height="40"/>
   <object id="25" name="Obstacle" x="400" y="800" width="40" height="40"/>
-  <object id="26" name="Obstacle" x="960" y="320" width="40" height="40"/>
-  <object id="27" name="Obstacle" x="1000" y="320" width="40" height="40"/>
-  <object id="28" name="Obstacle" x="1040" y="280" width="40" height="40"/>
-  <object id="29" name="Obstacle" x="1080" y="280" width="40" height="40"/>
-  <object id="30" name="Obstacle" x="1080" y="240" width="40" height="40"/>
-  <object id="31" name="Obstacle" x="1120" y="240" width="40" height="40"/>
-  <object id="32" name="Obstacle" x="1160" y="240" width="40" height="40"/>
-  <object id="33" name="Obstacle" x="1160" y="200" width="40" height="40"/>
-  <object id="34" name="Obstacle" x="1200" y="200" width="40" height="40"/>
   <object id="35" name="Obstacle" x="1240" y="200" width="40" height="40"/>
   <object id="36" name="Obstacle" x="1280" y="160" width="40" height="40"/>
   <object id="37" name="Obstacle" x="1320" y="160" width="40" height="40"/>
@@ -834,10 +825,6 @@
   <object id="379" name="Obstacle" x="1400" y="1520" width="40" height="40"/>
   <object id="380" name="Obstacle" x="1440" y="1560" width="40" height="40"/>
   <object id="381" name="Obstacle" x="1440" y="1520" width="40" height="40"/>
-  <object id="382" name="Obstacle" x="920" y="320" width="40" height="40"/>
-  <object id="383" name="Obstacle" x="880" y="280" width="40" height="40"/>
-  <object id="384" name="Obstacle" x="800" y="240" width="40" height="40"/>
-  <object id="385" name="Obstacle" x="840" y="280" width="40" height="40"/>
   <object id="404" name="Obstacle" x="474.667" y="480" width="79.3333" height="40"/>
   <object id="406" name="Obstacle" x="471.333" y="522" width="79.3333" height="40"/>
   <object id="407" name="Obstacle" x="431.333" y="540.667" width="79.3333" height="40"/>

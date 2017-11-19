@@ -11,6 +11,7 @@ GREEN = (0, 255, 0)
 LIGHT_GREEN = (0, 200, 0)
 LIGHT_BLACK = (60, 60, 55)
 DARK_GREY = (40, 40, 40)
+GREY = (82, 79, 96)
 LIGHTGREY = (100, 100, 100)
 DOWN_RED = (216, 40, 35)
 BLUE = (0, 0, 200)
@@ -48,7 +49,8 @@ ITEM_FOLDER = path.join(IMAGE_FOLDER, "Items")
 
 # Effects Settings
 MISSILE_SPEED = 300
-EFFECT_FOLDER = path.join(IMAGE_FOLDER, "Effects")
+EFFECT_KEY = "Effects"
+EFFECT_FOLDER = path.join(IMAGE_FOLDER, EFFECT_KEY)
 EFFECT_RECT = pg.Rect(0, 0, 30, 30)
 
 # Player Settings

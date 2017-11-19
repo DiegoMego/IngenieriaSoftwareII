@@ -1,5 +1,6 @@
 import pygame as pg
 import playerstate
+from effects import *
 from settings import *
 
 class Sorcerer(playerstate.Player):

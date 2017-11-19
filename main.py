@@ -5,6 +5,7 @@ from spritesheet import *
 from inventory import *
 from button import *
 from warrior import *
+from sorcerer import *
 from mobstate import *
 from tilemap import *
 from hud import *
@@ -233,6 +234,7 @@ class GamePlay(GameState):
         screen = pg.display.get_surface()
         self.imagemanager.load_bag_image()
         self.imagemanager.load_inventory_image()
+        self.imagemanager.load_effect_images()
         self.inventory = Inventory.get_instance()
         generator = self.imagemanager.loading_screen(7440, screen)
         self.gameover = False
@@ -250,7 +252,7 @@ class GamePlay(GameState):
                 else:
                     self.lines.append(Line(tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height))
             if tile_object.name == "Player":
-                self.player = Warrior(self, tile_object.x, tile_object.y)
+                self.player = Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Obstacle":
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Mob":
@@ -281,6 +283,7 @@ class GamePlay(GameState):
 
     def update(self, dt):
         self.all_sprites.update(dt)
+        self.effect_sprites.update(dt)
         self.bags.update()
         self.camera.update(self.player)
 
@@ -295,12 +298,14 @@ class GamePlay(GameState):
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
+        for effect in self.effect_sprites:
+            screen.blit(effect.image, self.camera.apply(effect))
         self.hud_sprites.draw(screen)
         if self.inventory.on:
             self.inventory_sprites.draw(screen)
-        self.rect.x = self.player.hit_rect.x
-        self.rect.y = self.player.hit_rect.y
-        screen.blit(self.surf, (self.rect.x + self.camera.pos.x, self.rect.y + self.camera.pos.y))
+        # self.rect.x = self.player.hit_rect.x
+        # self.rect.y = self.player.hit_rect.y
+        # screen.blit(self.surf, (self.rect.x + self.camera.pos.x, self.rect.y + self.camera.pos.y))
         pg.display.flip()
 
 class GameOver(GameState):
