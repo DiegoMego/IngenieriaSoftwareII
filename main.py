@@ -2,6 +2,7 @@ import sys
 import pygame as pg
 from settings import *
 from spritesheet import *
+from inventory import *
 from button import *
 from warrior import *
 from mobstate import *
@@ -74,13 +75,11 @@ class Game(object):
         """
         while not self.done:
             dt = self.clock.tick(self.fps) / 1000
-            print(int(self.clock.get_fps()))
             pg.display.set_caption(str(self.clock.get_fps())[0:2])
             self.events()
             self.update(dt)
             self.draw()
             pg.display.update()
-
 
 class GameState(object):
     """
@@ -92,7 +91,7 @@ class GameState(object):
         self.next_state = None
         self.persist = {}
         self.spritesheet = SpriteSheet.get_instance()
-        self.image_manager = ImageManager.get_instance()
+        self.imagemanager = ImageManager.get_instance()
 
     def startup(self, persistent = {}):
         """
@@ -217,7 +216,10 @@ class GamePlay(GameState):
     def __init__(self):
         super().__init__()
         self.lines = []
+        self.inventory = Inventory.get_instance()
         self.all_sprites = pg.sprite.Group()
+        self.inventory_sprites = pg.sprite.Group()
+        self.bags = pg.sprite.Group()
         self.rect_sprites = pg.sprite.Group()
         self.mob_sprites = pg.sprite.Group()
         self.dead_sprites = pg.sprite.Group()
@@ -228,7 +230,10 @@ class GamePlay(GameState):
 
     def startup(self, persistent):
         screen = pg.display.get_surface()
-        generator = self.image_manager.loading_screen(7440, screen)
+        self.imagemanager.load_bag_image()
+        self.imagemanager.load_inventory_image()
+        self.inventory = Inventory.get_instance()
+        generator = self.imagemanager.loading_screen(7440, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()
@@ -257,15 +262,22 @@ class GamePlay(GameState):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.quit = True
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_i:
+                    self.inventory.on = not self.inventory.on
 
         for sprite in self.all_sprites:
             sprite.events()
+
+        for bag in self.bags:
+            bag.events()
 
         if self.gameover:
             self.done["GAMEOVER"] = True
 
     def update(self, dt):
         self.all_sprites.update(dt)
+        self.bags.update()
         self.camera.update(self.player)
 
     def draw(self, screen):
@@ -273,11 +285,15 @@ class GamePlay(GameState):
         screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
+        for bag in self.bags:
+            screen.blit(bag.image, self.camera.apply(bag))
         for sprite in self.all_sprites:
             if isinstance(sprite, Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
         self.hud_sprites.draw(screen)
+        if self.inventory.on:
+            self.inventory_sprites.draw(screen)
         pg.display.flip()
 
 class GameOver(GameState):

@@ -6,13 +6,14 @@ from settings import *
 from keyhandler import *
 from mechanics import *
 from imagemanager import *
+from items import *
 
 vec = pg.math.Vector2
 
 class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.rect_sprites, game.mob_sprites
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(self.groups)
         self.game = game
         self.x = x
         self.y = y
@@ -301,6 +302,7 @@ class Die(MobState):
             self.finish = True
             self.mob.remove(self.mob.groups)
             self.mob.add(self.game.dead_sprites)
+            Bag(self.mob.game, self.mob.pos.x, self.mob.pos.y)
 
 class Health:
     def __init__(self, width, height):

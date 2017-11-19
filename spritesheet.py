@@ -31,11 +31,3 @@ class SpriteSheet:
 
     def clear_sprites(cls):
         cls._sprites.clear()
-
-
-    # def get_terrain(self, x, y):
-    #     image = pg.Surface((160, 80))
-    #     image.fill(WHITE)
-    #     image.blit(self.image, (0, 0), (x, y, 160, 80))
-    #     image.set_colorkey(FUCHSIA)
-    #     return image

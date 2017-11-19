@@ -1,6 +1,12 @@
 import pygame as pg
 import random
 
+def getNextID():
+    ID = 0
+    for i in iter(int, 0):
+        ID += 1
+        yield ID
+
 def collide_line(sprite, lines, axis):
     if axis == "x":
         for line in lines:
@@ -8,6 +14,7 @@ def collide_line(sprite, lines, axis):
     if axis == "y":
         for line in lines:
             line.check_collision(sprite, axis)
+
 def collide_hit_rect(one, two):
     if one != two:
         return one.hit_rect.colliderect(two.hit_rect)
@@ -34,18 +41,18 @@ def detect_collision(sprite, group, dir):
             sprite.hit_rect.centery = sprite.pos.y
 
 def hit(AR, DR, AL, DL):
-    n = random.random()
+    random_number = random.random()
     chance = 2 * (AR/(AR + DR)) * (AL/(AL + DL))
     if chance > 1:
         chance = 1
-    if n <= chance:
+    if random_number <= chance:
         return True
     else:
         return False
 
 def block(BR):
-    n = random.random()
-    if n <= BR:
+    random_number = random.random()
+    if random_number <= BR:
         return True
     else:
         return False
@@ -56,7 +63,7 @@ def block(BR):
 Abbreviations:
 AR = Attacker's Attack Rating
 DR = Defender's Defense rating
-Alvl = Attacker's level
-Dlvl = Defender's level
+AL = Attacker's level
+DL = Defender's level
 BR = Block Rate
 '''

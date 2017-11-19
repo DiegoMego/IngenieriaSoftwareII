@@ -13,6 +13,15 @@ class ImageManager:
             cls._instance = ImageManager()
         return cls._instance
 
+    def load_inventory_image(self):
+        spritesheet = pg.image.load(path.join(ITEM_FOLDER, "Inventory Warrior.png")).convert()
+        self.inventory = spritesheet
+
+    def load_bag_image(self):
+        spritesheet = pg.image.load(path.join(ITEM_FOLDER, "bag.png")).convert()
+        spritesheet.set_colorkey(WHITE)
+        self.bag = pg.transform.scale(spritesheet, (int(WIDTH * 0.01), int(HEIGHT / 64)))
+
     def load_effect_images(self):
         pass
 

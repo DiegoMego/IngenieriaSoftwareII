@@ -39,6 +39,9 @@ class Life(pg.sprite.Sprite):
         self.image.blit(manager.hud["Life"][1], (0, 0))
         self.image.blit(manager.hud["Life"][2], (0, self.y[1] * n), (0, self.y[1] * n, self.width, self.height))
 
+    def update(self):
+        pass
+
 class Mana(pg.sprite.Sprite):
     def __init__(self, game, w, h):
         self.groups = game.hud_sprites
@@ -55,3 +58,6 @@ class Mana(pg.sprite.Sprite):
         self.image.fill(WHITE)
         self.image.blit(manager.hud["Mana"][1], (0, 0))
         self.image.blit(manager.hud["Mana"][2], (0, self.y[0] + self.y[1] * n), (0, self.y[0] + self.y[1] * n, self.width, self.height))
+
+    def update(self):
+        pass

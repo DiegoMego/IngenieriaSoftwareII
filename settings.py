@@ -3,7 +3,7 @@ import pygame as pg
 import json
 from os import path
 
-# define colors
+# Colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (200, 0, 0)
@@ -30,18 +30,21 @@ GAME_FOLDER = path.dirname(__file__)
 IMAGE_FOLDER = path.join(GAME_FOLDER, "img")
 IMAGE_KEY = "Images"
 
-#Load Data
+# Load Data
 DATAFILE = path.join(path.join(GAME_FOLDER, "data"), "data.json")
 with open(DATAFILE) as json_data:
     GAMEDATA = json.load(json_data)
 
-#Intro Settings
+# Intro Settings
 INTRO_TITLE = "DOOM KINGDOM"
 INTRO_FOLDER = path.join(IMAGE_FOLDER, "Background")
 
-#Map Settings
+# Map Settings
 MAP_FOLDER = path.join(IMAGE_FOLDER, "Maps")
 TILEDMAP_FOLDER = path.join(MAP_FOLDER, "Act_1")
+
+# Item Settings
+ITEM_FOLDER = path.join(IMAGE_FOLDER, "Items")
 
 # Player Settings
 PLAYER_KEY = "Player"

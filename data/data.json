@@ -79,8 +79,8 @@
             "Stats": {
                 "Health": 500,
                 "Mana": 200,
-                "Damage": 40,
-                "Hit Rate": 200,
+                "Damage": 100,
+                "Hit Rate": 500,
                 "Defense": 75,
                 "Block": 0,
                 "Level": 1

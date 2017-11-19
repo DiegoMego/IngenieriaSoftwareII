@@ -3,12 +3,13 @@ from settings import *
 from keyhandler import *
 from mechanics import *
 from imagemanager import *
+from inventory import *
 vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.rect_sprites
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(self.groups)
         self.game = game
         self.lines = game.lines
         self.x = x
@@ -16,6 +17,8 @@ class Player(pg.sprite.Sprite):
         self.last_update = 0
         self.vel = vec(0, 0)
         self.pos = vec(x, y)
+        self.inventory = Inventory.get_instance()
+        self.inventory.make_inventory(game)
         self.load_data()
         self.load_attributes()
 
