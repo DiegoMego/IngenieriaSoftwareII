@@ -11,7 +11,6 @@ class Player(pg.sprite.Sprite):
         self.groups = game.all_sprites, game.rect_sprites
         super().__init__(self.groups)
         self.game = game
-        self.lines = game.lines
         self.x = x
         self.y = y
         self.last_update = 0
@@ -84,10 +83,10 @@ class Player(pg.sprite.Sprite):
         self.pos.y += round(self.vel.y, 0)
         self.hit_rect.centerx = self.pos.x
         detect_collision(self, self.game.rect_sprites, "x")
-        collide_line(self, self.lines, "x")
+        collide_line(self, self.game.lines, "x")
         self.hit_rect.centery = self.pos.y
         detect_collision(self, self.game.rect_sprites, "y")
-        collide_line(self, self.lines, "y")
+        collide_line(self, self.game.lines, "y")
         self.rect.centerx = self.hit_rect.centerx
         self.rect.centery = self.hit_rect.centery - 30
 

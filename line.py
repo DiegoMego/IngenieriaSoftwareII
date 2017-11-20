@@ -1,8 +1,21 @@
 import pygame as pg
 
-class Line:
-    def __init__(self, x1, y1, x2, y2):
+class Line(pg.sprite.Sprite):
+    def __init__(self, game, x1, y1, x2, y2, inverted = False):
+        self.groups = game.lines
+        super().__init__(self.groups)
         self.points = []
+        self.width = x2 - x1
+        y = y1
+        if inverted:
+            y = y2
+        self.height = abs(y2 - y1)
+        self.rect = pg.Rect(x1, y, self.width, self.height)
+        self.hit_rect = self.rect
+        self.x = x1
+        self.y = y
+        self.rect.x = x1
+        self.rect.y = y
         self.get_points(x1, y1, x2, y2)
 
     def get_points(self, x1, y1, x2, y2):

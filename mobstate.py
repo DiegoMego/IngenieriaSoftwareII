@@ -82,7 +82,6 @@ class Mob(pg.sprite.Sprite):
             self.player_collision = True
         detect_collision(self, self.game.rect_sprites, "y")
         collide_line(self, self.lines, "y")
-        print(self.hit_rect.centerx, self.hit_rect.centery)
         self.rect.centerx = self.hit_rect.centerx
         self.rect.centery = self.hit_rect.centery - 30
 

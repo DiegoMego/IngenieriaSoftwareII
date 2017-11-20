@@ -8,12 +8,11 @@ def getNextID():
         yield ID
 
 def collide_line(sprite, lines, axis):
-    if axis == "x":
-        for line in lines:
-            line.check_collision(sprite, axis)
-    if axis == "y":
-        for line in lines:
-            line.check_collision(sprite, axis)
+    hits = pg.sprite.spritecollide(sprite, lines, False, collide_hit_rect)
+    for hit in hits:
+        hit.check_collision(sprite, axis)
+    # for line in lines:
+    #     line.check_collision(sprite, axis)
 
 def collide_hit_rect(one, two):
     if one != two:

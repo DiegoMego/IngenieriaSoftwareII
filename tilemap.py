@@ -17,6 +17,7 @@ class TiledMap:
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, gid, in layer:
                     tile = ti(gid)
+                    #tile = temp_tile.convert_alpha()
                     try:
                         tile.set_colorkey((255, 0, 255))
                     except Exception as e:
