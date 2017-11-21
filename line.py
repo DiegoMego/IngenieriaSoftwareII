@@ -41,6 +41,7 @@ class Line(pg.sprite.Sprite):
                     if point[0] < sprite.hit_rect.centerx:
                         sprite.pos.x = point[0] + sprite.hit_rect.width / 2
                     #sprite.vel.x = 0
+                    sprite.pos.x = int(sprite.pos.x)
                     sprite.hit_rect.centerx = sprite.pos.x
 
         if axis == "y":
@@ -51,4 +52,5 @@ class Line(pg.sprite.Sprite):
                     if point[1] < sprite.hit_rect.centery:
                         sprite.pos.y = point[1] + sprite.hit_rect.height / 2
                     #sprite.vel.y = 0
+                    sprite.pos.y = int(sprite.pos.y)
                     sprite.hit_rect.centery = sprite.pos.y

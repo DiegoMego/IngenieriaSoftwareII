@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="755">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="761">
  <tileset firstgid="1" source="T_Cave.tsx"/>
  <tileset firstgid="1921" source="O_Cave2.tsx"/>
  <tileset firstgid="2617" source="O_Cave.tsx"/>
@@ -1228,4 +1228,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="Colisiones"/>
 </map>

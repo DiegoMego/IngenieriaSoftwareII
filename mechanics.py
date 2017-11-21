@@ -7,6 +7,11 @@ def getNextID():
         ID += 1
         yield ID
 
+def render_order(render, player):
+    for key, value in sorted(render.items()):
+        if player.hit_rect.x <= key[0] and player.hit_rect.y <= key[1]:
+            return value
+
 def collide_line(sprite, lines, axis):
     hits = pg.sprite.spritecollide(sprite, lines, False, collide_hit_rect)
     for hit in hits:
@@ -22,7 +27,8 @@ def collide_hit_rect(one, two):
 def collide_effect(sprite, group):
     hits = pg.sprite.spritecollide(sprite, group, False, collide_hit_rect)
     if hits:
-        sprite.kill()
+        return hits[0]
+    return None
 
 def detect_collision(sprite, group, dir):
     if dir == 'x':

@@ -1,5 +1,6 @@
 import sys
 import pygame as pg
+import mechanics
 from settings import *
 from spritesheet import *
 from inventory import *
@@ -216,6 +217,7 @@ class TutorialScreen(GameState):
 class GamePlay(GameState):
     def __init__(self):
         super().__init__()
+        self.render = {}
         self.lines = pg.sprite.Group()
         self.inventory = Inventory.get_instance()
         self.all_sprites = pg.sprite.Group()
@@ -236,15 +238,17 @@ class GamePlay(GameState):
         self.imagemanager.load_inventory_image()
         self.imagemanager.load_effect_images()
         self.inventory = Inventory.get_instance()
-        generator = self.imagemanager.loading_screen(7440, screen)
+        generator = self.imagemanager.loading_screen(7116, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()
         self.hud = HUD(self)
         next(generator)
         self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Mapa_Cueva.tmx"))
-        self.map_img = self.map.make_map(generator)
-        self.map_rect = self.map_img.get_rect()
+        self.map_terrain, self.map_objects = self.map.make_map(generator)
+        self.terrain_rect = self.map_terrain.get_rect()
+        self.objects_rect = self.map_objects.get_rect()
+        i = 0
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == "Line":
                 if tile_object.properties["Slope"] == "-1":
@@ -256,8 +260,9 @@ class GamePlay(GameState):
                 self.player = Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
                 Mob(self, tile_object.x, tile_object.y)
+            i += 1
+            print(i)
             next(generator)
-
         self.camera = Camera(self.map.width, self.map.height)
         self.surf = pg.Surface((25, 16))
         self.surf.fill(GREEN)
@@ -288,7 +293,8 @@ class GamePlay(GameState):
 
     def draw(self, screen):
         screen.fill(WHITE)
-        screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
+        screen.blit(self.map_terrain, self.camera.apply_rect(self.terrain_rect))
+        screen.blit(self.map_objects, (self.objects_rect.x + self.camera.pos.x, self.objects_rect.y + self.camera.pos.y), (0, 0, self.objects_rect.width, self.objects_rect.height))
         for sprite in self.dead_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for bag in self.bags:
@@ -299,6 +305,7 @@ class GamePlay(GameState):
             screen.blit(sprite.image, self.camera.apply(sprite))
         for effect in self.effect_sprites:
             screen.blit(effect.image, self.camera.apply(effect))
+        #screen.blit(self.map_objects, (self.objects_rect.x + self.camera.pos.x, int(split) + self.camera.pos.y), (0, int(split), self.objects_rect.width, self.objects_rect.height - int(split)))
         self.hud_sprites.draw(screen)
         if self.inventory.on:
             self.inventory_sprites.draw(screen)
