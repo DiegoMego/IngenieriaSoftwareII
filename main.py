@@ -11,7 +11,6 @@ from mobstate import *
 from tilemap import *
 from hud import *
 from line import *
-from obstacle import *
 
 class Game(object):
     """
@@ -255,7 +254,7 @@ class GamePlay(GameState):
                     Line(self, tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y, True)
                 else:
                     Line(self, tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height)
-                #Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+
             if tile_object.name == "Player":
                 self.player = Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
