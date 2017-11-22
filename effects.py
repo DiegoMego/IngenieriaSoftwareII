@@ -24,7 +24,8 @@ class FlareRed(pg.sprite.Sprite):
         self.explode = False
 
     def load(self):
-        self.states = {"Shoot": Shoot()}
+        self.states = {"Shoot": Shoot(),
+                       "Explode": Explode()}
         self.state_name = "Shoot"
         self.state = self.states[self.state_name]
 
@@ -35,10 +36,15 @@ class FlareRed(pg.sprite.Sprite):
         self.state = self.states[self.state_name]
         self.state.start_up()
 
+    def events(self):
+        self.state.events()
+
     def update(self, dt):
-        self.vel = vec(0, 0)
-        self.vel.x = self.x * MISSILE_SPEED * dt
-        self.vel.y = self.y * MISSILE_SPEED * dt
+        for key, value in self.state.done.items():
+            if value:
+                self.flip_state(key)
+        self.state.update(dt)
+        self.vel = self.state.vel
         self.pos += self.vel
         self.hit_rect.centerx = self.pos.x
         self.hit_rect.centery = self.pos.y
@@ -60,9 +66,15 @@ class FlareRed(pg.sprite.Sprite):
 
 class State:
     def __init__(self, effect):
-        self.fire = effect
+        self.effect = effect
         self.last_update = 0
         self.current_frame = 0
+
+    def events(self):
+        pass
+
+    def update(self, dt):
+        pass
 
     def action(self, action):
         now = pg.time.get_ticks()
@@ -74,8 +86,13 @@ class State:
 class Shoot(State):
     def __init__(self, effect):
         super().__init__(effect)
+        self.done = {"Explode": False}
         self.clock = pg.time.Clock()
         self.lifetime = 30
+
+    def events(self):
+        if self.effect.explode:
+            self.done["Explode"] = True
 
     def update(self, dt):
         self.clock.tick(FPS)
@@ -84,3 +101,19 @@ class Shoot(State):
         self.vel.x = self.x * MISSILE_SPEED * dt
         self.vel.y = self.y * MISSILE_SPEED * dt
         self.action(self.imagemanager.effects[self.__class__.__name__])
+
+class Explode(State):
+    def __init__(self, effect):
+        super().__init__(effect)
+        self.done = {"None": None}
+        self.finish = False
+
+    def events(self):
+        pass
+
+    def update(self, dt):
+        self.vel = vec(0, 0)
+        if not self.finish:
+            self.action(self.imagemanager.effects[self.__class__.__name__])
+        if self.current_frame == len(self.imagemanager.effects[self.__class__.__name__]):
+            pass

@@ -282,6 +282,9 @@ class GamePlay(GameState):
         for bag in self.bags:
             bag.events()
 
+        for effect in self.effect_sprites:
+            effect.events()
+
         if self.gameover:
             self.done["GAMEOVER"] = True
 
