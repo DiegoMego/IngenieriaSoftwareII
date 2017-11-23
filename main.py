@@ -33,7 +33,6 @@ class Game(object):
         self.done = False
         self.screen = screen
         self.clock = pg.time.Clock()
-        self.fps = 60
         self.states = states
         self.state_name = start_state
         self.state = self.states[self.state_name]
@@ -75,8 +74,8 @@ class Game(object):
         spent inside this while loop.
         """
         while not self.done:
-            dt = self.clock.tick(self.fps) / 1000
-            pg.display.set_caption(str(self.clock.get_fps())[0:2])
+            dt = self.clock.tick(FPS) / 1000
+            pg.display.set_caption(str(self.clock.get_fps())[0:3])
             self.events()
             self.update(dt)
             self.draw()
@@ -254,7 +253,6 @@ class GamePlay(GameState):
                     Line(self, tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y, True)
                 else:
                     Line(self, tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height)
-
             if tile_object.name == "Player":
                 self.player = Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
