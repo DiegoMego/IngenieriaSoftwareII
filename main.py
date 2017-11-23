@@ -11,7 +11,6 @@ from mobstate import *
 from tilemap import *
 from hud import *
 from line import *
-from obstacle import *
 
 class Game(object):
     """
