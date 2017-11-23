@@ -7,11 +7,11 @@ from inventory import *
 from button import *
 from warrior import *
 from sorcerer import *
+from obstacle import *
 from mobstate import *
 from tilemap import *
 from hud import *
 from line import *
-from obstacle import *
 
 class Game(object):
     """
@@ -34,7 +34,6 @@ class Game(object):
         self.done = False
         self.screen = screen
         self.clock = pg.time.Clock()
-        self.fps = 60
         self.states = states
         self.state_name = start_state
         self.state = self.states[self.state_name]
@@ -76,8 +75,8 @@ class Game(object):
         spent inside this while loop.
         """
         while not self.done:
-            dt = self.clock.tick(self.fps) / 1000
-            pg.display.set_caption(str(self.clock.get_fps())[0:2])
+            dt = self.clock.tick(FPS) / 1000
+            pg.display.set_caption(str(self.clock.get_fps())[0:3])
             self.events()
             self.update(dt)
             self.draw()
@@ -255,10 +254,13 @@ class GamePlay(GameState):
                     Line(self, tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y, True)
                 else:
                     Line(self, tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height)
-                #Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Obstacle":
+<<<<<<< HEAD
                 Obstacle(self,tile_object.x, tile_object.y,tile_object.width,tile_object.height)
 
+=======
+                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+>>>>>>> c56a6957f9d6d94102a6e059b33c7b96f2c04ff0
             if tile_object.name == "Player":
                 self.player = Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
@@ -267,7 +269,7 @@ class GamePlay(GameState):
             print(i)
             next(generator)
         self.camera = Camera(self.map.width, self.map.height)
-        self.surf = pg.Surface((25, 16))
+        self.surf = pg.Surface((20, 15))
         self.surf.fill(GREEN)
         self.rect = self.surf.get_rect()
 

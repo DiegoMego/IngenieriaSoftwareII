@@ -6,7 +6,7 @@ from imagemanager import *
 from mechanics import *
 vec = pg.math.Vector2
 
-class FlareRed(pg.sprite.Sprite):
+class Effect(pg.sprite.Sprite):
     def __init__(self, game, pos, direction, damage):
         self.groups = game.effect_sprites
         pg.sprite.Sprite.__init__(self, self.groups)

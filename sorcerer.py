@@ -1,6 +1,6 @@
 import pygame as pg
 import playerstate
-from effects import *
+import flarered
 from settings import *
 
 class Sorcerer(playerstate.Player):
@@ -28,7 +28,7 @@ class Fire(playerstate.Fire):
     def update(self, dt):
         super().update(dt)
         if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]) - 1:
-            FlareRed(self.game, self.player.pos, self.direction, self.damage)
+            flarered.FlareRed(self.game, self.player.pos, self.direction, self.damage)
             self.player.currentmana -= self.manacost
             n = 1 - self.game.player.currentmana/self.game.player.totalmana
             self.game.hud.update(n, "Mana")

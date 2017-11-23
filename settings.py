@@ -56,7 +56,7 @@ EFFECT_RECT = pg.Rect(0, 0, 30, 30)
 # Player Settings
 PLAYER_KEY = "Player"
 PLAYER_SPEED = 200
-PLAYER_HIT_RECT = pg.Rect(0, 0, 25, 16)
+PLAYER_HIT_RECT = pg.Rect(0, 0, 20, 15)
 PLAYER_CLASS = "Sorcerer"
 PLAYER_LETTER = "P"
 
