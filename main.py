@@ -237,7 +237,7 @@ class GamePlay(GameState):
         self.imagemanager.load_inventory_image()
         self.imagemanager.load_effect_images()
         self.inventory = Inventory.get_instance()
-        generator = self.imagemanager.loading_screen(7127, screen)
+        generator = self.imagemanager.loading_screen(7800, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()
@@ -254,13 +254,9 @@ class GamePlay(GameState):
                     Line(self, tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y, True)
                 else:
                     Line(self, tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height)
-            if tile_object.name == "Obstacle":
-<<<<<<< HEAD
-                Obstacle(self,tile_object.x, tile_object.y,tile_object.width,tile_object.height)
-
-=======
+            if tile_object.name == "Obstacle":               
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
->>>>>>> c56a6957f9d6d94102a6e059b33c7b96f2c04ff0
+
             if tile_object.name == "Player":
                 self.player = Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
