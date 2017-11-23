@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="761">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="764">
  <tileset firstgid="1" source="T_Cave.tsx"/>
  <tileset firstgid="1921" source="O_Cave2.tsx"/>
  <tileset firstgid="2617" source="O_Cave.tsx"/>
@@ -493,7 +493,7 @@
   <object id="3" name="Player" x="560" y="280" width="40" height="40"/>
   <object id="10" name="Mob" x="1000" y="1200" width="40" height="40"/>
   <object id="14" name="Mob" x="1560" y="400" width="40" height="40"/>
-  <object id="541" name="Line" x="274" y="200" width="391" height="190">
+  <object id="541" name="Line" x="345.333" y="200" width="319.667" height="155.333">
    <properties>
     <property name="Slope" type="int" value="-1"/>
    </properties>
@@ -837,15 +837,15 @@
   <object id="639" x="661.333" y="198.667">
    <polyline points="0,0 317.333,160"/>
   </object>
-  <object id="640" name="Line" x="275" y="389" width="286" height="145">
+  <object id="640" name="Line" x="345" y="353" width="216" height="104.333">
    <properties>
     <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
-  <object id="641" x="275.3" y="390.222">
-   <polyline points="0,0 285.899,144.151"/>
+  <object id="641" x="350.633" y="353.889">
+   <polyline points="0,0 210.566,103.484"/>
   </object>
-  <object id="642" name="Line" x="552" y="533" width="9" height="22">
+  <object id="642" name="Line" x="553.75" y="535.333" width="7" height="17.625">
    <properties>
     <property name="Slope" type="int" value="-1"/>
    </properties>
@@ -867,7 +867,7 @@
    <polyline points="0,0 1198.33,598.667"/>
   </object>
   <object id="647" x="662" y="198">
-   <polyline points="0,0 -388,192"/>
+   <polyline points="0,0 -318,158"/>
   </object>
   <object id="648" name="Line" x="1385" y="163" width="438" height="222">
    <properties>
@@ -1227,6 +1227,6 @@
     <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
+  <object id="763" name="Obstacle" x="553.909" y="457.96" width="7" height="77.2614"/>
  </objectgroup>
- <objectgroup name="Colisiones"/>
 </map>

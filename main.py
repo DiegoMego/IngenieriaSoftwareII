@@ -7,6 +7,7 @@ from inventory import *
 from button import *
 from warrior import *
 from sorcerer import *
+from obstacle import *
 from mobstate import *
 from tilemap import *
 from hud import *
@@ -236,7 +237,7 @@ class GamePlay(GameState):
         self.imagemanager.load_inventory_image()
         self.imagemanager.load_effect_images()
         self.inventory = Inventory.get_instance()
-        generator = self.imagemanager.loading_screen(7116, screen)
+        generator = self.imagemanager.loading_screen(7117, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()
@@ -253,6 +254,8 @@ class GamePlay(GameState):
                     Line(self, tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y, True)
                 else:
                     Line(self, tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height)
+            if tile_object.name == "Obstacle":
+                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Player":
                 self.player = Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
