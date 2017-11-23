@@ -264,7 +264,7 @@ class GamePlay(GameState):
             print(i)
             next(generator)
         self.camera = Camera(self.map.width, self.map.height)
-        self.surf = pg.Surface((25, 16))
+        self.surf = pg.Surface((20, 15))
         self.surf.fill(GREEN)
         self.rect = self.surf.get_rect()
 
