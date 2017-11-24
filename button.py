@@ -1,14 +1,13 @@
 import pygame as pg
-from os import path
-from settings import *
+import settings
 
 class Button:
     def __init__(self, text):
         self.font = pg.font.SysFont("Arial", 25)
-        self.text = self.font.render(text, True, WHITE)
+        self.text = self.font.render(text, True, settings.WHITE)
         self.textrect = self.text.get_rect()
-        self.width = WIDTH * 0.2
-        self.height = HEIGHT * 0.1
+        self.width = settings.WIDTH * 0.2
+        self.height = settings.HEIGHT * 0.1
         self.surface = pg.Surface((self.width, self.height))
         self.rect = self.surface.get_rect()
         self.textrect.center = self.rect.center
