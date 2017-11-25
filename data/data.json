@@ -15,9 +15,213 @@
                 "w": 128,
                 "h": 128
             }
+        },
+        "FlareBlue":{
+             "Shoot":{
+               "n": 8,
+               "x": 0,
+               "y": 0,
+               "w": 96,
+               "h": 96
+           },
+           "Explosion": {
+               "n": 7,
+               "x": 0,
+               "y": 194,
+               "w": 128,
+               "h": 128
+          }
+        },
+        "FlareWhite":{
+             "Shoot":{
+               "n": 8,
+               "x": 0,
+               "y": 152,
+               "w": 96,
+               "h": 96
+           },
+           "Explosion": {
+               "n": 7,
+               "x": 0,
+               "y": 13,
+               "w": 128,
+               "h": 128
+          }
         }
     },
     "Player":{
+        "Monk":{
+          "Images": {
+              "BaseSurface": [128, 128],
+              "Idle": {
+                  "n": 8,
+                  "x": 0,
+                  "y": 1045,
+                  "w": 112,
+                  "h": 96,
+                  "offsetx": 16,
+                  "offsety": 16
+              },
+              "Walk": {
+                  "n": 8,
+                  "x": 3138,
+                  "y": 1045,
+                  "w": 112,
+                  "h": 96,
+                  "offsetx": 16,
+                  "offsety": 16
+              },
+              "Attack": {
+                  "n": 12,
+                  "x": 0,
+                  "y": 7,
+                  "w": 130,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              },
+              "GetHit": {
+                  "n": 6,
+                  "x": 4762,
+                  "y": 7,
+                  "w": 98,
+                  "h": 128,
+                  "offsetx": 16,
+                  "offsety": 16
+              },
+              "Die": {
+                  "n": 20,
+                  "x": 1561,
+                  "y": 7,
+                  "w": 160,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": 16
+              },
+              "Fire": {
+                  "n": 18,
+                  "x": 2053,
+                  "y": 1827,
+                  "w": 114,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              },
+              "Lightning": {
+                  "n": 18,
+                  "x": 2053,
+                  "y": 1827,
+                  "w": 114,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              },
+              "Smoke": {
+                  "n": 18,
+                  "x": 4106,
+                  "y": 1827,
+                  "w": 114,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              }
+          },
+          "Stats": {
+              "Health": 500,
+              "Mana": 200,
+              "Damage": 100,
+              "Hit Rate": 500,
+              "Defense": 75,
+              "Block": 0,
+              "Level": 1
+          }
+      },
+      "Rogue":{
+          "Images": {
+              "BaseSurface": [128, 128],
+              "Idle": {
+                  "n": 12,
+                  "x": 0,
+                  "y": 1045,
+                  "w": 96,
+                  "h": 96,
+                  "offsetx": 16,
+                  "offsety": 16
+              },
+              "Walk": {
+                  "n": 8,
+                  "x": 2690,
+                  "y": 1045,
+                  "w": 96,
+                  "h": 96,
+                  "offsetx": 16,
+                  "offsety": 16
+              },
+              "Attack": {
+                  "n": 12,
+                  "x": 0,
+                  "y": 7,
+                  "w": 128,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              },
+              "GetHit": {
+                  "n": 7,
+                  "x": 4228,
+                  "y": 7,
+                  "w": 96,
+                  "h": 96,
+                  "offsetx": 16,
+                  "offsety": 16
+              },
+              "Die": {
+                  "n": 20,
+                  "x": 1537,
+                  "y": 7,
+                  "w": 128,
+                  "h": 96,
+                  "offsetx": 0,
+                  "offsety": 16
+              },
+              "Fire": {
+                  "n": 16,
+                  "x": 0,
+                  "y": 1827,
+                  "w": 128,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              },
+              "Lightning": {
+                  "n": 16,
+                  "x": 1537,
+                  "y": 1827,
+                  "w": 128,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              },
+              "Smoke": {
+                  "n": 16,
+                  "x": 3074,
+                  "y": 1827,
+                  "w": 128,
+                  "h": 128,
+                  "offsetx": 0,
+                  "offsety": -16
+              }
+          },
+          "Stats": {
+              "Health": 500,
+              "Mana": 200,
+              "Damage": 100,
+              "Hit Rate": 500,
+              "Defense": 75,
+              "Block": 0,
+              "Level": 1
+          }
+      },
         "Warrior": {
             "Images": {
                 "BaseSurface": [128, 128],
