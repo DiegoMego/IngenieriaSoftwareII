@@ -10,7 +10,6 @@ import mobstate
 import inventory as inv
 import button as btn
 import line
-import mechanics
 import obstacle
 import hud
 import os
@@ -220,7 +219,6 @@ class GamePlay(GameState):
         super().__init__()
         self.render = {}
         self.lines = pg.sprite.Group()
-        self.inventory = inv.Inventory.get_instance()
         self.all_sprites = pg.sprite.Group()
         self.inventory_sprites = pg.sprite.Group()
         self.effect_sprites = pg.sprite.Group()
@@ -239,7 +237,7 @@ class GamePlay(GameState):
         self.imagemanager.load_inventory_image()
         self.imagemanager.load_effect_images()
         self.inventory = inv.Inventory.get_instance()
-        generator = self.imagemanager.loading_screen(7800, screen)
+        generator = self.imagemanager.loading_screen(7138, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()

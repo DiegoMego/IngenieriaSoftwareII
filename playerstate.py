@@ -1,9 +1,9 @@
 import pygame as pg
-from settings import *
-from keyhandler import *
-from mechanics import *
-from imagemanager import *
-from inventory import *
+import settings
+import keyhandler as kh
+import imagemanager as im
+import inventory as inv
+import mechanics as mechs
 vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
@@ -16,7 +16,7 @@ class Player(pg.sprite.Sprite):
         self.last_update = 0
         self.vel = vec(0, 0)
         self.pos = vec(x, y)
-        self.inventory = Inventory.get_instance()
+        self.inventory = inv.Inventory.get_instance()
         self.inventory.make_inventory(game)
         self.load_data()
         self.load_attributes()
@@ -31,15 +31,15 @@ class Player(pg.sprite.Sprite):
                        "Lightning": Lightning(self),
                        "Smoke": Smoke(self)}
 
-        self.image_manager = ImageManager.get_instance()
-        self.keyhandler = KeyHandler.get_instance()
+        self.image_manager = im.ImageManager.get_instance()
+        self.keyhandler = kh.KeyHandler.get_instance()
         self.image_manager.load_player_images(self.states, self.keyhandler)
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
-        self.hit_rect = PLAYER_HIT_RECT
+        self.hit_rect = settings.PLAYER_HIT_RECT
 
     def load_attributes(self):
-        data = GAMEDATA[PLAYER_KEY][PLAYER_CLASS]["Stats"]
+        data = settings.GAMEDATA[settings.PLAYER_KEY][settings.PLAYER_CLASS]["Stats"]
         self.basehealth = data["Health"]
         self.totalhealth = self.basehealth
         self.currenthealth = self.totalhealth
@@ -82,11 +82,11 @@ class Player(pg.sprite.Sprite):
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
         self.hit_rect.centerx = self.pos.x
-        detect_collision(self, self.game.rect_sprites, "x")
-        collide_line(self, self.game.lines, "x")
+        mechs.detect_collision(self, self.game.rect_sprites, "x")
+        mechs.collide_line(self, self.game.lines, "x")
         self.hit_rect.centery = self.pos.y
-        detect_collision(self, self.game.rect_sprites, "y")
-        collide_line(self, self.game.lines, "y")
+        mechs.detect_collision(self, self.game.rect_sprites, "y")
+        mechs.collide_line(self, self.game.lines, "y")
         self.rect.centerx = self.hit_rect.centerx
         self.rect.centery = self.hit_rect.centery - 30
 
@@ -119,8 +119,8 @@ class Player(pg.sprite.Sprite):
 class State:
     def __init__(self, player):
         pg.sprite.Sprite.__init__(self)
-        self.image_manager = ImageManager.get_instance()
-        self.keyhandler = KeyHandler.get_instance()
+        self.image_manager = im.ImageManager.get_instance()
+        self.keyhandler = kh.KeyHandler.get_instance()
         self.game = player.game
         self.player = player
         self.inital_data()
@@ -217,8 +217,8 @@ class Walk(State):
         for key, value in self.keyhandler.move_keys.items():
             if keys[value[2]]:
                 self.keyhandler.insert_key(key)
-                self.vel.x += value[0] * PLAYER_SPEED * dt
-                self.vel.y += value[1] * PLAYER_SPEED * dt
+                self.vel.x += value[0] * settings.PLAYER_SPEED * dt
+                self.vel.y += value[1] * settings.PLAYER_SPEED * dt
             else:
                 self.keyhandler.remove_key(key)
 
