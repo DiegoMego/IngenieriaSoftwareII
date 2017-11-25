@@ -1,9 +1,9 @@
 import pygame as pg
+import settings
+import keyhandler as kh
+import imagemanager as im
+import mechanics as mechs
 import copy
-from settings import *
-from keyhandler import *
-from imagemanager import *
-from mechanics import *
 vec = pg.math.Vector2
 
 class Effect(pg.sprite.Sprite):
@@ -12,7 +12,7 @@ class Effect(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.pos = vec(pos)
-        self.hit_rect = copy.copy(EFFECT_RECT)
+        self.hit_rect = copy.copy(settings.EFFECT_RECT)
         self.direction = direction
         self.damage = damage
         self.mob_hit = None
@@ -46,7 +46,7 @@ class Effect(pg.sprite.Sprite):
         self.pos += self.vel
         self.hit_rect.centerx = self.pos.x
         self.hit_rect.centery = self.pos.y
-        self.collide(collide_effect(self, self.game.mob_sprites))
+        self.collide(mechs.collide_effect(self, self.game.mob_sprites))
         self.rect.centerx = self.hit_rect.centerx
         self.rect.centery = self.hit_rect.centery - 30
 
@@ -56,7 +56,7 @@ class Effect(pg.sprite.Sprite):
 
 class State:
     def __init__(self, effect):
-        self.imagemanager = ImageManager.get_instance()
+        self.imagemanager = im.ImageManager.get_instance()
         self.effect = effect
         self.last_update = 0
         self.current_frame = 0
@@ -81,7 +81,7 @@ class Shoot(State):
     def __init__(self, effect):
         super().__init__(effect)
         self.direction = effect.direction
-        keyhandler = KeyHandler.get_instance()
+        keyhandler = kh.KeyHandler.get_instance()
         self.x = keyhandler.vel_directions[self.direction][1]
         self.y = keyhandler.vel_directions[self.direction][2]
         self.done = {"Explosion": False}
@@ -96,11 +96,11 @@ class Shoot(State):
             self.effect.kill()
 
     def update(self, dt):
-        self.clock.tick(FPS)
+        self.clock.tick(settings.FPS)
         self.lifetime -= self.clock.get_time() / 1000
         self.vel = vec(0, 0)
-        self.vel.x = self.x * MISSILE_SPEED * dt
-        self.vel.y = self.y * MISSILE_SPEED * dt
+        self.vel.x = self.x * settings.MISSILE_SPEED * dt
+        self.vel.y = self.y * settings.MISSILE_SPEED * dt
         self.action(self.imagemanager.effects[self.__class__.__name__])
 
 class Explosion(State):
