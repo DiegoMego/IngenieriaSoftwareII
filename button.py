@@ -22,8 +22,8 @@ class Button:
 
     def update(self, mouse, click):
         if self.rect.left <= mouse[0] <= self.rect.right and self.rect.top <= mouse[1] <= self.rect.bottom:
-            self.color(DOWN_RED)
+            self.color(settings.DOWN_RED)
             if click[0] == 1:
                 self.clicked = True
         else:
-            self.color(LIGHT_BLACK)
+            self.color(settings.LIGHT_BLACK)

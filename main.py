@@ -239,7 +239,7 @@ class GamePlay(GameState):
         self.imagemanager.load_inventory_image()
         self.imagemanager.load_effect_images()
         self.inventory = inv.Inventory.get_instance()
-        generator = self.imagemanager.loading_screen(7117, screen)
+        generator = self.imagemanager.loading_screen(7800, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()
@@ -310,7 +310,6 @@ class GamePlay(GameState):
             screen.blit(sprite.image, self.camera.apply(sprite))
         for effect in self.effect_sprites:
             screen.blit(effect.image, self.camera.apply(effect))
-        #screen.blit(self.map_objects, (self.objects_rect.x + self.camera.pos.x, int(split) + self.camera.pos.y), (0, int(split), self.objects_rect.width, self.objects_rect.height - int(split)))
         self.hud_sprites.draw(screen)
         if self.inventory.on:
             self.inventory_sprites.draw(screen)
