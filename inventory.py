@@ -1,4 +1,5 @@
 import pygame as pg
+import copy
 from imagemanager import *
 
 class Inventory(pg.sprite.Sprite):
@@ -20,7 +21,8 @@ class Inventory(pg.sprite.Sprite):
                       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
-        self.image = imagemanager.inventory
+        self.original_image = imagemanager.inventory
+        self.image = copy.copy(self.original_image)
         self.rect = self.image.get_rect()
         self.rect.top = HEIGHT * 0.2
         self.rect.right = WIDTH
