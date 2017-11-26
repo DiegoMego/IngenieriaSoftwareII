@@ -453,6 +453,64 @@
                 "Block": 0,
                 "Level": 1
             }
+        },
+        "Azid": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 13,
+                    "x": 0,
+                    "y": 2409,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 8,
+                    "x": 0,
+                    "y": 4001,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 12,
+                    "x": 0,
+                    "y": 21,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 8,
+                    "x": 0,
+                    "y": 1613,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 24,
+                    "x": 0,
+                    "y": 817,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
         }
     }
 }
