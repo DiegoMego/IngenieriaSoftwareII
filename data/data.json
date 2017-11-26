@@ -971,6 +971,348 @@
                 "Block": 0,
                 "Level": 1
             }
+        },"NaKrul": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 16,
+                    "x": 3617,
+                    "y": 1301,
+                    "w": 226,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 6,
+                    "x": 7233,
+                    "y": 1301,
+                    "w": 226,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 7,
+                    "w": 226,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 16,
+                    "x": 7234,
+                    "y": 7,
+                    "w": 226,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 3617,
+                    "y": 7,
+                    "w": 226,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"Overlord": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 8,
+                    "x": 2049,
+                    "y": 782,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 10,
+                    "x": 3074,
+                    "y": 782,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 15,
+                    "x": 0,
+                    "y": 7,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 1921,
+                    "y": 7,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 782,
+                    "w": 128,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"Reaper": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 12,
+                    "x": 0,
+                    "y": 1301,
+                    "w": 180,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 10,
+                    "x": 3242,
+                    "y": 1301,
+                    "w": 180,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 14,
+                    "x": 0,
+                    "y": 7,
+                    "w": 180,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 5043,
+                    "y": 1401,
+                    "w": 180,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 2521,
+                    "y": 7,
+                    "w": 180,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"RhinoDemon": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 8,
+                    "x": 3202,
+                    "y": 7,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 8,
+                    "x": 3522,
+                    "y": 1045,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 14,
+                    "x": 0,
+                    "y": 7,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 2241,
+                    "y": 7,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 1045,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"SkeletonKing": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 8,
+                    "x": 0,
+                    "y": 3945,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 8,
+                    "x": 0,
+                    "y": 6561,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 21,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 0,
+                    "y": 2637,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 1329,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"Stormrider": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 8,
+                    "x": 2241,
+                    "y": 1045,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 8,
+                    "x": 4803,
+                    "y": 1045,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 18,
+                    "x": 0,
+                    "y": 7,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 4,
+                    "x": 4803,
+                    "y": 1045,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 17,
+                    "x": 2880,
+                    "y": 7,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
         }
     }
 }
