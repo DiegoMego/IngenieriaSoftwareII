@@ -511,6 +511,466 @@
                 "Block": 0,
                 "Level": 1
             }
+        },
+        "Balrog": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 6,
+                    "x": 2241,
+                    "y": 7,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 7,
+                    "x": 3202,
+                    "y": 7,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 14,
+                    "x": 0,
+                    "y": 7,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 24,
+                    "x": 0,
+                    "y": 2595,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 6,
+                    "x": 0,
+                    "y": 1301,
+                    "w": 160,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },
+        "Black Knight": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 16,
+                    "x": 3845,
+                    "y": 9,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 8,
+                    "x": 2562,
+                    "y": 9,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 9,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 4,
+                    "x": 3845,
+                    "y": 1051,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 24,
+                    "x": 0,
+                    "y": 1051,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"Byclops": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 10,
+                    "x": 0,
+                    "y": 1045,
+                    "w": 180,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 16,
+                    "x": 4682,
+                    "y": 1045,
+                    "w": 180,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 7,
+                    "w": 180,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 5761,
+                    "y": 7,
+                    "w": 180,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 2881,
+                    "y": 7,
+                    "w": 180,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },
+        "DarkSpider": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 20,
+                    "x": 2221,
+                    "y": 1045,
+                    "w": 148,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 10,
+                    "x": 3258,
+                    "y": 1045,
+                    "w": 148,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 15,
+                    "x": 0,
+                    "y": 7,
+                    "w": 148,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 4738,
+                    "y": 1045,
+                    "w": 148,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 20,
+                    "x": 0,
+                    "y": 7,
+                    "w": 148,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"Defiler": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 8,
+                    "x": 0,
+                    "y": 1301,
+                    "w": 198,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 8,
+                    "x": 3962,
+                    "y": 1301,
+                    "w": 198,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 14,
+                    "x": 0,
+                    "y": 7,
+                    "w": 198,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 5545,
+                    "y": 7,
+                    "w": 198,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 14,
+                    "x": 2773,
+                    "y": 7,
+                    "w": 198,
+                    "h": 160,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },
+        "Firebat": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 14,
+                    "x": 0,
+                    "y": 7,
+                    "w": 96,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 16,
+                    "x": 2881,
+                    "y": 1045,
+                    "w": 96,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 14,
+                    "x": 0,
+                    "y": 7,
+                    "w": 96,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 18,
+                    "x": 3074,
+                    "y": 7,
+                    "w": 96,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 18,
+                    "x": 1345,
+                    "y": 7,
+                    "w": 96,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"GoatmanLord": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 13,
+                    "x": 0,
+                    "y": 4159,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 13,
+                    "x": 0,
+                    "y": 2083,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 14,
+                    "x": 0,
+                    "y": 7,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 9,
+                    "x": 0,
+                    "y": 3121,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 0,
+                    "y": 1045,
+                    "w": 160,
+                    "h": 128,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
+        },"Golem": {
+            "Images": {
+                "BaseSurface": [128, 128],
+                "Idle": {
+                    "n": 15,
+                    "x": 0,
+                    "y": 1301,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Walk": {
+                    "n": 12,
+                    "x": 0,
+                    "y": 788,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Attack": {
+                    "n": 12,
+                    "x": 0,
+                    "y": 7,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "GetHit": {
+                    "n": 6,
+                    "x": 4418,
+                    "y": 7,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                },
+                "Die": {
+                    "n": 16,
+                    "x": 2209,
+                    "y": 7,
+                    "w": 96,
+                    "h": 96,
+                    "offsetx": 0,
+                    "offsety": -20
+                }
+            },
+            "Stats": {
+                "Health": 200,
+                "Damage": 40,
+                "Hit Rate": 100,
+                "Defense": 50,
+                "Block": 0,
+                "Level": 1
+            }
         }
     }
 }
