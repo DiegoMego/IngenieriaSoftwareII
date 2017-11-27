@@ -1,0 +1,46 @@
+Flare Red:
+Shoot:
+n:8
+x:0
+y:15
+w:128
+h:128
+
+Explosion:
+n:7
+x:0
+y:287
+w:128
+h:128
+
+
+Flare Blue:
+Shoot:
+n:8
+x:0
+y:417
+w:96
+h:96
+
+Explosion:
+n:7
+x:0
+y:611
+w:128
+h:128
+
+
+Flare White:
+Explosion:
+n:7
+x:0
+y:753
+w:128
+h:128
+
+Shoot:
+n:8
+x:0
+y:892
+w:96
+h:96

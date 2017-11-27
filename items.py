@@ -1,5 +1,5 @@
 import pygame as pg
-from imagemanager import *
+import imagemanager as im
 
 class Item(pg.sprite.Sprite):
     def __init__(self, game, ID, width, height):
@@ -25,7 +25,7 @@ class Bag(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.bags
         super().__init__(self.groups)
-        imagemanager = ImageManager.get_instance()
+        imagemanager = im.ImageManager.get_instance()
         self.image = imagemanager.bag
         self.rect = self.image.get_rect()
         self.rect.centerx = x

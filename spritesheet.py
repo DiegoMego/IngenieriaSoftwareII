@@ -1,6 +1,6 @@
 import pygame as pg
 from os import path
-from settings import *
+import settings
 
 class SpriteSheet:
     _instance = None
@@ -16,7 +16,7 @@ class SpriteSheet:
         try:
             image = pg.image.load(path.join(folder, filename)).convert()
             if fit_screen:
-                cls._sprites[filename[:-4]] = pg.transform.scale(image, (WIDTH, HEIGHT))
+                cls._sprites[filename[:-4]] = pg.transform.scale(image, (settings.WIDTH, settings.HEIGHT))
             else:
                 cls._sprites[filename[:-4]] = image
         except Exception as e:

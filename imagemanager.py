@@ -1,6 +1,5 @@
 import pygame as pg
 import sys
-from spritesheet import *
 from os import path
 from settings import *
 
@@ -23,17 +22,19 @@ class ImageManager:
         self.bag = pg.transform.scale(spritesheet, (int(WIDTH * 0.01), int(HEIGHT / 64)))
 
     def load_effect_images(self):
-        spritesheet = pg.image.load(path.join(EFFECT_FOLDER, "Flare Red.png")).convert()
-        data = GAMEDATA[EFFECT_KEY]["FlareRed"]
+        spritesheet = pg.image.load(path.join(EFFECT_FOLDER, "Flarered.png")).convert()
+        data = GAMEDATA[EFFECT_KEY]
         self.effects = {}
-        for key, value in data.items():
-            x = value["x"]
-            y = value["y"]
-            self.effects[key] = []
-            for i in range(value["n"]):
-                self.effects[key].append(self.get_image(spritesheet, x, y, value["w"], value["h"]))
-                self.effects[key][i].set_colorkey(GREY)
-                x += 129
+        for effectkey, effect in data.items():
+            self.effects[effectkey] = {}
+            for key, value in effect.items():
+                x = value["x"]
+                y = value["y"]
+                self.effects[effectkey][key] = []
+                for i in range(value["n"]):
+                    self.effects[effectkey][key].append(self.get_image(spritesheet, x, y, value["w"], value["h"]))
+                    self.effects[effectkey][key][i].set_colorkey(GREY)
+                    x += 129
 
 
     def load_hud_images(self):

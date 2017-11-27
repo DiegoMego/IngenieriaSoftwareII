@@ -28,11 +28,12 @@ TILESIZE = 40
 BGCOLOR = DARK_GREY
 FPS = 60
 GAME_FOLDER = path.dirname(__file__)
-IMAGE_FOLDER = path.join(GAME_FOLDER, "img")
+ASSETS_FOLDER = path.join(GAME_FOLDER, "assets")
+IMAGE_FOLDER = path.join(ASSETS_FOLDER, "img")
 IMAGE_KEY = "Images"
 
 # Load Data
-DATAFILE = path.join(path.join(GAME_FOLDER, "data"), "data.json")
+DATAFILE = path.join(path.join(ASSETS_FOLDER, "data"), "data.json")
 with open(DATAFILE) as json_data:
     GAMEDATA = json.load(json_data)
 
@@ -57,11 +58,11 @@ EFFECT_RECT = pg.Rect(0, 0, 30, 30)
 PLAYER_KEY = "Player"
 PLAYER_SPEED = 200
 PLAYER_HIT_RECT = pg.Rect(0, 0, 20, 15)
-PLAYER_CLASS = "Sorcerer"
+PLAYER_CLASS = "Warrior"
 PLAYER_LETTER = "P"
 
 #Player Image Settings
-PLAYER_EQUIPMENT = "Light Armor with Staff"
+PLAYER_EQUIPMENT = "Light Armor with Sword & Shield"
 PLAYER_SPRITESHEET_GENERATOR = "%s in %s.png"
 PLAYER_FOLDER = path.join(IMAGE_FOLDER, "Class")
 PLAYER_CLASS_FOLDER = path.join(PLAYER_FOLDER, PLAYER_CLASS)

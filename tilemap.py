@@ -1,6 +1,6 @@
 import pygame as pg
 import math
-from settings import *
+import settings
 import pytmx
 vec = pg.math.Vector2
 
@@ -20,7 +20,7 @@ class TiledMap:
                     tile = ti(gid)
                     #tile = temp_tile.convert_alpha()
                     try:
-                        tile.set_colorkey((255, 0, 255))
+                        tile.set_colorkey(settings.FUCHSIA)
                     except Exception as e:
                         pass
                     if tile:
@@ -31,12 +31,12 @@ class TiledMap:
                             surface.blit(tile, (x * self.tmxdata.tilewidth + layer.offsetx, y * self.tmxdata.tileheight + layer.offsety))
                         else:
                             objects_surface.blit(tile, (x * self.tmxdata.tilewidth + layer.offsetx, y * self.tmxdata.tileheight + layer.offsety))
-        print(i)
+        #print(i)
 
     def make_map(self, generator):
         temp_surface = pg.Surface((self.width, self.height))
         objects_surface = pg.Surface((self.width, self.height))
-        objects_surface.set_colorkey(BLACK)
+        objects_surface.set_colorkey(settings.BLACK)
         self.render(temp_surface, objects_surface, generator)
         return temp_surface, objects_surface
 
@@ -53,23 +53,23 @@ class Camera:
         return rect.move(self.pos)
 
     def update(self, target):
-        x = -target.rect.centerx + int(WIDTH / 2)
-        y = -target.rect.centery + int(HEIGHT / 2)
+        x = -target.rect.centerx + int(settings.WIDTH / 2)
+        y = -target.rect.centery + int(settings.HEIGHT / 2)
         x = min(0, x)
         y = min(0, y)
-        x = max(-(self.width - WIDTH), x)
-        y = max(-(self.height - HEIGHT), y)
+        x = max(-(self.width - settings.WIDTH), x)
+        y = max(-(self.height - settings.HEIGHT), y)
         self.pos.x = x
         self.pos.y = y
 
     def onscreen(self, entity):
-        if -self.pos.x < entity.rect.x < (-self.pos.x + WIDTH) and -self.pos.y < entity.rect.y < (-self.pos.y + HEIGHT):
+        if -self.pos.x < entity.rect.x < (-self.pos.x + settings.WIDTH) and -self.pos.y < entity.rect.y < (-self.pos.y + settings.HEIGHT):
             return True
         return False
 
     def inside(self):
-        row = math.floor(-self.pos.y / TILEHEIGHT)
-        col = math.floor(-self.pos.x / TILEWIDTH)
+        row = math.floor(-self.pos.y / settings.TILEHEIGHT)
+        col = math.floor(-self.pos.x / settings.TILEWIDTH)
         return row, col
 
 # class Map:
