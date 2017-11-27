@@ -1,12 +1,11 @@
 import pygame as pg
-from os import *
-from settings import *
-from imagemanager import *
+import settings
+import imagemanager as im
 
 class HUD:
     def __init__(self, game):
-        self.image_manager = ImageManager.get_instance()
-        self.image = (Life(game, WIDTH * 0.2, HEIGHT * 0.2,), Mana(game, WIDTH * 0.2, HEIGHT * 0.2,))
+        self.image_manager = im.ImageManager.get_instance()
+        self.image = (Life(game, settings.WIDTH * 0.2, settings.HEIGHT * 0.2,), Mana(game, settings.WIDTH * 0.2, settings.HEIGHT * 0.2,))
         self.load_images()
 
     def load_images(self):
@@ -28,14 +27,14 @@ class Life(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, self.groups)
         self.y = (0, h * 0.875)
         self.image = pg.Surface((w, h))
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey(settings.BLACK)
         self.rect = self.image.get_rect()
         self.width = self.rect.width
         self.height = self.rect.height
-        self.rect.bottomleft = ((0, HEIGHT))
+        self.rect.bottomleft = ((0, settings.HEIGHT))
 
     def get_life(self, n, manager):
-        self.image.fill(WHITE)
+        self.image.fill(settings.WHITE)
         self.image.blit(manager.hud["Life"][1], (0, 0))
         self.image.blit(manager.hud["Life"][2], (0, self.y[1] * n), (0, self.y[1] * n, self.width, self.height))
 
@@ -48,14 +47,14 @@ class Mana(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, self.groups)
         self.y = (h * 0.125, h * 0.875)
         self.image = pg.Surface((w, h))
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey(settings.BLACK)
         self.rect = self.image.get_rect()
         self.width = self.rect.width
         self.height = self.rect.height
-        self.rect.bottomright = ((WIDTH, HEIGHT))
+        self.rect.bottomright = ((settings.WIDTH, settings.HEIGHT))
 
     def get_mana(self, n, manager):
-        self.image.fill(WHITE)
+        self.image.fill(settings.WHITE)
         self.image.blit(manager.hud["Mana"][1], (0, 0))
         self.image.blit(manager.hud["Mana"][2], (0, self.y[0] + self.y[1] * n), (0, self.y[0] + self.y[1] * n, self.width, self.height))
 

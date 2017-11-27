@@ -1,6 +1,5 @@
 import pygame as pg
 import sys
-from spritesheet import *
 from os import path
 from settings import *
 

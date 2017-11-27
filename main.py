@@ -4,13 +4,11 @@ import settings
 import tilemap as tm
 import imagemanager as im
 import spritesheet as ss
-import sorcerer as sorc
-import warrior as war
-import mobstate
+from player import sorcerer, warrior
+from mobs import mobstate
 import inventory as inv
 import button as btn
-import line
-import obstacle
+from map_obstacles import line, obstacle
 import hud
 import os
 
@@ -257,7 +255,7 @@ class GamePlay(GameState):
             if tile_object.name == "Obstacle":
                 obstacle.Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Player":
-                self.player = sorc.Sorcerer(self, tile_object.x, tile_object.y)
+                self.player = sorcerer.Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
                 mobstate.Mob(self, tile_object.x, tile_object.y)
             i += 1

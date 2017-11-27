@@ -1,6 +1,7 @@
 import pygame as pg
 import copy
-from imagemanager import *
+import settings
+import imagemanager as im
 
 class Inventory(pg.sprite.Sprite):
     _instance = None
@@ -14,7 +15,7 @@ class Inventory(pg.sprite.Sprite):
     def make_inventory(self, game):
         groups = game.inventory_sprites
         super().__init__(groups)
-        imagemanager = ImageManager.get_instance()
+        imagemanager = im.ImageManager.get_instance()
         self.items = {}
         self.space = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -24,8 +25,8 @@ class Inventory(pg.sprite.Sprite):
         self.original_image = imagemanager.inventory
         self.image = copy.copy(self.original_image)
         self.rect = self.image.get_rect()
-        self.rect.top = HEIGHT * 0.2
-        self.rect.right = WIDTH
+        self.rect.top = settings.HEIGHT * 0.2
+        self.rect.right = settings.WIDTH
         self.on = False
 
     def find_slot(self, item):

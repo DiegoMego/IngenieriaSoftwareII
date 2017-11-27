@@ -51,9 +51,9 @@ class Mob(pg.sprite.Sprite):
         """Switch to the next game state."""
         self.state.done[state_name] = False
         self.state_name = state_name
-        persistent = self.state.persistence
+        direction = self.state.direction
         self.state = self.states[self.state_name]
-        self.state.start_up(persistent)
+        self.state.start_up(direction)
 
     def events(self):
         self.state.events()
@@ -125,8 +125,8 @@ class MobState(pg.sprite.Sprite):
         self.direction = "down"
         self.persistence = {"direction": self.direction}
 
-    def start_up(self, direction_persistence):
-        self.persistence = direction_persistence
+    def start_up(self, direction):
+        self.direction = direction
 
     def events(self):
         pass
@@ -151,10 +151,9 @@ class Idle(MobState):
                      "GetHit": False,
                      "Die": False}
 
-    def start_up(self, persistence):
-        self.persistence = persistence
+    def start_up(self, direction):
+        self.direction = direction
         self.current_frame = 0
-        self.direction = self.persistence["direction"]
 
     def events(self):
         if self.mob.isdead():
@@ -177,10 +176,9 @@ class Walk(MobState):
                      "GetHit": False,
                      "Die": False}
 
-    def start_up(self, persistence):
+    def start_up(self, direction):
         self.mob.player_collision = False
-        self.persistence = persistence
-        self.direction = self.persistence["direction"]
+        self.direction = direction
         self.random_direction = self.keyhandler.get_key(random.randint(0, 7))
         self.distancia = 0
 
@@ -207,10 +205,8 @@ class Walk(MobState):
         elif self.mob.gets_hit():
             self.done["GetHit"] = True
         elif self.distancia >= 160 and not self.mob.player_detected:
-            self.persistence["direction"] = self.direction
             self.done["Idle"] = True
         elif self.mob.player_collision:
-            self.persistence["direction"] = self.direction
             self.done["Attack"] = True
 
     def update(self, dt):
@@ -237,10 +233,9 @@ class Attack(MobState):
                      "GetHit": False,
                      "Die": False}
 
-    def start_up(self, persistence):
-        self.persistence = persistence
+    def start_up(self, direction):
+        self.direction = direction
         self.current_frame = 0
-        self.direction = self.persistence["direction"]
 
     def apply_damage(self):
         if not self.try_hit:
@@ -271,10 +266,9 @@ class GetHit(MobState):
         super().__init__(mob)
         self.done = {"Idle": False}
 
-    def start_up(self, persistence):
-        self.persistence = persistence
+    def start_up(self, direction):
+        self.direction = direction
         self.current_frame = 0
-        self.direction = self.persistence["direction"]
 
     def events(self):
         if (self.current_frame + 1) % len(self.image_manager.mob[self.mob_class][self.__class__.__name__][self.direction]) == 0:
@@ -293,10 +287,9 @@ class Die(MobState):
         self.finish = False
         self.done = {"None": None}
 
-    def start_up(self, persistence):
-        self.persistence = persistence
+    def start_up(self, direction):
+        self.direction = direction
         self.current_frame = 0
-        self.direction = self.persistence["direction"]
 
     def update(self, dt):
         self.vel = vec(0, 0)

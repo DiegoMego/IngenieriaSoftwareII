@@ -28,11 +28,12 @@ TILESIZE = 40
 BGCOLOR = DARK_GREY
 FPS = 60
 GAME_FOLDER = path.dirname(__file__)
-IMAGE_FOLDER = path.join(GAME_FOLDER, "img")
+ASSETS_FOLDER = path.join(GAME_FOLDER, "assets")
+IMAGE_FOLDER = path.join(ASSETS_FOLDER, "img")
 IMAGE_KEY = "Images"
 
 # Load Data
-DATAFILE = path.join(path.join(GAME_FOLDER, "data"), "data.json")
+DATAFILE = path.join(path.join(ASSETS_FOLDER, "data"), "data.json")
 with open(DATAFILE) as json_data:
     GAMEDATA = json.load(json_data)
 

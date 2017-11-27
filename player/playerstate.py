@@ -250,7 +250,7 @@ class Attack(State):
             posx = self.player.pos.x + self.keyhandler.vel_directions[self.direction][1] * (self.player.hit_rect.width / 2 + 1)
             posy = self.player.pos.y + self.keyhandler.vel_directions[self.direction][2] * (self.player.hit_rect.height / 2 + 1)
             for mob in self.game.mob_sprites.sprites():
-                if mob.hit_rect.collidepoint(posx, posy) and hit(self.player.hit_rate, mob.defense, self.player.level, mob.level):
+                if mob.hit_rect.collidepoint(posx, posy) and mechs.hit(self.player.hit_rate, mob.defense, self.player.level, mob.level):
                     mob.currenthealth -= self.player.damage
 
     def events(self):
