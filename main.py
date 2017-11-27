@@ -1,17 +1,18 @@
 import sys
 import pygame as pg
-import mechanics
-from settings import *
-from spritesheet import *
-from inventory import *
-from button import *
-from warrior import *
-from sorcerer import *
-from obstacle import *
-from mobstate import *
-from tilemap import *
-from hud import *
-from line import *
+import settings
+import tilemap as tm
+import imagemanager as im
+import spritesheet as ss
+import sorcerer as sorc
+import warrior as war
+import mobstate
+import inventory as inv
+import button as btn
+import line
+import obstacle
+import hud
+import os
 
 class Game(object):
     """
@@ -75,7 +76,7 @@ class Game(object):
         spent inside this while loop.
         """
         while not self.done:
-            dt = self.clock.tick(FPS) / 1000
+            dt = self.clock.tick(settings.FPS) / 1000
             pg.display.set_caption(str(self.clock.get_fps())[0:3])
             self.events()
             self.update(dt)
@@ -91,8 +92,8 @@ class GameState(object):
         self.quit = False
         self.next_state = None
         self.persist = {}
-        self.spritesheet = SpriteSheet.get_instance()
-        self.imagemanager = ImageManager.get_instance()
+        self.spritesheet = ss.SpriteSheet.get_instance()
+        self.imagemanager = im.ImageManager.get_instance()
 
     def startup(self, persistent = {}):
         """
@@ -136,20 +137,20 @@ class MainScreen(GameState):
         self.load_buttons()
 
     def load_buttons(self):
-        self.buttons = {"GAMEPLAY": Button("Nueva Partida"),
-                        "TUTORIAL": Button("Tutorial"),
-                        "QUIT": Button("Salir")}
-        x = WIDTH / 2
+        self.buttons = {"GAMEPLAY": btn.Button("Nueva Partida"),
+                        "TUTORIAL": btn.Button("Tutorial"),
+                        "QUIT": btn.Button("Salir")}
+        x = settings.WIDTH / 2
         y = 0.3
         for button in self.buttons.values():
-            button.set_pos(x, HEIGHT * y)
+            button.set_pos(x, settings.HEIGHT * y)
             y += 0.25
 
     def startup(self, persistent = {}):
         self.spritesheet.clear_sprites()
-        self.spritesheet.add_sprite(INTRO_FOLDER, self.image_name, True)
-        self.spritesheet.add_sprite(INTRO_FOLDER, self.image_text_name)
-        self.spritesheet.get_sprite(self.image_text_name[:-4]).set_colorkey(BLACK)
+        self.spritesheet.add_sprite(settings.INTRO_FOLDER, self.image_name, True)
+        self.spritesheet.add_sprite(settings.INTRO_FOLDER, self.image_text_name)
+        self.spritesheet.get_sprite(self.image_text_name[:-4]).set_colorkey(settings.BLACK)
         for button in self.buttons.values():
             button.clicked = False
 
@@ -171,7 +172,7 @@ class MainScreen(GameState):
             button.update(mouse, click)
 
     def draw(self, screen):
-        screen.fill(WHITE)
+        screen.fill(settings.WHITE)
         screen.blit(self.spritesheet.get_sprite(self.image_name[:-4]), (0, 0))
         screen.blit(self.spritesheet.get_sprite(self.image_text_name[:-4]), (0, 0))
         for key, button in self.buttons.items():
@@ -185,15 +186,15 @@ class TutorialScreen(GameState):
         self.load_button()
 
     def load_button(self):
-        self.button = Button("Regresar")
+        self.button = btn.Button("Regresar")
         x = 0.12
         y = 0.93
-        self.button.set_pos(WIDTH * x, HEIGHT * y)
+        self.button.set_pos(settings.WIDTH * x, settings.HEIGHT * y)
 
 
     def startup(self, persistent = {}):
         self.spritesheet.clear_sprites()
-        self.spritesheet.add_sprite(INTRO_FOLDER, self.image_name, True)
+        self.spritesheet.add_sprite(settings.INTRO_FOLDER, self.image_name, True)
         self.button.clicked = False
 
     def events(self):
@@ -209,7 +210,7 @@ class TutorialScreen(GameState):
         self.button.update(mouse, click)
 
     def draw(self, screen):
-        screen.fill(WHITE)
+        screen.fill(settings.WHITE)
         screen.blit(self.spritesheet.get_sprite(self.image_name[:-4]), (0, 0))
         screen.blit(self.button.surface, self.button.rect)
 
@@ -218,7 +219,6 @@ class GamePlay(GameState):
         super().__init__()
         self.render = {}
         self.lines = pg.sprite.Group()
-        self.inventory = Inventory.get_instance()
         self.all_sprites = pg.sprite.Group()
         self.inventory_sprites = pg.sprite.Group()
         self.effect_sprites = pg.sprite.Group()
@@ -236,14 +236,14 @@ class GamePlay(GameState):
         self.imagemanager.load_bag_image()
         self.imagemanager.load_inventory_image()
         self.imagemanager.load_effect_images()
-        self.inventory = Inventory.get_instance()
-        generator = self.imagemanager.loading_screen(7117, screen)
+        self.inventory = inv.Inventory.get_instance()
+        generator = self.imagemanager.loading_screen(7138, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()
-        self.hud = HUD(self)
+        self.hud = hud.HUD(self)
         next(generator)
-        self.map = TiledMap(path.join(TILEDMAP_FOLDER, "Mapa_Cueva.tmx"))
+        self.map = tm.TiledMap(os.path.join(settings.TILEDMAP_FOLDER, "Mapa_Cueva.tmx"))
         self.map_terrain, self.map_objects = self.map.make_map(generator)
         self.terrain_rect = self.map_terrain.get_rect()
         self.objects_rect = self.map_objects.get_rect()
@@ -251,21 +251,21 @@ class GamePlay(GameState):
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == "Line":
                 if tile_object.properties["Slope"] == "-1":
-                    Line(self, tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y, True)
+                    line.Line(self, tile_object.x, tile_object.y + tile_object.height, tile_object.x + tile_object.width, tile_object.y, True)
                 else:
-                    Line(self, tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height)
+                    line.Line(self, tile_object.x, tile_object.y, tile_object.x + tile_object.width, tile_object.y + tile_object.height)
             if tile_object.name == "Obstacle":
-                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                obstacle.Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Player":
-                self.player = Sorcerer(self, tile_object.x, tile_object.y)
+                self.player = sorc.Sorcerer(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
-                Mob(self, tile_object.x, tile_object.y)
+                mobstate.Mob(self, tile_object.x, tile_object.y)
             i += 1
             print(i)
             next(generator)
-        self.camera = Camera(self.map.width, self.map.height)
+        self.camera = tm.Camera(self.map.width, self.map.height)
         self.surf = pg.Surface((20, 15))
-        self.surf.fill(GREEN)
+        self.surf.fill(settings.GREEN)
         self.rect = self.surf.get_rect()
 
     def events(self):
@@ -295,7 +295,7 @@ class GamePlay(GameState):
         self.camera.update(self.player)
 
     def draw(self, screen):
-        screen.fill(WHITE)
+        screen.fill(settings.WHITE)
         screen.blit(self.map_terrain, self.camera.apply_rect(self.terrain_rect))
         screen.blit(self.map_objects, (self.objects_rect.x + self.camera.pos.x, self.objects_rect.y + self.camera.pos.y), (0, 0, self.objects_rect.width, self.objects_rect.height))
         for sprite in self.dead_sprites:
@@ -303,12 +303,11 @@ class GamePlay(GameState):
         for bag in self.bags:
             screen.blit(bag.image, self.camera.apply(bag))
         for sprite in self.all_sprites:
-            if isinstance(sprite, Mob):
+            if isinstance(sprite, mobstate.Mob):
                 sprite.draw_health(screen)
             screen.blit(sprite.image, self.camera.apply(sprite))
         for effect in self.effect_sprites:
             screen.blit(effect.image, self.camera.apply(effect))
-        #screen.blit(self.map_objects, (self.objects_rect.x + self.camera.pos.x, int(split) + self.camera.pos.y), (0, int(split), self.objects_rect.width, self.objects_rect.height - int(split)))
         self.hud_sprites.draw(screen)
         if self.inventory.on:
             self.inventory_sprites.draw(screen)
@@ -347,7 +346,7 @@ class GameOver(GameState):
 
 if __name__ == "__main__":
     pg.init()
-    screen = pg.display.set_mode((WIDTH, HEIGHT))
+    screen = pg.display.set_mode((settings.WIDTH, settings.HEIGHT))
     states = {"MAINSCREEN": MainScreen(),
               "GAMEPLAY": GamePlay(),
               "TUTORIAL": TutorialScreen(),

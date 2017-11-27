@@ -1,12 +1,12 @@
 import pygame as pg
+import settings
+import imagemanager as im
+import keyhandler as kh
+import mechanics as mechs
+import items
 import random
 import math
 import copy
-from settings import *
-from keyhandler import *
-from mechanics import *
-from imagemanager import *
-from items import *
 
 vec = pg.math.Vector2
 
@@ -32,12 +32,12 @@ class Mob(pg.sprite.Sprite):
                        "GetHit": GetHit(self),
                        "Die": Die(self)}
 
-        self.image_manager = ImageManager.get_instance()
-        self.keyhandler = KeyHandler.get_instance()
+        self.image_manager = im.ImageManager.get_instance()
+        self.keyhandler = kh.KeyHandler.get_instance()
         self.image_manager.load_mob_images(self.mob_class, self.states, self.keyhandler)
         self.state_name = "Idle"
         self.state = self.states[self.state_name]
-        self.hit_rect = copy.copy(MOB_HIT_RECT)
+        self.hit_rect = copy.copy(settings.MOB_HIT_RECT)
         self.player_collision = False
 
     def load_attributes(self):
@@ -73,15 +73,15 @@ class Mob(pg.sprite.Sprite):
         self.pos.x += round(self.vel.x, 0)
         self.pos.y += round(self.vel.y, 0)
         self.hit_rect.centerx = self.pos.x
-        if collide_hit_rect(self, self.game.player):
+        if mechs.collide_hit_rect(self, self.game.player):
             self.player_collision = True
-        detect_collision(self, self.game.rect_sprites, "x")
-        collide_line(self, self.lines, "x")
+        mechs.detect_collision(self, self.game.rect_sprites, "x")
+        mechs.collide_line(self, self.lines, "x")
         self.hit_rect.centery = self.pos.y
-        if collide_hit_rect(self, self.game.player):
+        if mechs.collide_hit_rect(self, self.game.player):
             self.player_collision = True
-        detect_collision(self, self.game.rect_sprites, "y")
-        collide_line(self, self.lines, "y")
+        mechs.detect_collision(self, self.game.rect_sprites, "y")
+        mechs.collide_line(self, self.lines, "y")
         self.rect.centerx = self.hit_rect.centerx
         self.rect.centery = self.hit_rect.centery - 30
 
@@ -112,8 +112,8 @@ class Mob(pg.sprite.Sprite):
 class MobState(pg.sprite.Sprite):
     def __init__(self, mob):
         pg.sprite.Sprite.__init__(self)
-        self.image_manager = ImageManager.get_instance()
-        self.keyhandler = KeyHandler.get_instance()
+        self.image_manager = im.ImageManager.get_instance()
+        self.keyhandler = kh.KeyHandler.get_instance()
         self.game = mob.game
         self.mob = mob
         self.mob_class = mob.mob_class
@@ -197,7 +197,7 @@ class Walk(MobState):
             if distance_vector.x != 0:
                 distance_vector.x = math.copysign(1, distance_vector.x)
                 direction += key if value[0] == distance_vector.x else ""
-        self.vel = distance_vector * MOB_SPEED * dt
+        self.vel = distance_vector * settings.MOB_SPEED * dt
 
         return direction
 
@@ -218,9 +218,9 @@ class Walk(MobState):
         self.vel = vec(0, 0)
         if not self.mob.player_detected:
             self.direction = self.random_direction
-            self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * MOB_SPEED * dt
-            self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * MOB_SPEED * dt
-            self.distancia += MOB_SPEED
+            self.vel.x += self.keyhandler.vel_directions[self.random_direction][0] * settings.MOB_SPEED * dt
+            self.vel.y += self.keyhandler.vel_directions[self.random_direction][1] * settings.MOB_SPEED * dt
+            self.distancia += settings.MOB_SPEED
         else:
             self.direction = self.follow(dt)
 
@@ -306,7 +306,7 @@ class Die(MobState):
             self.finish = True
             self.mob.remove(self.mob.groups)
             self.mob.add(self.game.dead_sprites)
-            Bag(self.mob.game, self.mob.pos.x, self.mob.pos.y)
+            items.Bag(self.mob.game, self.mob.pos.x, self.mob.pos.y)
 
 class Health:
     def __init__(self, width, height):
@@ -315,11 +315,11 @@ class Health:
 
     def get_color(self, ratio):
         if ratio > 0.6:
-            self.image.fill(GREEN)
+            self.image.fill(settings.GREEN)
         elif ratio > 0.3:
-            self.image.fill(YELLOW)
+            self.image.fill(settings.YELLOW)
         else:
-            self.image.fill(RED)
+            self.image.fill(settings.RED)
 
     def set_width(self, width, height):
         self.image = pg.Surface((width, height))
