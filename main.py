@@ -255,11 +255,11 @@ class GamePlay(GameState):
             if tile_object.name == "Obstacle":
                 obstacle.Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name == "Player":
-                self.player = sorcerer.Sorcerer(self, tile_object.x, tile_object.y)
+                self.player = warrior.Warrior(self, tile_object.x, tile_object.y)
             if tile_object.name == "Mob":
                 mobstate.Mob(self, tile_object.x, tile_object.y)
             i += 1
-            print(i)
+            #print(i)
             next(generator)
         self.camera = tm.Camera(self.map.width, self.map.height)
         self.surf = pg.Surface((20, 15))

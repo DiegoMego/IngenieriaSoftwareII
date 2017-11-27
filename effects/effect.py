@@ -101,7 +101,7 @@ class Shoot(State):
         self.vel = vec(0, 0)
         self.vel.x = self.x * settings.MISSILE_SPEED * dt
         self.vel.y = self.y * settings.MISSILE_SPEED * dt
-        self.action(self.imagemanager.effects[self.__class__.__name__])
+        self.action(self.imagemanager.effects[self.effect.__class__.__name__][self.__class__.__name__])
 
 class Explosion(State):
     def __init__(self, effect):
@@ -118,6 +118,6 @@ class Explosion(State):
     def update(self, dt):
         self.vel = vec(0, 0)
         if not self.finish:
-            self.action(self.imagemanager.effects[self.__class__.__name__])
-        if self.current_frame == len(self.imagemanager.effects[self.__class__.__name__]) - 1:
+            self.action(self.imagemanager.effects[self.effect.__class__.__name__][self.__class__.__name__])
+        if self.current_frame == len(self.imagemanager.effects[self.effect.__class__.__name__][self.__class__.__name__]) - 1:
             self.effect.kill()

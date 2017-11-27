@@ -240,7 +240,7 @@ class Attack(MobState):
     def apply_damage(self):
         if not self.try_hit:
             self.try_hit = True
-            if hit(self.mob.hit_rate, self.game.player.defense, self.mob.level, self.game.player.level):
+            if mechs.hit(self.mob.hit_rate, self.game.player.defense, self.mob.level, self.game.player.level):
                 self.game.player.currenthealth -= self.mob.damage
                 n = 1 - self.game.player.currenthealth/self.game.player.totalhealth
                 self.game.hud.update(n, "Life")
@@ -259,7 +259,7 @@ class Attack(MobState):
             self.try_hit = False
         if self.current_frame == 10:
             self.apply_damage()
-        self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.persistence["direction"])
+        self.action(self.image_manager.mob[self.mob_class][self.__class__.__name__], self.direction)
 
 class GetHit(MobState):
     def __init__(self, mob):

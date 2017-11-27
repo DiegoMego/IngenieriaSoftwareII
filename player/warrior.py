@@ -21,7 +21,7 @@ class Warrior(playerstate.Player):
         super().update(dt)
 
     def buff(self):
-        self.clock.tick(FPS)
+        self.clock.tick(settings.FPS)
         if self.totalhealth != self.basehealth:
             self.buffs["Fire"] -= self.clock.get_time() / 1000
             if self.buffs["Fire"] <= 0:

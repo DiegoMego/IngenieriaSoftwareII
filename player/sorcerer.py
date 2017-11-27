@@ -1,6 +1,6 @@
 import pygame as pg
 from player import playerstate
-from effects import flarered
+from effects import flarered, flareblue, flarewhite
 import settings
 
 class Sorcerer(playerstate.Player):
@@ -37,6 +37,7 @@ class Lightning(playerstate.Lightning):
     def update(self, dt):
         super().update(dt)
         if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
+            flareblue.FlareBlue(self.game, self.player.pos, self.direction, self.damage)
             self.player.currentmana -= self.manacost
             n = 1 - self.game.player.currentmana/self.game.player.totalmana
             self.game.hud.update(n, "Mana")
@@ -45,6 +46,7 @@ class Smoke(playerstate.Smoke):
     def update(self, dt):
         super().update(dt)
         if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
+            flarewhite.FlareWhite(self.game, self.player.pos, self.direction, self.damage)
             self.player.currentmana -= self.manacost
             n = 1 - self.game.player.currentmana/self.game.player.totalmana
             self.game.hud.update(n, "Mana")
