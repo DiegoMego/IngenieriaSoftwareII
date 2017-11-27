@@ -627,7 +627,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"Byclops": {
+        },
+        "Byclops": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -742,7 +743,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"Defiler": {
+        },
+        "Defiler": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -857,7 +859,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"GoatmanLord": {
+        },
+        "GoatmanLord": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -914,7 +917,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"Golem": {
+        },
+        "Golem": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -971,7 +975,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"NaKrul": {
+        },
+        "NaKrul": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -1028,7 +1033,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"Overlord": {
+        },
+        "Overlord": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -1085,7 +1091,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"Reaper": {
+        },
+        "Reaper": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -1142,7 +1149,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"RhinoDemon": {
+        },
+        "RhinoDemon": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -1199,7 +1207,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"SkeletonKing": {
+        },
+        "SkeletonKing": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
@@ -1256,7 +1265,8 @@
                 "Block": 0,
                 "Level": 1
             }
-        },"Stormrider": {
+        },
+        "Stormrider": {
             "Images": {
                 "BaseSurface": [128, 128],
                 "Idle": {
