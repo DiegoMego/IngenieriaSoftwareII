@@ -34,18 +34,27 @@ class Fire(playerstate.Fire):
             self.game.hud.update(n, "Mana")
 
 class Lightning(playerstate.Lightning):
+    def __init__(self, player):
+        super().__init__(player)
+        self.damage = 100
+
     def update(self, dt):
         super().update(dt)
-        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
+        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]) - 1:
+            print("Lightning")
             flareblue.FlareBlue(self.game, self.player.pos, self.direction, self.damage)
             self.player.currentmana -= self.manacost
             n = 1 - self.game.player.currentmana/self.game.player.totalmana
             self.game.hud.update(n, "Mana")
 
 class Smoke(playerstate.Smoke):
+    def __init__(self, player):
+        super().__init__(player)
+        self.damage = 100
+
     def update(self, dt):
         super().update(dt)
-        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]):
+        if self.current_frame == len(self.image_manager.player[self.__class__.__name__][self.direction]) - 1:
             flarewhite.FlareWhite(self.game, self.player.pos, self.direction, self.damage)
             self.player.currentmana -= self.manacost
             n = 1 - self.game.player.currentmana/self.game.player.totalmana

@@ -58,11 +58,11 @@ EFFECT_RECT = pg.Rect(0, 0, 30, 30)
 PLAYER_KEY = "Player"
 PLAYER_SPEED = 200
 PLAYER_HIT_RECT = pg.Rect(0, 0, 20, 15)
-PLAYER_CLASS = "Warrior"
+PLAYER_CLASS = "Sorcerer"
 PLAYER_LETTER = "P"
 
 #Player Image Settings
-PLAYER_EQUIPMENT = "Light Armor with Sword & Shield"
+PLAYER_EQUIPMENT = "Light Armor with Staff"
 PLAYER_SPRITESHEET_GENERATOR = "%s in %s.png"
 PLAYER_FOLDER = path.join(IMAGE_FOLDER, "Class")
 PLAYER_CLASS_FOLDER = path.join(PLAYER_FOLDER, PLAYER_CLASS)

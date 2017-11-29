@@ -22,7 +22,7 @@ class ImageManager:
         self.bag = pg.transform.scale(spritesheet, (int(WIDTH * 0.01), int(HEIGHT / 64)))
 
     def load_effect_images(self):
-        spritesheet = pg.image.load(path.join(EFFECT_FOLDER, "Flarered.png")).convert()
+        spritesheet = pg.image.load(path.join(EFFECT_FOLDER, "Flares.png")).convert()
         data = GAMEDATA[EFFECT_KEY]
         self.effects = {}
         for effectkey, effect in data.items():
@@ -34,7 +34,7 @@ class ImageManager:
                 for i in range(value["n"]):
                     self.effects[effectkey][key].append(self.get_image(spritesheet, x, y, value["w"], value["h"]))
                     self.effects[effectkey][key][i].set_colorkey(GREY)
-                    x += 129
+                    x += value["w"] + 1
 
 
     def load_hud_images(self):
