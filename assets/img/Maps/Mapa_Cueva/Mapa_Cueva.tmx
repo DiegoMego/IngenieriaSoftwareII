@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="540">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="40" tileheight="40" nextobjectid="808">
  <tileset firstgid="1" source="T_Cave.tsx"/>
  <tileset firstgid="1921" source="O_Cave2.tsx"/>
  <tileset firstgid="2617" source="O_Cave.tsx"/>
- <layer name="Bottom 1" width="50" height="50">
+ <layer name="B_1" width="50" height="50">
   <data encoding="csv">
 1133,1134,1135,1136,1253,1254,1255,1256,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1253,1254,1255,1256,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1257,1258,
 1153,1154,1155,1156,1273,1274,1275,1276,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1273,1274,1275,1276,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1277,1278,
@@ -57,7 +57,7 @@
 1153,1154,1155,1156,1109,1110,1111,1112,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1153,1154,1155,1156,1277,1278
 </data>
  </layer>
- <layer name="Bottom 2" width="50" height="50">
+ <layer name="B_2" width="50" height="50">
   <data encoding="csv">
 1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,1277,1278,1279,1280,
 1259,1260,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,1133,1134,1135,1136,
@@ -155,17 +155,17 @@
 0,0,2823,2824,0,0,2807,2808,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,0,0,0,0,0,2257,2258,2259,2614,2615,2616,0,0,
 0,0,2839,2840,0,0,2823,2824,0,0,0,0,0,0,2498,2499,2500,0,2266,2267,2268,0,0,0,0,0,0,0,0,0,0,0,0,2614,2615,2616,0,0,0,0,0,0,2373,2374,2375,0,0,0,0,0,
 0,0,0,0,0,0,2839,2840,0,0,0,0,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2489,2490,2491,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,2266,2267,2268,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2605,2606,2607,0,0,0,0,0,
+0,2062,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,2266,2267,2268,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2605,2606,2607,0,0,0,0,0,
 0,0,0,0,0,0,0,0,2807,2808,0,0,0,0,0,0,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,0,0,0,0,0,0,0,2268,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,2823,2824,0,0,0,0,0,0,2807,2808,0,0,0,0,2498,2499,2500,0,2266,2267,2268,0,0,0,0,0,0,2266,2267,2268,0,0,0,0,2257,2258,2259,0,0,0,0,0,
-0,0,0,0,0,0,0,0,2839,2840,0,0,0,0,0,0,2823,2824,0,0,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,2382,2383,2384,0,0,0,0,2373,2374,2375,0,0,0,0,0,
+0,0,0,0,2257,0,0,0,0,0,0,0,0,0,0,0,2823,2824,0,0,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,2382,2383,2384,0,0,0,0,2373,2374,2375,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2839,2840,0,0,0,0,0,0,0,0,2498,2499,2500,0,0,0,0,0,0,2498,2499,2500,0,0,0,0,2489,2490,2491,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2614,2615,2616,0,0,0,0,0,0,2614,2615,2616,0,0,0,0,2605,2606,2607,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2526,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="M_1.5" width="50" height="50">
+ <layer name="M_2" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -212,14 +212,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,2266,2267,2268,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2614,2615,2616,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,0,0,0,0,0,0,0,2268,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,2266,2267,2268,0,0,0,0,0,0,2266,2267,2268,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,2064,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,2266,2267,2268,0,0,0,0,0,0,2266,2267,2268,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2614,2615,2616,0,2382,2383,2384,0,0,0,0,0,0,2382,2383,2384,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2498,2499,2500,0,0,0,0,0,0,2498,2499,2500,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2614,2615,2616,0,0,0,0,0,0,2614,2615,2616,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="M_2" width="50" height="50">
+ <layer name="M_3" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2257,2258,2259,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -273,7 +273,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="M_2.5" width="50" height="50">
+ <layer name="M_4" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -327,7 +327,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="M_3" width="50" height="50">
+ <layer name="M_5" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -381,7 +381,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="M_3.5" width="50" height="50">
+ <layer name="M_6" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -435,7 +435,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="M_4" width="50" height="50">
+ <layer name="M_7" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -491,514 +491,782 @@
  </layer>
  <objectgroup name="Objetos">
   <object id="3" name="Player" x="560" y="280" width="40" height="40"/>
-  <object id="7" name="Obstacle" x="480" y="840" width="40" height="40"/>
-  <object id="8" name="Mob" x="280" y="920" width="40" height="40"/>
-  <object id="9" name="Mob" x="560" y="1000" width="40" height="40"/>
   <object id="10" name="Mob" x="1000" y="1200" width="40" height="40"/>
-  <object id="12" name="Mob" x="1280" y="680" width="40" height="40"/>
-  <object id="14" name="Mob" x="1560" y="400" width="40" height="40"/>
-  <object id="16" name="Mob" x="1400" y="1440" width="40" height="40"/>
-  <object id="18" name="Mob" x="960" y="1560" width="40" height="40"/>
-  <object id="19" name="Mob" x="400" y="1040" width="40" height="40"/>
-  <object id="21" name="Obstacle" x="320" y="720" width="40" height="40"/>
-  <object id="22" name="Obstacle" x="280" y="720" width="40" height="40"/>
-  <object id="23" name="Obstacle" x="400" y="760" width="40" height="40"/>
-  <object id="24" name="Obstacle" x="440" y="800" width="40" height="40"/>
-  <object id="25" name="Obstacle" x="400" y="800" width="40" height="40"/>
-  <object id="26" name="Obstacle" x="960" y="320" width="40" height="40"/>
-  <object id="27" name="Obstacle" x="1000" y="320" width="40" height="40"/>
-  <object id="28" name="Obstacle" x="1040" y="280" width="40" height="40"/>
-  <object id="29" name="Obstacle" x="1080" y="280" width="40" height="40"/>
-  <object id="30" name="Obstacle" x="1080" y="240" width="40" height="40"/>
-  <object id="31" name="Obstacle" x="1120" y="240" width="40" height="40"/>
-  <object id="32" name="Obstacle" x="1160" y="240" width="40" height="40"/>
-  <object id="33" name="Obstacle" x="1160" y="200" width="40" height="40"/>
-  <object id="34" name="Obstacle" x="1200" y="200" width="40" height="40"/>
-  <object id="35" name="Obstacle" x="1240" y="200" width="40" height="40"/>
-  <object id="36" name="Obstacle" x="1280" y="160" width="40" height="40"/>
-  <object id="37" name="Obstacle" x="1320" y="160" width="40" height="40"/>
-  <object id="38" name="Obstacle" x="1360" y="120" width="40" height="40"/>
-  <object id="39" name="Obstacle" x="1400" y="160" width="40" height="40"/>
-  <object id="40" name="Obstacle" x="1440" y="160" width="40" height="40"/>
-  <object id="41" name="Obstacle" x="1480" y="160" width="40" height="40"/>
-  <object id="42" name="Obstacle" x="1520" y="200" width="40" height="40"/>
-  <object id="43" name="Obstacle" x="1480" y="200" width="40" height="40"/>
-  <object id="44" name="Obstacle" x="1640" y="240" width="40" height="40"/>
-  <object id="45" name="Obstacle" x="1600" y="240" width="40" height="40"/>
-  <object id="46" name="Obstacle" x="1560" y="240" width="40" height="40"/>
-  <object id="47" name="Obstacle" x="1560" y="200" width="40" height="40"/>
-  <object id="48" name="Obstacle" x="1680" y="280" width="40" height="40"/>
-  <object id="49" name="Obstacle" x="1720" y="320" width="40" height="40"/>
-  <object id="50" name="Obstacle" x="1720" y="280" width="40" height="40"/>
-  <object id="51" name="Obstacle" x="1640" y="280" width="40" height="40"/>
-  <object id="52" name="Obstacle" x="1720" y="360" width="40" height="40"/>
-  <object id="53" name="Obstacle" x="1720" y="400" width="40" height="40"/>
-  <object id="54" name="Obstacle" x="1760" y="320" width="40" height="40"/>
-  <object id="55" name="Obstacle" x="1720" y="440" width="40" height="40"/>
-  <object id="56" name="Obstacle" x="1720" y="480" width="40" height="40"/>
-  <object id="57" name="Obstacle" x="1760" y="520" width="40" height="40"/>
-  <object id="58" name="Obstacle" x="1760" y="480" width="40" height="40"/>
-  <object id="59" name="Obstacle" x="1800" y="520" width="40" height="40"/>
-  <object id="60" name="Obstacle" x="1800" y="560" width="40" height="40"/>
-  <object id="61" name="Obstacle" x="1840" y="560" width="40" height="40"/>
-  <object id="62" name="Obstacle" x="1840" y="600" width="40" height="40"/>
-  <object id="63" name="Obstacle" x="1840" y="640" width="40" height="40"/>
-  <object id="64" name="Obstacle" x="1840" y="680" width="40" height="40"/>
-  <object id="65" name="Obstacle" x="1840" y="720" width="40" height="40"/>
-  <object id="66" name="Obstacle" x="1800" y="760" width="40" height="40"/>
-  <object id="67" name="Obstacle" x="1760" y="760" width="40" height="40"/>
-  <object id="68" name="Obstacle" x="1720" y="800" width="40" height="40"/>
-  <object id="69" name="Obstacle" x="1680" y="800" width="40" height="40"/>
-  <object id="70" name="Obstacle" x="1640" y="840" width="40" height="40"/>
-  <object id="71" name="Obstacle" x="1600" y="840" width="40" height="40"/>
-  <object id="72" name="Obstacle" x="1600" y="880" width="40" height="40"/>
-  <object id="73" name="Obstacle" x="1560" y="880" width="40" height="40"/>
-  <object id="74" name="Obstacle" x="1560" y="920" width="40" height="40"/>
-  <object id="75" name="Obstacle" x="1600" y="920" width="40" height="40"/>
-  <object id="76" name="Obstacle" x="1640" y="880" width="40" height="40"/>
-  <object id="77" name="Obstacle" x="1600" y="960" width="40" height="40"/>
-  <object id="78" name="Obstacle" x="1640" y="960" width="40" height="40"/>
-  <object id="79" name="Obstacle" x="1680" y="960" width="40" height="40"/>
-  <object id="80" name="Obstacle" x="1680" y="1000" width="40" height="40"/>
-  <object id="81" name="Obstacle" x="1720" y="1000" width="40" height="40"/>
-  <object id="82" name="Obstacle" x="1760" y="1000" width="40" height="40"/>
-  <object id="83" name="Obstacle" x="1760" y="1040" width="40" height="40"/>
-  <object id="84" name="Obstacle" x="1800" y="1040" width="40" height="40"/>
-  <object id="85" name="Obstacle" x="1800" y="1080" width="40" height="40"/>
-  <object id="86" name="Obstacle" x="1760" y="1080" width="40" height="40"/>
-  <object id="87" name="Obstacle" x="1720" y="1120" width="40" height="40"/>
-  <object id="88" name="Obstacle" x="1680" y="1120" width="40" height="40"/>
-  <object id="89" name="Obstacle" x="1640" y="1120" width="40" height="40"/>
-  <object id="90" name="Obstacle" x="1640" y="1160" width="40" height="40"/>
-  <object id="91" name="Obstacle" x="1640" y="1200" width="40" height="40"/>
-  <object id="92" name="Obstacle" x="1680" y="1200" width="40" height="40"/>
-  <object id="93" name="Obstacle" x="1720" y="1240" width="40" height="40"/>
-  <object id="94" name="Obstacle" x="1680" y="1240" width="40" height="40"/>
-  <object id="95" name="Obstacle" x="1760" y="1280" width="40" height="40"/>
-  <object id="96" name="Obstacle" x="1800" y="1280" width="40" height="40"/>
-  <object id="97" name="Obstacle" x="1760" y="1320" width="40" height="40"/>
-  <object id="98" name="Obstacle" x="1720" y="1360" width="40" height="40"/>
-  <object id="99" name="Obstacle" x="1680" y="1360" width="40" height="40"/>
-  <object id="100" name="Obstacle" x="1640" y="1400" width="40" height="40"/>
-  <object id="101" name="Obstacle" x="1640" y="1440" width="40" height="40"/>
-  <object id="102" name="Obstacle" x="1680" y="1440" width="40" height="40"/>
-  <object id="103" name="Obstacle" x="1680" y="1480" width="40" height="40"/>
-  <object id="104" name="Obstacle" x="1720" y="1480" width="40" height="40"/>
-  <object id="105" name="Obstacle" x="1760" y="1520" width="40" height="40"/>
-  <object id="106" name="Obstacle" x="1760" y="1560" width="40" height="40"/>
-  <object id="107" name="Obstacle" x="1720" y="1560" width="40" height="40"/>
-  <object id="108" name="Obstacle" x="1680" y="1600" width="40" height="40"/>
-  <object id="109" name="Obstacle" x="1640" y="1640" width="40" height="40"/>
-  <object id="110" name="Obstacle" x="1640" y="1680" width="40" height="40"/>
-  <object id="111" name="Obstacle" x="1680" y="1680" width="40" height="40"/>
-  <object id="112" name="Obstacle" x="1680" y="1720" width="40" height="40"/>
-  <object id="113" name="Obstacle" x="1720" y="1720" width="40" height="40"/>
-  <object id="114" name="Obstacle" x="1760" y="1760" width="40" height="40"/>
-  <object id="115" name="Obstacle" x="1720" y="1800" width="40" height="40"/>
-  <object id="116" name="Obstacle" x="1560" y="1840" width="40" height="40"/>
-  <object id="117" name="Obstacle" x="1680" y="1800" width="40" height="40"/>
-  <object id="118" name="Obstacle" x="1640" y="1840" width="40" height="40"/>
-  <object id="119" name="Obstacle" x="1600" y="1840" width="40" height="40"/>
-  <object id="120" name="Obstacle" x="1520" y="1840" width="40" height="40"/>
-  <object id="121" name="Obstacle" x="1480" y="1800" width="40" height="40"/>
-  <object id="122" name="Obstacle" x="1440" y="1800" width="40" height="40"/>
-  <object id="123" name="Obstacle" x="1400" y="1760" width="40" height="40"/>
-  <object id="124" name="Obstacle" x="1360" y="1800" width="40" height="40"/>
-  <object id="125" name="Obstacle" x="1320" y="1800" width="40" height="40"/>
-  <object id="126" name="Obstacle" x="1280" y="1840" width="40" height="40"/>
-  <object id="127" name="Obstacle" x="1240" y="1840" width="40" height="40"/>
-  <object id="128" name="Obstacle" x="1200" y="1840" width="40" height="40"/>
-  <object id="129" name="Obstacle" x="1160" y="1840" width="40" height="40"/>
-  <object id="130" name="Obstacle" x="1120" y="1800" width="40" height="40"/>
-  <object id="131" name="Obstacle" x="1000" y="1760" width="40" height="40"/>
-  <object id="132" name="Obstacle" x="1040" y="1760" width="40" height="40"/>
-  <object id="133" name="Obstacle" x="1080" y="1800" width="40" height="40"/>
-  <object id="134" name="Obstacle" x="960" y="1720" width="40" height="40"/>
-  <object id="135" name="Obstacle" x="960" y="1760" width="40" height="40"/>
-  <object id="136" name="Obstacle" x="920" y="1720" width="40" height="40"/>
-  <object id="137" name="Obstacle" x="880" y="1680" width="40" height="40"/>
-  <object id="138" name="Obstacle" x="840" y="1680" width="40" height="40"/>
-  <object id="139" name="Obstacle" x="800" y="1640" width="40" height="40"/>
-  <object id="140" name="Obstacle" x="760" y="1640" width="40" height="40"/>
-  <object id="141" name="Obstacle" x="680" y="1600" width="40" height="40"/>
-  <object id="142" name="Obstacle" x="720" y="1640" width="40" height="40"/>
-  <object id="143" name="Obstacle" x="720" y="1600" width="40" height="40"/>
-  <object id="144" name="Obstacle" x="600" y="1560" width="40" height="40"/>
-  <object id="145" name="Obstacle" x="640" y="1560" width="40" height="40"/>
-  <object id="146" name="Obstacle" x="640" y="1600" width="40" height="40"/>
-  <object id="147" name="Obstacle" x="560" y="1520" width="40" height="40"/>
-  <object id="148" name="Obstacle" x="560" y="1560" width="40" height="40"/>
-  <object id="149" name="Obstacle" x="520" y="1520" width="40" height="40"/>
-  <object id="150" name="Obstacle" x="480" y="1480" width="40" height="40"/>
-  <object id="151" name="Obstacle" x="240" y="1400" width="40" height="40"/>
-  <object id="152" name="Obstacle" x="400" y="1480" width="40" height="40"/>
-  <object id="153" name="Obstacle" x="320" y="1440" width="40" height="40"/>
-  <object id="154" name="Obstacle" x="280" y="1400" width="40" height="40"/>
-  <object id="155" name="Obstacle" x="320" y="1400" width="40" height="40"/>
-  <object id="156" name="Obstacle" x="400" y="1440" width="40" height="40"/>
-  <object id="157" name="Obstacle" x="360" y="1440" width="40" height="40"/>
-  <object id="158" name="Obstacle" x="440" y="1480" width="40" height="40"/>
-  <object id="159" name="Obstacle" x="240" y="1360" width="40" height="40"/>
-  <object id="160" name="Obstacle" x="160" y="1360" width="40" height="40"/>
-  <object id="161" name="Obstacle" x="160" y="1320" width="40" height="40"/>
-  <object id="162" name="Obstacle" x="200" y="1280" width="40" height="40"/>
-  <object id="163" name="Obstacle" x="160" y="1280" width="40" height="40"/>
-  <object id="164" name="Obstacle" x="160" y="1240" width="40" height="40"/>
-  <object id="165" name="Obstacle" x="200" y="1360" width="40" height="40"/>
-  <object id="166" name="Obstacle" x="120" y="1240" width="40" height="40"/>
-  <object id="167" name="Obstacle" x="80" y="1200" width="40" height="40"/>
-  <object id="168" name="Obstacle" x="120" y="1200" width="40" height="40"/>
-  <object id="169" name="Obstacle" x="160" y="1200" width="40" height="40"/>
-  <object id="170" name="Obstacle" x="160" y="1160" width="40" height="40"/>
-  <object id="171" name="Obstacle" x="160" y="1120" width="40" height="40"/>
-  <object id="172" name="Obstacle" x="160" y="1080" width="40" height="40"/>
-  <object id="173" name="Obstacle" x="120" y="1080" width="40" height="40"/>
-  <object id="174" name="Obstacle" x="80" y="1080" width="40" height="40"/>
-  <object id="175" name="Obstacle" x="40" y="1080" width="40" height="40"/>
-  <object id="176" name="Obstacle" x="160" y="1040" width="40" height="40"/>
-  <object id="177" name="Obstacle" x="120" y="1000" width="40" height="40"/>
-  <object id="178" name="Obstacle" x="160" y="960" width="40" height="40"/>
-  <object id="179" name="Obstacle" x="120" y="920" width="40" height="40"/>
-  <object id="180" name="Obstacle" x="160" y="880" width="40" height="40"/>
-  <object id="181" name="Obstacle" x="120" y="840" width="40" height="40"/>
-  <object id="182" name="Obstacle" x="120" y="800" width="40" height="40"/>
-  <object id="183" name="Obstacle" x="80" y="840" width="40" height="40"/>
-  <object id="184" name="Obstacle" x="200" y="680" width="40" height="40"/>
-  <object id="185" name="Obstacle" x="80" y="800" width="40" height="40"/>
-  <object id="186" name="Obstacle" x="160" y="640" width="40" height="40"/>
-  <object id="187" name="Obstacle" x="160" y="720" width="40" height="40"/>
-  <object id="188" name="Obstacle" x="120" y="720" width="40" height="40"/>
-  <object id="189" name="Obstacle" x="120" y="760" width="40" height="40"/>
-  <object id="190" name="Obstacle" x="160" y="680" width="40" height="40"/>
-  <object id="191" name="Obstacle" x="160" y="760" width="40" height="40"/>
-  <object id="192" name="Obstacle" x="200" y="640" width="40" height="40"/>
-  <object id="193" name="Obstacle" x="360" y="760" width="40" height="40"/>
-  <object id="194" name="Obstacle" x="240" y="680" width="40" height="40"/>
-  <object id="195" name="Obstacle" x="240" y="720" width="40" height="40"/>
-  <object id="196" name="Obstacle" x="480" y="800" width="40" height="40"/>
-  <object id="197" name="Obstacle" x="520" y="840" width="40" height="40"/>
-  <object id="198" name="Obstacle" x="600" y="880" width="40" height="40"/>
-  <object id="199" name="Obstacle" x="680" y="920" width="40" height="40"/>
-  <object id="200" name="Obstacle" x="760" y="960" width="40" height="40"/>
-  <object id="201" name="Obstacle" x="840" y="1000" width="40" height="40"/>
-  <object id="202" name="Obstacle" x="560" y="880" width="40" height="40"/>
-  <object id="203" name="Obstacle" x="640" y="920" width="40" height="40"/>
-  <object id="204" name="Obstacle" x="720" y="960" width="40" height="40"/>
-  <object id="205" name="Obstacle" x="800" y="1000" width="40" height="40"/>
-  <object id="206" name="Obstacle" x="840" y="1080" width="40" height="40"/>
-  <object id="207" name="Obstacle" x="880" y="1040" width="40" height="40"/>
-  <object id="208" name="Obstacle" x="800" y="1120" width="40" height="40"/>
-  <object id="209" name="Obstacle" x="760" y="1160" width="40" height="40"/>
-  <object id="210" name="Obstacle" x="720" y="1160" width="40" height="40"/>
-  <object id="211" name="Obstacle" x="760" y="1120" width="40" height="40"/>
-  <object id="212" name="Obstacle" x="320" y="1160" width="40" height="40"/>
-  <object id="213" name="Obstacle" x="320" y="1200" width="40" height="40"/>
-  <object id="214" name="Obstacle" x="320" y="1240" width="40" height="40"/>
-  <object id="215" name="Obstacle" x="360" y="1240" width="40" height="40"/>
-  <object id="216" name="Obstacle" x="360" y="1200" width="40" height="40"/>
-  <object id="217" name="Obstacle" x="400" y="1200" width="40" height="40"/>
-  <object id="218" name="Obstacle" x="360" y="1160" width="40" height="40"/>
-  <object id="219" name="Obstacle" x="400" y="1160" width="40" height="40"/>
-  <object id="220" name="Obstacle" x="360" y="1120" width="40" height="40"/>
-  <object id="221" name="Obstacle" x="400" y="1120" width="40" height="40"/>
-  <object id="222" name="Obstacle" x="440" y="1120" width="40" height="40"/>
-  <object id="223" name="Obstacle" x="440" y="1160" width="40" height="40"/>
-  <object id="224" name="Obstacle" x="440" y="1200" width="40" height="40"/>
-  <object id="225" name="Obstacle" x="480" y="1160" width="40" height="40"/>
-  <object id="226" name="Obstacle" x="480" y="1200" width="40" height="40"/>
-  <object id="227" name="Obstacle" x="440" y="1240" width="40" height="40"/>
-  <object id="228" name="Obstacle" x="480" y="1240" width="40" height="40"/>
-  <object id="229" name="Obstacle" x="520" y="1240" width="40" height="40"/>
-  <object id="230" name="Obstacle" x="520" y="1280" width="40" height="40"/>
-  <object id="231" name="Obstacle" x="560" y="1280" width="40" height="40"/>
-  <object id="232" name="Obstacle" x="600" y="1280" width="40" height="40"/>
-  <object id="233" name="Obstacle" x="560" y="1240" width="40" height="40"/>
-  <object id="234" name="Obstacle" x="640" y="1200" width="40" height="40"/>
-  <object id="235" name="Obstacle" x="720" y="1240" width="40" height="40"/>
-  <object id="236" name="Obstacle" x="640" y="1240" width="40" height="40"/>
-  <object id="237" name="Obstacle" x="760" y="1280" width="40" height="40"/>
-  <object id="238" name="Obstacle" x="800" y="1280" width="40" height="40"/>
-  <object id="239" name="Obstacle" x="800" y="1320" width="40" height="40"/>
-  <object id="240" name="Obstacle" x="840" y="1320" width="40" height="40"/>
-  <object id="241" name="Obstacle" x="880" y="1360" width="40" height="40"/>
-  <object id="242" name="Obstacle" x="520" y="1200" width="40" height="40"/>
-  <object id="243" name="Obstacle" x="560" y="1200" width="40" height="40"/>
-  <object id="244" name="Obstacle" x="640" y="1280" width="40" height="40"/>
-  <object id="245" name="Obstacle" x="600" y="1240" width="40" height="40"/>
-  <object id="246" name="Obstacle" x="600" y="1200" width="40" height="40"/>
-  <object id="247" name="Obstacle" x="680" y="1200" width="40" height="40"/>
-  <object id="248" name="Obstacle" x="680" y="1240" width="40" height="40"/>
-  <object id="249" name="Obstacle" x="680" y="1160" width="40" height="40"/>
-  <object id="250" name="Obstacle" x="680" y="1280" width="40" height="40"/>
-  <object id="251" name="Obstacle" x="760" y="1240" width="40" height="40"/>
-  <object id="252" name="Obstacle" x="880" y="1320" width="40" height="40"/>
-  <object id="253" name="Obstacle" x="800" y="1240" width="40" height="40"/>
-  <object id="254" name="Obstacle" x="880" y="1280" width="40" height="40"/>
-  <object id="255" name="Obstacle" x="920" y="1280" width="40" height="40"/>
-  <object id="256" name="Obstacle" x="920" y="1320" width="40" height="40"/>
-  <object id="257" name="Obstacle" x="920" y="1360" width="40" height="40"/>
-  <object id="258" name="Obstacle" x="840" y="1280" width="40" height="40"/>
-  <object id="259" name="Obstacle" x="840" y="1240" width="40" height="40"/>
-  <object id="260" name="Obstacle" x="720" y="1200" width="40" height="40"/>
-  <object id="261" name="Obstacle" x="760" y="1200" width="40" height="40"/>
-  <object id="262" name="Obstacle" x="800" y="1200" width="40" height="40"/>
-  <object id="263" name="Obstacle" x="800" y="1160" width="40" height="40"/>
-  <object id="264" name="Obstacle" x="840" y="1160" width="40" height="40"/>
-  <object id="265" name="Obstacle" x="880" y="1160" width="40" height="40"/>
-  <object id="266" name="Obstacle" x="880" y="1120" width="40" height="40"/>
-  <object id="267" name="Obstacle" x="960" y="1120" width="40" height="40"/>
-  <object id="268" name="Obstacle" x="920" y="1120" width="40" height="40"/>
-  <object id="269" name="Obstacle" x="960" y="1080" width="40" height="40"/>
-  <object id="270" name="Obstacle" x="1000" y="1080" width="40" height="40"/>
-  <object id="271" name="Obstacle" x="1040" y="1080" width="40" height="40"/>
-  <object id="272" name="Obstacle" x="1040" y="1120" width="40" height="40"/>
-  <object id="273" name="Obstacle" x="1080" y="1120" width="40" height="40"/>
-  <object id="274" name="Obstacle" x="1120" y="1120" width="40" height="40"/>
-  <object id="275" name="Obstacle" x="1120" y="1160" width="40" height="40"/>
-  <object id="276" name="Obstacle" x="1160" y="1160" width="40" height="40"/>
-  <object id="277" name="Obstacle" x="1200" y="1160" width="40" height="40"/>
-  <object id="278" name="Obstacle" x="1200" y="1200" width="40" height="40"/>
-  <object id="279" name="Obstacle" x="1240" y="1200" width="40" height="40"/>
-  <object id="280" name="Obstacle" x="1240" y="1160" width="40" height="40"/>
-  <object id="281" name="Obstacle" x="1280" y="1240" width="40" height="40"/>
-  <object id="282" name="Obstacle" x="920" y="1040" width="40" height="40"/>
-  <object id="283" name="Obstacle" x="1000" y="1000" width="40" height="40"/>
-  <object id="284" name="Obstacle" x="1000" y="1040" width="40" height="40"/>
-  <object id="285" name="Obstacle" x="1040" y="1040" width="40" height="40"/>
-  <object id="286" name="Obstacle" x="1080" y="1040" width="40" height="40"/>
-  <object id="287" name="Obstacle" x="1120" y="1080" width="40" height="40"/>
-  <object id="288" name="Obstacle" x="1080" y="1080" width="40" height="40"/>
-  <object id="289" name="Obstacle" x="1200" y="1120" width="40" height="40"/>
-  <object id="290" name="Obstacle" x="1160" y="1120" width="40" height="40"/>
-  <object id="291" name="Obstacle" x="1440" y="1240" width="40" height="40"/>
-  <object id="292" name="Obstacle" x="1440" y="1280" width="40" height="40"/>
-  <object id="293" name="Obstacle" x="1400" y="1240" width="40" height="40"/>
-  <object id="294" name="Obstacle" x="1400" y="1280" width="40" height="40"/>
-  <object id="295" name="Obstacle" x="1400" y="1280" width="40" height="40"/>
-  <object id="296" name="Obstacle" x="1400" y="1320" width="40" height="40"/>
-  <object id="297" name="Obstacle" x="1360" y="1280" width="40" height="40"/>
-  <object id="298" name="Obstacle" x="1360" y="1320" width="40" height="40"/>
-  <object id="299" name="Obstacle" x="1320" y="1280" width="40" height="40"/>
-  <object id="300" name="Obstacle" x="1320" y="1320" width="40" height="40"/>
-  <object id="301" name="Obstacle" x="1280" y="1320" width="40" height="40"/>
-  <object id="302" name="Obstacle" x="1280" y="1360" width="40" height="40"/>
-  <object id="303" name="Obstacle" x="1240" y="1320" width="40" height="40"/>
-  <object id="304" name="Obstacle" x="1240" y="1360" width="40" height="40"/>
-  <object id="305" name="Obstacle" x="1200" y="1360" width="40" height="40"/>
-  <object id="306" name="Obstacle" x="1200" y="1400" width="40" height="40"/>
-  <object id="307" name="Obstacle" x="1160" y="1360" width="40" height="40"/>
-  <object id="308" name="Obstacle" x="1160" y="1400" width="40" height="40"/>
-  <object id="309" name="Obstacle" x="1120" y="1360" width="40" height="40"/>
-  <object id="310" name="Obstacle" x="1120" y="1400" width="40" height="40"/>
-  <object id="311" name="Obstacle" x="1080" y="1400" width="40" height="40"/>
-  <object id="312" name="Obstacle" x="1080" y="1440" width="40" height="40"/>
-  <object id="313" name="Obstacle" x="1120" y="1440" width="40" height="40"/>
-  <object id="314" name="Obstacle" x="1120" y="1480" width="40" height="40"/>
-  <object id="315" name="Obstacle" x="1160" y="1480" width="40" height="40"/>
-  <object id="316" name="Obstacle" x="1200" y="1520" width="40" height="40"/>
-  <object id="317" name="Obstacle" x="1240" y="1520" width="40" height="40"/>
-  <object id="318" name="Obstacle" x="1280" y="1520" width="40" height="40"/>
-  <object id="319" name="Obstacle" x="1280" y="1560" width="40" height="40"/>
-  <object id="320" name="Obstacle" x="1320" y="1560" width="40" height="40"/>
-  <object id="321" name="Obstacle" x="1280" y="1600" width="40" height="40"/>
-  <object id="322" name="Obstacle" x="1280" y="1640" width="40" height="40"/>
-  <object id="323" name="Obstacle" x="1280" y="1680" width="40" height="40"/>
-  <object id="324" name="Obstacle" x="1360" y="1640" width="40" height="40"/>
-  <object id="325" name="Obstacle" x="1320" y="1680" width="40" height="40"/>
-  <object id="326" name="Obstacle" x="1400" y="1640" width="40" height="40"/>
-  <object id="327" name="Obstacle" x="1440" y="1600" width="40" height="40"/>
-  <object id="328" name="Obstacle" x="1280" y="1200" width="40" height="40"/>
-  <object id="329" name="Obstacle" x="1320" y="1200" width="40" height="40"/>
-  <object id="330" name="Obstacle" x="1320" y="1240" width="40" height="40"/>
-  <object id="331" name="Obstacle" x="1360" y="1240" width="40" height="40"/>
-  <object id="332" name="Obstacle" x="1360" y="1200" width="40" height="40"/>
-  <object id="333" name="Obstacle" x="1400" y="1200" width="40" height="40"/>
-  <object id="334" name="Obstacle" x="1280" y="1160" width="40" height="40"/>
-  <object id="335" name="Obstacle" x="1320" y="1160" width="40" height="40"/>
-  <object id="336" name="Obstacle" x="1240" y="1120" width="40" height="40"/>
-  <object id="337" name="Obstacle" x="1160" y="1080" width="40" height="40"/>
-  <object id="338" name="Obstacle" x="1080" y="1000" width="40" height="40"/>
-  <object id="339" name="Obstacle" x="1080" y="960" width="40" height="40"/>
-  <object id="340" name="Obstacle" x="1040" y="1000" width="40" height="40"/>
-  <object id="341" name="Obstacle" x="1120" y="960" width="40" height="40"/>
-  <object id="342" name="Obstacle" x="1160" y="960" width="40" height="40"/>
-  <object id="343" name="Obstacle" x="1120" y="880" width="40" height="40"/>
-  <object id="344" name="Obstacle" x="1240" y="920" width="40" height="40"/>
-  <object id="345" name="Obstacle" x="1200" y="920" width="40" height="40"/>
-  <object id="346" name="Obstacle" x="1240" y="840" width="40" height="40"/>
-  <object id="347" name="Obstacle" x="1360" y="840" width="40" height="40"/>
-  <object id="348" name="Obstacle" x="1320" y="840" width="40" height="40"/>
-  <object id="349" name="Obstacle" x="1440" y="800" width="40" height="40"/>
-  <object id="350" name="Obstacle" x="1480" y="760" width="40" height="40"/>
-  <object id="351" name="Obstacle" x="1520" y="760" width="40" height="40"/>
-  <object id="352" name="Obstacle" x="1560" y="720" width="40" height="40"/>
-  <object id="353" name="Obstacle" x="1640" y="680" width="40" height="40"/>
-  <object id="354" name="Obstacle" x="1600" y="720" width="40" height="40"/>
-  <object id="355" name="Obstacle" x="1680" y="680" width="40" height="40"/>
-  <object id="356" name="Obstacle" x="1680" y="640" width="40" height="40"/>
-  <object id="357" name="Obstacle" x="1680" y="600" width="40" height="40"/>
-  <object id="358" name="Obstacle" x="1640" y="639" width="40" height="40"/>
-  <object id="359" name="Obstacle" x="1640" y="560" width="40" height="40"/>
-  <object id="360" name="Obstacle" x="1640" y="600" width="40" height="40"/>
-  <object id="361" name="Obstacle" x="1600" y="560" width="40" height="40"/>
-  <object id="362" name="Obstacle" x="1600" y="600" width="40" height="40"/>
-  <object id="363" name="Obstacle" x="1480" y="520" width="40" height="40"/>
-  <object id="364" name="Obstacle" x="1520" y="520" width="40" height="40"/>
-  <object id="365" name="Obstacle" x="1600" y="640" width="40" height="40"/>
-  <object id="366" name="Obstacle" x="1560" y="560" width="40" height="40"/>
-  <object id="374" name="Obstacle" x="1200" y="1440" width="40" height="40"/>
-  <object id="375" name="Obstacle" x="1240" y="1440" width="40" height="40"/>
-  <object id="376" name="Obstacle" x="1320" y="1480" width="40" height="40"/>
-  <object id="377" name="Obstacle" x="1280" y="1480" width="40" height="40"/>
-  <object id="378" name="Obstacle" x="1360" y="1520" width="40" height="40"/>
-  <object id="379" name="Obstacle" x="1400" y="1520" width="40" height="40"/>
-  <object id="380" name="Obstacle" x="1440" y="1560" width="40" height="40"/>
-  <object id="381" name="Obstacle" x="1440" y="1520" width="40" height="40"/>
-  <object id="382" name="Obstacle" x="920" y="320" width="40" height="40"/>
-  <object id="383" name="Obstacle" x="880" y="280" width="40" height="40"/>
-  <object id="384" name="Obstacle" x="800" y="240" width="40" height="40"/>
-  <object id="385" name="Obstacle" x="840" y="280" width="40" height="40"/>
-  <object id="386" name="Obstacle" x="764" y="216.667" width="40" height="40"/>
-  <object id="387" name="Obstacle" x="722.667" y="200.667" width="40" height="40"/>
-  <object id="388" name="Obstacle" x="685.333" y="176.667" width="40" height="40"/>
-  <object id="389" name="Obstacle" x="640" y="160" width="40" height="40"/>
-  <object id="390" name="Obstacle" x="600.667" y="170" width="40" height="40"/>
-  <object id="391" name="Obstacle" x="562.667" y="192.667" width="40" height="40"/>
-  <object id="392" name="Obstacle" x="522.667" y="198.667" width="40" height="40"/>
-  <object id="393" name="Obstacle" x="476.667" y="232.667" width="40" height="40"/>
-  <object id="394" name="Obstacle" x="508.667" y="218.667" width="40" height="40"/>
-  <object id="395" name="Obstacle" x="440" y="240" width="40" height="40"/>
-  <object id="396" name="Obstacle" x="423.333" y="260" width="40" height="40"/>
-  <object id="397" name="Obstacle" x="400" y="280" width="40" height="40"/>
-  <object id="398" name="Obstacle" x="360" y="280" width="40" height="40"/>
-  <object id="399" name="Obstacle" x="321.333" y="318.667" width="40" height="40"/>
-  <object id="400" name="Obstacle" x="320" y="360" width="40" height="40"/>
-  <object id="401" name="Obstacle" x="360" y="360" width="40" height="40"/>
-  <object id="402" name="Obstacle" x="440" y="400" width="40" height="40"/>
-  <object id="403" name="Obstacle" x="400" y="400" width="40" height="40"/>
-  <object id="404" name="Obstacle" x="474.667" y="480" width="79.3333" height="40"/>
-  <object id="406" name="Obstacle" x="471.333" y="522" width="79.3333" height="40"/>
-  <object id="407" name="Obstacle" x="431.333" y="540.667" width="79.3333" height="40"/>
-  <object id="408" name="Obstacle" x="392.667" y="559.333" width="79.3333" height="40"/>
-  <object id="409" name="Obstacle" x="280" y="600" width="79.3333" height="40"/>
-  <object id="410" name="Obstacle" x="348.667" y="582.667" width="79.3333" height="40"/>
-  <object id="411" name="Obstacle" x="274.667" y="644.667" width="79.3333" height="40"/>
-  <object id="413" name="Obstacle" x="477.333" y="444.667" width="79.3333" height="40"/>
-  <object id="414" name="Obstacle" x="305.333" y="688.667" width="79.3333" height="40"/>
-  <object id="415" name="Obstacle" x="334" y="706.667" width="79.3333" height="40"/>
-  <object id="416" name="Obstacle" x="360" y="720" width="79.3333" height="40"/>
-  <object id="417" name="Obstacle" x="520" y="800" width="79.3333" height="40"/>
-  <object id="418" name="Obstacle" x="560" y="840" width="79.3333" height="40"/>
-  <object id="419" name="Obstacle" x="640" y="840" width="79.3333" height="40"/>
-  <object id="420" name="Obstacle" x="680" y="880" width="79.3333" height="40"/>
-  <object id="421" name="Obstacle" x="760" y="920" width="79.3333" height="40"/>
-  <object id="422" name="Obstacle" x="840" y="960" width="79.3333" height="40"/>
-  <object id="423" name="Obstacle" x="920" y="1000" width="79.3333" height="40"/>
-  <object id="424" name="Obstacle" x="920" y="960" width="79.3333" height="40"/>
-  <object id="425" name="Obstacle" x="440" y="720" width="40" height="40"/>
-  <object id="426" name="Obstacle" x="520" y="760" width="40" height="40"/>
-  <object id="427" name="Obstacle" x="600" y="800" width="40" height="40"/>
-  <object id="429" name="Obstacle" x="760" y="880" width="40" height="40"/>
-  <object id="430" name="Obstacle" x="840" y="920" width="40" height="40"/>
-  <object id="431" name="Obstacle" x="1000" y="960" width="40" height="40"/>
-  <object id="432" name="Obstacle" x="1080" y="920" width="40" height="40"/>
-  <object id="433" name="Obstacle" x="1040" y="960" width="40" height="40"/>
-  <object id="434" name="Obstacle" x="1120" y="920" width="40" height="40"/>
-  <object id="435" name="Obstacle" x="1160" y="920" width="40" height="40"/>
-  <object id="436" name="Obstacle" x="1160" y="880" width="40" height="40"/>
-  <object id="437" name="Obstacle" x="1200" y="840" width="40" height="40"/>
-  <object id="438" name="Obstacle" x="1040" y="920" width="40" height="40"/>
-  <object id="439" name="Obstacle" x="1200" y="880" width="40" height="40"/>
-  <object id="440" name="Obstacle" x="1280" y="872" width="40" height="40"/>
-  <object id="441" name="Obstacle" x="1280" y="800" width="40" height="40"/>
-  <object id="442" name="Obstacle" x="1360" y="760" width="40" height="40"/>
-  <object id="443" name="Obstacle" x="1320" y="800" width="40" height="40"/>
-  <object id="444" name="Obstacle" x="1400" y="760" width="40" height="40"/>
-  <object id="445" name="Obstacle" x="1440" y="720" width="40" height="40"/>
-  <object id="446" name="Obstacle" x="1520" y="680" width="40" height="40"/>
-  <object id="447" name="Obstacle" x="1480" y="720" width="40" height="40"/>
-  <object id="448" name="Obstacle" x="1560" y="680" width="40" height="40"/>
-  <object id="449" name="Obstacle" x="1560" y="600" width="40" height="40"/>
-  <object id="450" name="Obstacle" x="1520" y="600" width="40" height="40"/>
-  <object id="451" name="Obstacle" x="1440" y="560" width="40" height="40"/>
-  <object id="452" name="Obstacle" x="1474.67" y="598.667" width="40" height="40"/>
-  <object id="453" name="Obstacle" x="1360" y="520" width="40" height="40"/>
-  <object id="454" name="Obstacle" x="1400" y="560" width="40" height="40"/>
-  <object id="455" name="Obstacle" x="1320" y="520" width="40" height="40"/>
-  <object id="456" name="Obstacle" x="1280" y="560" width="40" height="40"/>
-  <object id="457" name="Obstacle" x="1240" y="560" width="40" height="40"/>
-  <object id="458" name="Obstacle" x="1040" y="520" width="40" height="40"/>
-  <object id="459" name="Obstacle" x="1040" y="440" width="40" height="40"/>
-  <object id="460" name="Obstacle" x="1120" y="560" width="40" height="40"/>
-  <object id="461" name="Obstacle" x="1200" y="600" width="40" height="40"/>
-  <object id="462" name="Obstacle" x="1160" y="520" width="40" height="40"/>
-  <object id="463" name="Obstacle" x="1120" y="480" width="40" height="40"/>
-  <object id="464" name="Obstacle" x="1240" y="600" width="40" height="40"/>
-  <object id="465" name="Obstacle" x="1080" y="520" width="40" height="40"/>
-  <object id="467" name="Obstacle" x="1080" y="480" width="40" height="40"/>
-  <object id="468" name="Obstacle" x="1120" y="520" width="40" height="40"/>
-  <object id="469" name="Obstacle" x="1200" y="560" width="40" height="40"/>
-  <object id="470" name="Obstacle" x="1000" y="480" width="40" height="40"/>
-  <object id="471" name="Obstacle" x="863.333" y="545.333" width="40" height="40"/>
-  <object id="472" name="Obstacle" x="818" y="566.667" width="40" height="40"/>
-  <object id="473" name="Obstacle" x="839.333" y="556.667" width="40" height="40"/>
-  <object id="474" name="Obstacle" x="880" y="560" width="40" height="40"/>
-  <object id="475" name="Obstacle" x="796.667" y="578" width="40" height="40"/>
-  <object id="476" name="Obstacle" x="775.333" y="587.333" width="40" height="40"/>
-  <object id="477" name="Obstacle" x="800" y="600" width="40" height="40"/>
-  <object id="478" name="Obstacle" x="752.667" y="602" width="40" height="40"/>
-  <object id="479" name="Obstacle" x="728.667" y="611.333" width="40" height="40"/>
-  <object id="480" name="Obstacle" x="698.667" y="619.333" width="40" height="40"/>
-  <object id="481" name="Obstacle" x="696.667" y="638" width="40" height="40"/>
-  <object id="482" name="Obstacle" x="689.333" y="676.667" width="40" height="40"/>
-  <object id="484" name="Obstacle" x="739.333" y="698.667" width="40" height="40"/>
-  <object id="485" name="Obstacle" x="800" y="720" width="40" height="40"/>
-  <object id="487" name="Obstacle" x="880" y="760" width="40" height="40"/>
-  <object id="488" name="Obstacle" x="843.333" y="755.333" width="40" height="40"/>
-  <object id="491" name="Obstacle" x="1000" y="720" width="40" height="40"/>
-  <object id="492" name="Obstacle" x="1080" y="720" width="40" height="40"/>
-  <object id="494" name="Obstacle" x="1120" y="720" width="40" height="40"/>
-  <object id="495" name="Obstacle" x="1120" y="680" width="40" height="40"/>
-  <object id="496" name="Obstacle" x="1080" y="680" width="40" height="40"/>
-  <object id="497" name="Obstacle" x="1040" y="680" width="40" height="40"/>
-  <object id="498" name="Obstacle" x="1040" y="720" width="40" height="40"/>
-  <object id="499" name="Obstacle" x="1034" y="752.667" width="40" height="40"/>
-  <object id="500" name="Obstacle" x="1000" y="760" width="40" height="40"/>
-  <object id="501" name="Obstacle" x="720" y="640" width="40" height="40"/>
-  <object id="502" name="Obstacle" x="760" y="640" width="40" height="40"/>
-  <object id="503" name="Obstacle" x="800" y="680" width="40" height="40"/>
-  <object id="504" name="Obstacle" x="840" y="680" width="40" height="40"/>
-  <object id="505" name="Obstacle" x="880" y="720" width="40" height="40"/>
-  <object id="506" name="Obstacle" x="920" y="720" width="40" height="40"/>
-  <object id="507" name="Obstacle" x="960" y="720" width="40" height="40"/>
-  <object id="508" name="Obstacle" x="1160" y="560" width="40" height="40"/>
-  <object id="509" name="Obstacle" x="977.333" y="486.667" width="40" height="40"/>
-  <object id="510" name="Obstacle" x="886.667" y="535.333" width="40" height="40"/>
-  <object id="511" name="Obstacle" x="880" y="600" width="40" height="40"/>
-  <object id="512" name="Obstacle" x="920" y="560" width="40" height="40"/>
-  <object id="513" name="Obstacle" x="840" y="600" width="40" height="40"/>
-  <object id="514" name="Obstacle" x="800" y="640" width="40" height="40"/>
-  <object id="516" name="Mob" x="1400" y="1000" width="40" height="40"/>
-  <object id="517" name="Obstacle" x="1400" y="840" width="40" height="40"/>
-  <object id="518" name="Obstacle" x="1200" y="520" width="40" height="40"/>
-  <object id="519" name="Obstacle" x="1240" y="520" width="40" height="40"/>
-  <object id="520" name="Obstacle" x="1320" y="480" width="40" height="40"/>
-  <object id="521" name="Obstacle" x="1280" y="480" width="40" height="40"/>
-  <object id="522" name="Obstacle" x="1360" y="480" width="40" height="40"/>
-  <object id="523" name="Obstacle" x="1400" y="480" width="40" height="40"/>
-  <object id="524" name="Obstacle" x="1440" y="520" width="40" height="40"/>
-  <object id="525" name="Obstacle" x="1360" y="440" width="40" height="40"/>
-  <object id="526" name="Obstacle" x="720" y="680" width="40" height="40"/>
-  <object id="529" name="Obstacle" x="920" y="760" width="40" height="40"/>
-  <object id="530" name="Obstacle" x="960" y="760" width="40" height="40"/>
-  <object id="531" name="Obstacle" x="959.333" y="554" width="40" height="40"/>
-  <object id="532" name="Obstacle" x="909.333" y="524.667" width="40" height="40"/>
-  <object id="533" name="Obstacle" x="930.667" y="512" width="40" height="40"/>
-  <object id="534" name="Obstacle" x="954" y="500" width="40" height="40"/>
-  <object id="535" name="Obstacle" x="1004" y="512" width="40" height="40"/>
-  <object id="536" name="Obstacle" x="459.333" y="748.667" width="40" height="40"/>
-  <object id="537" name="Obstacle" x="480" y="760" width="40" height="40"/>
-  <object id="538" name="Obstacle" x="771.333" y="714.667" width="40" height="40"/>
-  <object id="539" name="Obstacle" x="810.667" y="734" width="40" height="40"/>
+  <object id="14" name="Mob" x="1200" y="440" width="40" height="40"/>
+  <object id="541" name="Line" x="345" y="200" width="319" height="155">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="543" name="Line" x="978" y="164" width="406" height="195">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="547" name="Line" x="833" y="556" width="228" height="116">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="548" name="Line" x="1231" y="559" width="151" height="74">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="549" name="Line" x="987" y="755" width="166" height="79">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="551" x="553.333" y="554">
+   <polyline points="0,0 -277.333,136"/>
+  </object>
+  <object id="552" x="1063.33" y="556">
+   <polyline points="0,0 -230.667,116"/>
+  </object>
+  <object id="553" x="1153.33" y="756">
+   <polyline points="0,0 -166.583,77.5833"/>
+  </object>
+  <object id="554" x="1382.67" y="164.667">
+   <polyline points="0,0 -404.667,194.667"/>
+  </object>
+  <object id="555" x="1382" y="558.667">
+   <polyline points="0,0 -151.333,75"/>
+  </object>
+  <object id="557" name="Line" x="200" y="719" width="21" height="7.75">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="559" x="191.044" y="795.053">
+   <polyline points="0,0 -31.2412,11.7686"/>
+  </object>
+  <object id="560" name="Line" x="160" y="795" width="31" height="12">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="561" name="Line" x="1724" y="378" width="9" height="56">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="562" x="1734.75" y="378">
+   <polyline points="0,0 -6.4294,56.3395"/>
+  </object>
+  <object id="563" x="1731.99" y="475.135">
+   <polyline points="0,0 -4.93255,39.9755"/>
+  </object>
+  <object id="564" name="Line" x="1727" y="475" width="5" height="40">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="565" x="187.202" y="900.15">
+   <polyline points="0,0 -59.742,23.6747"/>
+  </object>
+  <object id="566" name="Line" x="127" y="900.004" width="59" height="23">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="567" x="188.742" y="983.328">
+   <polyline points="0,0 -59.742,23.6747"/>
+  </object>
+  <object id="568" name="Line" x="129" y="983" width="59" height="23">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="569" x="189.238" y="1060.33">
+   <polyline points="0,0 -60.7387,24.0697"/>
+  </object>
+  <object id="570" name="Line" x="128" y="1060" width="60" height="24">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="574" x="1714.15" y="717.237">
+   <polyline points="0,0 -679.259,338.108"/>
+  </object>
+  <object id="575" name="Line" x="999" y="717" width="715" height="352">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="576" x="1808.54" y="551.348">
+   <polyline points="0,0 -42.0143,23.2199"/>
+  </object>
+  <object id="577" name="Line" x="1766" y="551" width="41" height="22">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="578" x="1835.5" y="589.5">
+   <polyline points="0,0 -16.5143,9.2199"/>
+  </object>
+  <object id="579" name="Line" x="1818" y="588" width="18" height="11">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="581" name="Line" x="183" y="1191" width="11" height="7">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="586" x="420.424" y="1241.32">
+   <polyline points="0,0 -67.0546,30.9244"/>
+  </object>
+  <object id="587" name="Line" x="352" y="1240" width="67" height="31">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="588" x="601.007" y="1295.83">
+   <polyline points="0,0 -37.895,16.9668"/>
+  </object>
+  <object id="589" name="Line" x="563" y="1295" width="38" height="17">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="592" x="699.674" y="1281.11">
+   <polyline points="0,0 -68.8782,30.7374"/>
+  </object>
+  <object id="593" name="Line" x="631" y="1281" width="68" height="31">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="594" x="1851.92" y="635.179">
+   <polyline points="0,0 -7.76145,32.9328"/>
+  </object>
+  <object id="595" name="Line" x="1844" y="635" width="8" height="33">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="596" x="1851.78" y="596.94">
+   <polyline points="0,0 -5.6819,31.1146"/>
+  </object>
+  <object id="597" name="Line" x="1846" y="597" width="6" height="31">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="598" x="1858.57" y="678.182">
+   <polyline points="0,0 -14.5617,54.0809"/>
+  </object>
+  <object id="599" name="Line" x="1844" y="678" width="15" height="54">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="600" x="1059.33" y="441">
+   <polyline points="0,0 -368.424,187"/>
+  </object>
+  <object id="601" name="Line" x="694" y="441" width="366" height="187">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="602" x="1842.09" y="733">
+   <polyline points="0,0 -262.065,127.147"/>
+  </object>
+  <object id="603" name="Line" x="1580" y="733" width="264" height="127">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="604" name="Line" x="1660" y="1074" width="145" height="63">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="605" x="1803.5" y="1074.67">
+   <polyline points="0,0 -141.995,62.583"/>
+  </object>
+  <object id="606" x="1804.51" y="1316.12">
+   <polyline points="0,0 -146.245,62.6663"/>
+  </object>
+  <object id="607" name="Line" x="1659" y="1314" width="146" height="64">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="608" x="1807.84" y="1553.45">
+   <polyline points="0,0 -147.912,64.6663"/>
+  </object>
+  <object id="609" name="Line" x="1660" y="1553" width="148" height="65">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="610" name="Line" x="1601" y="1772" width="159" height="79">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="611" x="1759.84" y="1772">
+   <polyline points="0,0 -158.912,78.941"/>
+  </object>
+  <object id="612" name="Line" x="1242" y="1763" width="179" height="88">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="613" x="1420.28" y="1763.36">
+   <polyline points="0,0 -178.511,87.59"/>
+  </object>
+  <object id="614" name="Line" x="1310" y="1631" width="165" height="82">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="615" x="1475.94" y="1630.52">
+   <polyline points="0,0 -165.976,82.2567"/>
+  </object>
+  <object id="616" name="Line" x="1279" y="1591" width="44" height="23">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="617" x="1324.97" y="1590.52">
+   <polyline points="0,0 -44.037,23.4233"/>
+  </object>
+  <object id="618" x="418.841" y="1125.28">
+   <polyline points="0,0 -98.5806,45.4636"/>
+  </object>
+  <object id="619" name="Line" x="320" y="1124" width="100" height="47">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="622" name="Line" x="1222" y="441" width="159" height="79">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="623" x="1380.83" y="442.5">
+   <polyline points="0,0 -159.333,78"/>
+  </object>
+  <object id="624" x="1127.45" y="651.896">
+   <polyline points="0,0 -166.96,79.6874"/>
+  </object>
+  <object id="625" name="Line" x="960" y="651" width="167" height="79">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="626" name="Line" x="605" y="1060" width="298" height="153">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="627" x="904.003" y="1061.08">
+   <polyline points="0,0 -298.878,152.486"/>
+  </object>
+  <object id="628" name="Line" x="818" y="1115" width="215" height="108">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="629" x="1033.67" y="1114.1">
+   <polyline points="0,0 -215.045,106.874"/>
+  </object>
+  <object id="630" x="1327.26" y="1271.84">
+   <polyline points="0,0 -226.696,106.526"/>
+  </object>
+  <object id="631" name="Line" x="1101" y="1272" width="226" height="106">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="632" name="Line" x="1148" y="1314" width="326" height="165">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="633" x="1472.5" y="1313.93">
+   <polyline points="0,0 -325.378,163.208"/>
+  </object>
+  <object id="636" name="Line" x="962" y="659" width="620" height="308">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="637" x="1582.33" y="659.646">
+   <polyline points="0,0 -618.774,307.866"/>
+  </object>
+  <object id="638" name="Line" x="661" y="198" width="318" height="161">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="639" x="661.333" y="198.667">
+   <polyline points="0,0 317.333,160"/>
+  </object>
+  <object id="640" name="Line" x="345" y="353" width="214" height="102">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="641" x="350.633" y="353.889">
+   <polyline points="0,0 208.284,101.016"/>
+  </object>
+  <object id="642" name="Line" x="554" y="535" width="5" height="18">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="643" x="335.759" y="659.925">
+   <polyline points="0,0 1121.44,553.427"/>
+  </object>
+  <object id="644" name="Line" x="336" y="659" width="1122" height="554">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="645" name="Line" x="219" y="718" width="1107" height="555" visible="0">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="646" x="221" y="719">
+   <polyline points="0,0 1106.33,554"/>
+  </object>
+  <object id="647" x="662" y="198">
+   <polyline points="0,0 -318,158"/>
+  </object>
+  <object id="648" name="Line" x="1385" y="163" width="356" height="179">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="649" x="1386.02" y="164.086">
+   <polyline points="0,0 354.565,178.121"/>
+  </object>
+  <object id="650" x="1379.72" y="557.763">
+   <polyline points="0,0 202.478,103.531"/>
+  </object>
+  <object id="651" name="Line" x="1379" y="557" width="203" height="102">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="652" name="Line" x="1381" y="441" width="340" height="172">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="653" x="1380.32" y="442.365">
+   <polyline points="0,0 338.382,169.655"/>
+  </object>
+  <object id="659" name="Line" x="1714" y="696" width="7" height="21">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="663" x="1057.43" y="558.657">
+   <polyline points="0,0 150.2,75.731"/>
+  </object>
+  <object id="664" name="Line" x="1057" y="558" width="150" height="76">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="665" name="Line" x="1207" y="633" width="25" height="1">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="666" name="Line" x="1060" y="441" width="162" height="79">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="667" x="1059.17" y="441.071">
+   <polyline points="0,0 163.542,79.27"/>
+  </object>
+  <object id="668" name="Line" x="685" y="713" width="242" height="120">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="669" x="689.044" y="715.445">
+   <polyline points="0,0 238.668,117.048"/>
+  </object>
+  <object id="670" x="961.507" y="818.33">
+   <polyline points="0,0 -37.895,16.9668"/>
+  </object>
+  <object id="671" name="Line" x="923" y="817" width="38" height="17">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="672" name="Line" x="961" y="817" width="27" height="17">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="675" name="Line" x="833" y="672" width="127" height="59">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="676" x="833.266" y="672.176">
+   <polyline points="0,0 126.779,59.5213"/>
+  </object>
+  <object id="677" x="698.567" y="1281.12">
+   <polyline points="0,0 222.966,112.42"/>
+  </object>
+  <object id="678" name="Line" x="698" y="1280" width="223" height="113">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="679" name="Line" x="921" y="1377" width="39" height="17">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="680" x="818.55" y="1222.56">
+   <polyline points="0,0 141.628,69.77"/>
+  </object>
+  <object id="681" name="Line" x="819" y="1222" width="141" height="71">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="682" name="Line" x="235" y="1351" width="1006" height="500">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="683" x="236.014" y="1352.42">
+   <polyline points="0,0 1004.24,498.744"/>
+  </object>
+  <object id="684" x="1419.83" y="1763.35">
+   <polyline points="0,0 181.366,88.1877"/>
+  </object>
+  <object id="685" name="Line" x="1421" y="1763" width="180" height="88">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="688" x="1089.32" y="1473.33">
+   <polyline points="0,0 233.624,118.331"/>
+  </object>
+  <object id="689" name="Line" x="1087" y="1471" width="236" height="120">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="690" name="Line" x="1233" y="1434" width="226" height="104">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="691" x="1231.15" y="1434.16">
+   <polyline points="0,0 227.593,103.808"/>
+  </object>
+  <object id="692" x="1569.98" y="956.327">
+   <polyline points="0,0 235.29,117.664"/>
+  </object>
+  <object id="693" name="Line" x="1566" y="953" width="239" height="121">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="694" x="1646.54" y="1231.54">
+   <polyline points="0,0 158.16,82.4473"/>
+  </object>
+  <object id="695" name="Line" x="1645" y="1230" width="160" height="84">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="696" x="1643.71" y="1470.71">
+   <polyline points="0,0 164.16,82.114"/>
+  </object>
+  <object id="697" name="Line" x="1644" y="1471" width="164" height="82">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="698" x="1645.25" y="1711.04">
+   <polyline points="0,0 114.581,60.949"/>
+  </object>
+  <object id="699" name="Line" x="1645" y="1711" width="115" height="61">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="700" x="419.107" y="1241.15">
+   <polyline points="0,0 145.873,73.5499"/>
+  </object>
+  <object id="701" name="Line" x="418" y="1240" width="145" height="73">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="702" name="Line" x="420" y="1124" width="185" height="89">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="703" x="419.667" y="1125.33">
+   <polyline points="0,0 186,87.6666"/>
+  </object>
+  <object id="704" x="1727.97" y="433.997">
+   <polyline points="0,0 10.7567,5.61589"/>
+  </object>
+  <object id="705" name="Line" x="1724" y="434" width="12" height="5">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="706" x="1727.17" y="515.027">
+   <polyline points="0,0 80.3029,41.586"/>
+  </object>
+  <object id="707" name="Line" x="1727" y="515" width="80" height="41">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="708" name="Line" x="1766" y="573" width="51" height="26">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="709" x="1766.98" y="573.457">
+   <polyline points="0,0 51.8758,26.1559"/>
+  </object>
+  <object id="710" x="1834.83" y="588.138">
+   <polyline points="0,0 17.7151,8.77005"/>
+  </object>
+  <object id="711" name="Line" x="1834" y="587" width="18" height="10">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="712" x="1846.06" y="628.074">
+   <polyline points="0,0 5.935,6.97275"/>
+  </object>
+  <object id="713" name="Line" x="1846" y="628" width="6" height="7">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="714" name="Line" x="1844" y="668" width="15" height="10">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="715" x="1844.24" y="668.195">
+   <polyline points="0,0 14.7598,9.8012"/>
+  </object>
+  <object id="722" x="199.972" y="774.933">
+   <polyline points="0,0 -9.0173,20.526"/>
+  </object>
+  <object id="723" name="Line" x="191" y="774" width="9" height="21">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="724" x="159.671" y="855.799">
+   <polyline points="0,0 -23.3555,6.92204"/>
+  </object>
+  <object id="725" name="Line" x="136" y="855" width="24" height="8">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="729" x="139.936" y="862.675">
+   <polyline points="0,0 30.4993,8.712"/>
+  </object>
+  <object id="730" name="Line" x="139" y="861" width="31" height="10">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="731" name="Line" x="170" y="871" width="15" height="29">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="732" x="171.25" y="872">
+   <polyline points="0,0 15.2493,29.712"/>
+  </object>
+  <object id="733" name="Line" x="127" y="923" width="20" height="25">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="734" x="127.072" y="923.584">
+   <polyline points="0,0 20.6811,24.3484"/>
+  </object>
+  <object id="735" x="146.881" y="947.119">
+   <polyline points="0,0 24.1356,3.85976"/>
+  </object>
+  <object id="736" x="170.545" y="950.727">
+   <polyline points="0,0 17.5071,32.5105"/>
+  </object>
+  <object id="737" name="Line" x="147" y="947" width="24" height="4">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="738" name="Line" x="170" y="950" width="18" height="33">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="739" x="129.405" y="1005.42">
+   <polyline points="0,0 20.6811,24.3484"/>
+  </object>
+  <object id="740" name="Line" x="129" y="1004" width="20" height="25">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="743" x="149.25" y="1028.75">
+   <polyline points="0,0 20,1.50436 38.5,31.3409"/>
+  </object>
+  <object id="744" name="Line" x="149" y="1028" width="20" height="2">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="745" name="Line" x="169" y="1030" width="19" height="30">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="748" x="219.179" y="1258.67">
+   <polyline points="0,0 15.839,92.3595"/>
+  </object>
+  <object id="749" name="Line" x="219" y="1258" width="15.5" height="93">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="750" name="Line" x="189" y="1250" width="30" height="8">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="751" x="188.977" y="1250.15">
+   <polyline points="0,0 30.1433,7.8415"/>
+  </object>
+  <object id="754" name="Line" x="275" y="553" width="279" height="138">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="763" name="Obstacle" x="553" y="455" width="6" height="80"/>
+  <object id="765" name="Obstacle" x="1733" y="342" width="8" height="36"/>
+  <object id="766" name="Obstacle" x="1732" y="439" width="6" height="36"/>
+  <object id="767" name="Line" x="1566" y="860" width="15" height="93">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="768" x="1581.33" y="859.333">
+   <polyline points="0,0 -14.5617,94.0809"/>
+  </object>
+  <object id="769" name="Line" x="1645" y="1137" width="15" height="93">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="770" name="Line" x="1644" y="1378" width="15" height="93">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="771" name="Line" x="1645" y="1618" width="15" height="93">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="772" name="Line" x="183" y="1198" width="6" height="52">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="773" name="Line" x="176" y="1097" width="15" height="94">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="776" x="191.75" y="1190.25">
+   <polyline points="0,0 -15.5,-94"/>
+  </object>
+  <object id="777" name="Line" x="133" y="1082" width="43" height="15">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="778" name="Obstacle" x="154" y="807" width="6" height="48"/>
+  <object id="779" name="Obstacle" x="194" y="726" width="6" height="48"/>
+  <object id="780" name="Obstacle" x="1279" y="1614" width="6" height="83"/>
+  <object id="781" name="Line" x="1285" y="1697" width="25" height="15">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="782" name="Line" x="1459" y="1538" width="16" height="93">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="783" x="1459.75" y="1536.75">
+   <polyline points="0,0 14.8737,95.9143"/>
+  </object>
+  <object id="784" name="Line" x="1087" y="1378" width="14" height="93">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="785" name="Line" x="1458" y="1213" width="16" height="101">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="786" name="Obstacle" x="954" y="1293" width="6" height="83.5"/>
+  <object id="787" name="Line" x="601" y="1295" width="30" height="17">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="788" name="Line" x="320" y="1256" width="32" height="17">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="789" name="Obstacle" x="320" y="1171" width="6" height="85"/>
+  <object id="790" name="Obstacle" x="1715" y="613" width="6" height="83"/>
+  <object id="791" name="Line" x="685" y="628" width="9" height="87">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="792" name="Line" x="1127" y="651" width="26" height="104">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="797" name="Mob" x="240" y="1000" width="40" height="40"/>
+  <object id="798" name="Mob" x="400" y="920" width="40" height="40"/>
+  <object id="799" name="Mob" x="640" y="1000" width="40" height="40"/>
+  <object id="800" name="Mob" x="480" y="1040" width="40" height="40"/>
+  <object id="801" name="Mob" x="960" y="1560" width="40" height="40"/>
+  <object id="803" name="Mob" x="1520" y="1480" width="40" height="40"/>
+  <object id="804" name="Mob" x="1480" y="1120" width="40" height="40"/>
+  <object id="805" name="Mob" x="1000" y="640" width="40" height="40"/>
+  <object id="806" name="Mob" x="1350.67" y="665.333" width="40" height="40"/>
+  <object id="807" name="Mob" x="1400" y="1000" width="40" height="40"/>
  </objectgroup>
 </map>
