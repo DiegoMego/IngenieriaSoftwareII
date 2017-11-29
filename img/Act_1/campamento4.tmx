@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="40" tileheight="40" nextobjectid="434">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="40" tileheight="40" nextobjectid="684">
  <tileset firstgid="1" source="camp.tsx"/>
  <tileset firstgid="1461" source="cercadomadera.tsx"/>
  <tileset firstgid="2613" source="afueras1.tsx"/>
@@ -1360,20 +1360,20 @@
 </data>
  </layer>
  <objectgroup name="Objetos">
-  <object id="1" name="Player" x="995" y="1146" width="40" height="40"/>
+  <object id="1" name="Player" x="1057" y="1203" width="40" height="40"/>
   <object id="34" name="Line" x="577.672" y="626.023" width="927.166" height="457.643">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="38" name="Line" x="2128.68" y="622.332" width="1420.89" height="692.668">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="44" name="Line" x="2628.5" y="1315.67" width="921" height="489">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="47" name="Obstacle" x="577.667" y="1083.67">
@@ -1384,7 +1384,7 @@
   </object>
   <object id="56" name="Line" x="3061.25" y="2051.76" width="509.014" height="224.092">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="57" name="Obstacle" x="3061.25" y="2051.76">
@@ -1395,7 +1395,7 @@
   </object>
   <object id="62" name="Line" x="2959.73" y="2275.92" width="610.396" height="301.709">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="63" name="Obstacle" x="2959.75" y="2577.51">
@@ -1403,7 +1403,7 @@
   </object>
   <object id="64" name="Line" x="3042.67" y="2997.31" width="264.583" height="128.197">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="65" name="Obstacle" x="3042.01" y="2997.64">
@@ -1411,7 +1411,7 @@
   </object>
   <object id="67" name="Line" x="2057.52" y="3125.46" width="1249.74" height="623.479">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="68" name="Obstacle" x="2057.61" y="3748.86">
@@ -1419,7 +1419,7 @@
   </object>
   <object id="69" name="Line" x="570.503" y="2995.99" width="1486.99" height="752.92">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="70" name="Obstacle" x="570.5" y="2996">
@@ -1427,7 +1427,7 @@
   </object>
   <object id="71" name="Line" x="570.499" y="2868.47" width="273.033" height="127.521">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="72" name="Obstacle" x="570.5" y="2996">
@@ -1435,7 +1435,7 @@
   </object>
   <object id="73" name="Line" x="571.281" y="2269.32" width="446.719" height="221.676">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="74" name="Obstacle" x="571.268" y="2269.33">
@@ -1443,7 +1443,7 @@
   </object>
   <object id="75" name="Line" x="571.267" y="2239.81" width="95.1669" height="29.5247">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="76" name="Obstacle" x="571.268" y="2269.34">
@@ -1451,7 +1451,7 @@
   </object>
   <object id="77" name="Line" x="569.011" y="1565.66" width="560.5" height="268.348">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="79" name="Obstacle" x="569" y="1565.67">
@@ -1459,7 +1459,7 @@
   </object>
   <object id="81" name="Line" x="569.006" y="1408.1" width="297.331" height="157.563">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="82" name="Obstacle" x="569.003" y="1565.66">
@@ -1467,7 +1467,7 @@
   </object>
   <object id="83" name="Line" x="577.674" y="1083.67" width="288.657" height="138.022">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="84" name="Obstacle" x="577.667" y="1083.67">
@@ -1483,12 +1483,12 @@
   <object id="93" name="Mob" x="2320" y="2720" width="40" height="40"/>
   <object id="97" name="Line" x="2519.66" y="1869.64" width="396.518" height="241.484">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="98" name="Line" x="2916.18" y="2051.91" width="145.004" height="59.2539">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="100" name="Obstacle" x="3061.18" y="2051.92">
@@ -1502,10 +1502,14 @@
   <object id="107" name="Obstacle" x="2559.6" y="1749.48" width="68.9583" height="40"/>
   <object id="109" name="Line" x="1504.87" y="625.995" width="242.172" height="128.166">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
-  <object id="111" name="Line" x="1504.94" y="815.604" width="243.901" height="124.985"/>
+  <object id="111" name="Line" x="1504.94" y="815.604" width="243.901" height="124.985">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
   <object id="112" name="Obstacle" x="1504.88" y="626.022">
    <polyline points="0,0 242.163,128.137"/>
   </object>
@@ -1515,7 +1519,7 @@
   <object id="114" name="Obstacle" x="1504.85" y="754.417" width="242.36" height="61.1648"/>
   <object id="115" name="Line" x="1254.17" y="1345.33" width="242.993" height="128.006">
    <properties>
-    <property name="Line" type="int" value="0"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="116" name="Obstacle" x="1254.17" y="1473.33">
@@ -1525,7 +1529,7 @@
   <object id="120" name="Obstacle" x="1495.52" y="1345.3" width="2.26087" height="189.627"/>
   <object id="121" name="Line" x="1254.08" y="1534.95" width="243.667" height="114.844">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="123" name="Obstacle" x="1254.09" y="1649.75">
@@ -1534,16 +1538,16 @@
   <object id="124" name="Obstacle" x="1616.83" y="1451.54">
    <polyline points="0,0 243.634,-114.783"/>
   </object>
-  <object id="125" name="Line" x="1616.91" y="1147.12" width="242.993" height="128.006">
+  <object id="125" name="Line" x="1636.16" y="1147.62" width="223.743" height="127.506">
    <properties>
-    <property name="Line" type="int" value="0"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="126" name="Obstacle" x="1858.26" y="1147.09" width="2.26087" height="189.627"/>
   <object id="127" name="Obstacle" x="1616.87" y="1275.15" width="1.58333" height="176.333"/>
   <object id="128" name="Line" x="1616.82" y="1336.74" width="243.667" height="114.844">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="129" name="Obstacle" x="1616.91" y="1275.12">
@@ -1555,12 +1559,12 @@
   <object id="133" name="Obstacle" x="1504.83" y="1221.83" width="106" height="189"/>
   <object id="134" name="Line" x="1225.82" y="1173.94" width="148.303" height="21.8788">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="136" name="Line" x="1213.84" y="1229.01" width="132.499" height="28.3411">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="137" name="Obstacle" x="1225.84" y="1195.78">
@@ -1580,17 +1584,17 @@
   </object>
   <object id="142" name="Line" x="1213.64" y="1195.84" width="12.2052" height="33.0735">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="143" name="Line" x="1346.48" y="1214.43" width="48.304" height="42.864">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="145" name="Line" x="1374.15" y="1195.81" width="20.6939" height="18.6172">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="156" name="Obstacle" x="1851.27" y="787.741">
@@ -1601,17 +1605,17 @@
   </object>
   <object id="158" name="Line" x="1983.9" y="773.171" width="48.304" height="42.864">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="159" name="Line" x="1863.24" y="732.681" width="148.303" height="21.8788">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="160" name="Line" x="1851.26" y="787.751" width="132.499" height="28.3411">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="161" name="Obstacle" x="2011.57" y="754.551">
@@ -1619,7 +1623,7 @@
   </object>
   <object id="162" name="Line" x="2011.57" y="754.551" width="20.6939" height="18.6172">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="163" name="Obstacle" x="1851.06" y="787.641">
@@ -1630,7 +1634,7 @@
   </object>
   <object id="165" name="Line" x="1851.06" y="754.581" width="12.2052" height="33.0735">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="166" name="Obstacle" x="2250.36" y="3067.1">
@@ -1641,17 +1645,17 @@
   </object>
   <object id="168" name="Line" x="2382.99" y="3052.53" width="48.304" height="42.864">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="169" name="Line" x="2262.33" y="3012.04" width="148.303" height="21.8788">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="170" name="Line" x="2250.35" y="3067.11" width="132.499" height="28.3411">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="171" name="Obstacle" x="2410.66" y="3033.91">
@@ -1659,7 +1663,7 @@
   </object>
   <object id="172" name="Line" x="2410.66" y="3033.91" width="20.6939" height="18.6172">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="173" name="Obstacle" x="2250.15" y="3067">
@@ -1670,7 +1674,7 @@
   </object>
   <object id="175" name="Line" x="2250.15" y="3033.94" width="12.2052" height="33.0735">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="176" name="Obstacle" x="1170.36" y="2387.1">
@@ -1681,17 +1685,17 @@
   </object>
   <object id="178" name="Line" x="1302.99" y="2372.53" width="48.304" height="42.864">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="179" name="Line" x="1182.33" y="2332.04" width="148.303" height="21.8788">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="180" name="Line" x="1170.35" y="2387.11" width="132.499" height="28.3411">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="181" name="Obstacle" x="1330.66" y="2353.91">
@@ -1699,7 +1703,7 @@
   </object>
   <object id="182" name="Line" x="1330.66" y="2353.91" width="20.6939" height="18.6172">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="183" name="Obstacle" x="1170.15" y="2387">
@@ -1710,47 +1714,7 @@
   </object>
   <object id="185" name="Line" x="1170.15" y="2353.94" width="12.2052" height="33.0735">
    <properties>
-    <property name="Line" type="int" value="-1"/>
-   </properties>
-  </object>
-  <object id="186" name="Obstacle" x="691.858" y="1546.35">
-   <polyline points="0,0 132.486,28.3284"/>
-  </object>
-  <object id="187" name="Obstacle" x="824.598" y="1574.52">
-   <polyline points="0,0 48.1818,-42.7273"/>
-  </object>
-  <object id="188" name="Line" x="824.488" y="1531.78" width="48.304" height="42.864">
-   <properties>
-    <property name="Line" type="int" value="-1"/>
-   </properties>
-  </object>
-  <object id="189" name="Line" x="703.828" y="1491.29" width="148.303" height="21.8788">
-   <properties>
-    <property name="Line" type="int" value="-1"/>
-   </properties>
-  </object>
-  <object id="190" name="Line" x="691.848" y="1546.36" width="132.499" height="28.3411">
-   <properties>
-    <property name="Line" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="191" name="Obstacle" x="852.158" y="1513.16">
-   <polyline points="0,0 20.6826,18.6146"/>
-  </object>
-  <object id="192" name="Line" x="852.158" y="1513.16" width="20.6939" height="18.6172">
-   <properties>
-    <property name="Line" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="193" name="Obstacle" x="691.648" y="1546.25">
-   <polyline points="0,0 12.1927,-33.0685"/>
-  </object>
-  <object id="194" name="Obstacle" x="703.848" y="1513.13">
-   <polyline points="0,0 148.244,-21.8444"/>
-  </object>
-  <object id="195" name="Line" x="691.648" y="1513.19" width="12.2052" height="33.0735">
-   <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="196" name="Obstacle" x="2034.69" y="1007.98">
@@ -1782,47 +1746,47 @@
   </object>
   <object id="205" name="Line" x="2034.72" y="1008.03" width="93.9844" height="76.875">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="208" name="Line" x="2128.7" y="983.233" width="131.04" height="101.679">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="209" name="Line" x="2259.77" y="983.244" width="66.0444" height="59.8465">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="210" name="Line" x="2325.8" y="976.496" width="79.725" height="66.5722">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="211" name="Line" x="2355.48" y="941.75" width="50.0313" height="34.7344">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="212" name="Line" x="2355.51" y="893.766" width="98.8823" height="47.9844">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="213" name="Line" x="2323.5" y="775.5" width="130.867" height="118.256">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="214" name="Line" x="2164.48" y="775.711" width="159.266" height="60.8201">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="215" name="Line" x="2034.69" y="880.99" width="131.077" height="127.072">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="216" name="Obstacle" x="2165.77" y="836.522" width="0.9375" height="44.4582"/>
@@ -1841,106 +1805,42 @@
   </object>
   <object id="223" name="Line" x="2019.12" y="695.817" width="113.949" height="59.0582">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="224" name="Line" x="2133.82" y="695.636" width="47.8182" height="31.2727">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="225" name="Line" x="2068" y="727.273" width="113.818" height="56.8352">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="226" name="Line" x="2019.2" y="754.875" width="48.7737" height="29.1139">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
-  </object>
-  <object id="235" name="Line" x="621.231" y="1633.75" width="48.7737" height="29.1139">
-   <properties>
-    <property name="Line" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="236" name="Line" x="670.031" y="1606.15" width="113.818" height="56.8352">
-   <properties>
-    <property name="Line" type="int" value="-1"/>
-   </properties>
-  </object>
-  <object id="237" name="Line" x="735.851" y="1574.51" width="47.8182" height="31.2727">
-   <properties>
-    <property name="Line" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="238" name="Line" x="621.151" y="1574.69" width="113.949" height="59.0582">
-   <properties>
-    <property name="Line" type="int" value="-1"/>
-   </properties>
-  </object>
-  <object id="239" name="Obstacle" x="735.091" y="1574.69">
-   <polyline points="0,0 48.5586,31.3789"/>
-  </object>
-  <object id="240" name="Obstacle" x="621.161" y="1633.75">
-   <polyline points="0,0 113.875,-58.7841"/>
-  </object>
-  <object id="241" name="Obstacle" x="621.161" y="1634.5">
-   <polyline points="0,0 48.625,28.25"/>
-  </object>
-  <object id="242" name="Obstacle" x="670.031" y="1662.88">
-   <polyline points="0,0 113.625,-56.8125"/>
-  </object>
-  <object id="243" name="Line" x="703.231" y="1673.25" width="48.7737" height="29.1139">
-   <properties>
-    <property name="Line" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="244" name="Line" x="752.031" y="1645.65" width="113.818" height="56.8352">
-   <properties>
-    <property name="Line" type="int" value="-1"/>
-   </properties>
-  </object>
-  <object id="245" name="Line" x="817.851" y="1614.01" width="47.8182" height="31.2727">
-   <properties>
-    <property name="Line" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="246" name="Line" x="703.151" y="1614.19" width="113.949" height="59.0582">
-   <properties>
-    <property name="Line" type="int" value="-1"/>
-   </properties>
-  </object>
-  <object id="247" name="Obstacle" x="817.091" y="1614.19">
-   <polyline points="0,0 48.5586,31.3789"/>
-  </object>
-  <object id="248" name="Obstacle" x="703.161" y="1673.25">
-   <polyline points="0,0 113.875,-58.7841"/>
-  </object>
-  <object id="249" name="Obstacle" x="703.161" y="1674">
-   <polyline points="0,0 48.625,28.25"/>
-  </object>
-  <object id="250" name="Obstacle" x="752.031" y="1702.38">
-   <polyline points="0,0 113.625,-56.8125"/>
   </object>
   <object id="251" name="Line" x="739.155" y="2356.15" width="48.7737" height="29.1139">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="252" name="Line" x="787.955" y="2328.55" width="113.818" height="56.8352">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="253" name="Line" x="853.775" y="2296.92" width="47.8182" height="31.2727">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="254" name="Line" x="739.075" y="2297.1" width="113.949" height="59.0582">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="255" name="Obstacle" x="853.015" y="2297.09">
@@ -1957,22 +1857,22 @@
   </object>
   <object id="267" name="Line" x="1420.06" y="3275.34" width="48.7737" height="29.1139">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="268" name="Line" x="1468.86" y="3247.73" width="113.818" height="56.8352">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="269" name="Line" x="1534.68" y="3216.1" width="47.8182" height="31.2727">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="270" name="Line" x="1419.98" y="3216.28" width="113.949" height="59.0582">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="271" name="Obstacle" x="1533.92" y="3216.27">
@@ -1989,22 +1889,22 @@
   </object>
   <object id="275" name="Line" x="2738.4" y="3196.67" width="48.7737" height="29.1139">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="276" name="Line" x="2787.2" y="3169.07" width="113.818" height="56.8352">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="277" name="Line" x="2853.02" y="3137.43" width="47.8182" height="31.2727">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="278" name="Line" x="2738.32" y="3137.61" width="113.949" height="59.0582">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="279" name="Obstacle" x="2852.26" y="3137.61">
@@ -2030,17 +1930,17 @@
   </object>
   <object id="288" name="Line" x="1980.25" y="621.75" width="148.5" height="74.5">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="289" name="Line" x="1828.25" y="614.25" width="151.25" height="82.75">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="291" name="Line" x="1669.5" y="614" width="158.75" height="99.75">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="292" name="Obstacle" x="1733.84" y="722.182" width="61.0909" height="42.9091"/>
@@ -2057,7 +1957,7 @@
   </object>
   <object id="303" name="Line" x="2954.29" y="2960.6" width="34.1921" height="17.3768">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="304" name="Obstacle" x="2817.75" y="3013">
@@ -2080,32 +1980,32 @@
   </object>
   <object id="310" name="Line" x="2817.75" y="2960.64" width="74.6101" height="52.3842">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="312" name="Line" x="2681.26" y="3013.02" width="136.488" height="135">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="313" name="Line" x="2621.49" y="3148" width="59.7578" height="14.7525">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="314" name="Line" x="2621.5" y="3089.02" width="15.3833" height="58.9493">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="315" name="Line" x="2565.88" y="3077.5" width="71" height="11.5">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="316" name="Line" x="2501.82" y="2926.73" width="63.8182" height="24.3636">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="317" name="Obstacle" x="2510.36" y="3074.91" width="55.2727" height="26.7273"/>
@@ -2114,7 +2014,7 @@
   </object>
   <object id="319" name="Line" x="2501.8" y="2951.11" width="8.57031" height="123.797">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="322" name="Obstacle" x="2512.15" y="2899.61">
@@ -2134,27 +2034,27 @@
   </object>
   <object id="327" name="Line" x="2512.13" y="2899.63" width="53.5625" height="27.1875">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="328" name="Line" x="2280.96" y="2899.64" width="231.137" height="118.12">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="329" name="Line" x="2280.66" y="2912.79" width="30.6429" height="104.911">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="330" name="Line" x="2311.25" y="2792.09" width="235.196" height="120.663">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="331" name="Line" x="2546.25" y="2792" width="126" height="65.25">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="332" name="Obstacle" x="2546.41" y="2792.12">
@@ -2166,9 +2066,21 @@
   <object id="334" name="Obstacle" x="2785.69" y="2487.33">
    <polyline points="0,0 174.026,90.1823"/>
   </object>
-  <object id="335" name="Line" x="2546.25" y="2577.93" width="125.764" height="214.093"/>
-  <object id="336" name="Line" x="2671.7" y="2487.31" width="113.994" height="91.0525"/>
-  <object id="337" name="Line" x="2785.7" y="2487.32" width="174.052" height="90.1927"/>
+  <object id="335" name="Line" x="2546.25" y="2577.93" width="125.764" height="214.093">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="336" name="Line" x="2671.7" y="2487.31" width="113.994" height="91.0525">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="337" name="Line" x="2785.7" y="2487.32" width="174.052" height="90.1927">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
   <object id="338" name="Obstacle" x="2700.5" y="2328.5">
    <polyline points="0,0 146.5,95"/>
   </object>
@@ -2183,22 +2095,22 @@
   </object>
   <object id="342" name="Line" x="2846.36" y="2424.21" width="113.357" height="63.0909">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="343" name="Line" x="2700" y="2329" width="146.522" height="95.4493">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="344" name="Line" x="2700" y="2227.53" width="36.5447" height="101.468">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="345" name="Line" x="2736.47" y="2123.18" width="324.727" height="104.346">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="347" name="Obstacle" x="2365.81" y="2355.71">
@@ -2218,27 +2130,27 @@
   </object>
   <object id="352" name="Line" x="2380" y="2237.25" width="60.125" height="72.6667">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="354" name="Line" x="2320.33" y="2237.35" width="59.75" height="22.6458">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="355" name="Line" x="2301.88" y="2260" width="18.4505" height="44.306">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="356" name="Line" x="2301.88" y="2304.3" width="63.9292" height="51.5738">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="357" name="Line" x="2365.75" y="2309.94" width="74.4363" height="45.8704">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="378" name="Obstacle" x="1365.11" y="3118.48">
@@ -2249,17 +2161,17 @@
   </object>
   <object id="380" name="Line" x="1379.3" y="3000.02" width="60.125" height="72.6667">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="381" name="Line" x="1301.18" y="3022.77" width="18.4505" height="44.306">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="382" name="Line" x="1301.18" y="3067.07" width="63.9292" height="51.5738">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="383" name="Obstacle" x="1319.63" y="3022.77">
@@ -2270,12 +2182,12 @@
   </object>
   <object id="385" name="Line" x="1365.05" y="3072.71" width="74.4363" height="45.8704">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="386" name="Line" x="1319.63" y="3000.12" width="59.75" height="22.6458">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="387" name="Obstacle" x="1301.18" y="3067.08">
@@ -2289,17 +2201,17 @@
   </object>
   <object id="390" name="Line" x="983.55" y="2356.35" width="60.125" height="72.6667">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="391" name="Line" x="905.43" y="2379.1" width="18.4505" height="44.306">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="392" name="Line" x="905.43" y="2423.4" width="63.9292" height="51.5738">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="393" name="Obstacle" x="923.88" y="2379.1">
@@ -2310,12 +2222,12 @@
   </object>
   <object id="395" name="Line" x="969.3" y="2429.04" width="74.4363" height="45.8704">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="396" name="Line" x="923.88" y="2356.45" width="59.75" height="22.6458">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="397" name="Obstacle" x="905.43" y="2423.41">
@@ -2330,17 +2242,17 @@
   </object>
   <object id="411" name="Line" x="906.467" y="1156.44" width="60.125" height="72.6667">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="412" name="Line" x="828.347" y="1179.19" width="18.4505" height="44.306">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="413" name="Line" x="828.347" y="1223.49" width="63.9292" height="51.5738">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="414" name="Obstacle" x="846.797" y="1179.19">
@@ -2351,12 +2263,12 @@
   </object>
   <object id="416" name="Line" x="892.217" y="1229.13" width="74.4363" height="45.8704">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="417" name="Line" x="846.797" y="1156.54" width="59.75" height="22.6458">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="418" name="Obstacle" x="828.347" y="1223.5">
@@ -2370,13 +2282,13 @@
   </object>
   <object id="422" name="Line" x="1218.33" y="973.667">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
    <polyline points="0,0 76.3542,8.02604"/>
   </object>
   <object id="423" name="Line" x="1294.67" y="981.667">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
    <polyline points="0,0 -10.0222,-59.7111"/>
   </object>
@@ -2388,44 +2300,401 @@
   </object>
   <object id="426" name="Line" x="1284.67" y="922">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
    <polyline points="0,0 17,-40"/>
   </object>
   <object id="427" name="Line" x="1185.18" y="783.781" width="116.484" height="98.2188">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="428" name="Line" x="1284.62" y="882.022" width="17.0444" height="39.9556">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="429" name="Line" x="1284.67" y="921.978" width="10" height="59.6472">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="430" name="Line" x="1218.32" y="973.573" width="76.3727" height="8.05027">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="431" name="Line" x="1191.32" y="946.635" width="27.0104" height="27.0535">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
   <object id="432" name="Line" x="1069.91" y="946.653" width="121.417" height="49.5214">
    <properties>
-    <property name="Line" type="int" value="-1"/>
+    <property name="Slope" type="int" value="-1"/>
    </properties>
   </object>
   <object id="433" name="Line" x="970.333" y="889" width="99.6377" height="107.014">
    <properties>
-    <property name="Line" type="int" value="1"/>
+    <property name="Slope" type="int" value="1"/>
    </properties>
   </object>
+  <object id="434" name="Obstacle" x="1843.33" y="1113" width="73" height="52.6667"/>
+  <object id="435" name="Obstacle" x="1901" y="1174">
+   <polyline points="0,0 190,96.3333"/>
+  </object>
+  <object id="436" name="Obstacle" x="2091" y="1269.33">
+   <polyline points="0,0 65,15"/>
+  </object>
+  <object id="437" name="Obstacle" x="2156" y="1284">
+   <polyline points="0,0 95.3333,-38.6667"/>
+  </object>
+  <object id="438" name="Obstacle" x="2251.67" y="1243.67">
+   <polyline points="0,0 -74,-90.6667"/>
+  </object>
+  <object id="439" name="Obstacle" x="2175" y="1152">
+   <polyline points="0,0 -104.667,25.3333"/>
+  </object>
+  <object id="440" name="Obstacle" x="2070" y="1177.33">
+   <polyline points="0,0 -139.667,-31"/>
+  </object>
+  <object id="441" name="Obstacle" x="1899.67" y="1174.33">
+   <polyline points="0,0 31.3333,-28"/>
+  </object>
+  <object id="442" name="Line" x="1900.67" y="1174.67" width="190.333" height="94.3333">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="443" name="Line" x="2068.33" y="1147.33" width="109" height="32.6667">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="444" name="Line" x="1930.33" y="1146" width="139.333" height="33">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="445" name="Line" x="1900.33" y="1146" width="30.3333" height="29">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="446" name="Line" x="2090" y="1269.33" width="66.6667" height="15">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="447" name="Line" x="2155" y="1243.67" width="96.6667" height="41">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="448" name="Line" x="2175.67" y="1153.33" width="76.3333" height="91.3333">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="452" name="Obstacle" x="2026.83" y="1816">
+   <polyline points="0,0 190,96.3333"/>
+  </object>
+  <object id="453" name="Obstacle" x="2025.5" y="1816.33">
+   <polyline points="0,0 31.3333,-28"/>
+  </object>
+  <object id="454" name="Obstacle" x="2195.83" y="1819.33">
+   <polyline points="0,0 -139.667,-31"/>
+  </object>
+  <object id="455" name="Line" x="2026.16" y="1788" width="30.3333" height="29">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="456" name="Line" x="2026.5" y="1816.67" width="190.333" height="94.3333">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="457" name="Line" x="2056.16" y="1788" width="139.333" height="33">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="458" name="Obstacle" x="1385" y="1815.5">
+   <polyline points="0,0 208,105"/>
+  </object>
+  <object id="459" name="Obstacle" x="1384.34" y="1816.46">
+   <polyline points="0,0 30.6666,-28.6333"/>
+  </object>
+  <object id="460" name="Obstacle" x="1554" y="1818.83">
+   <polyline points="0,0 -139.667,-31"/>
+  </object>
+  <object id="461" name="Line" x="1384.33" y="1787.5" width="30.3333" height="29">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="462" name="Line" x="1384.36" y="1816.47" width="208.729" height="104.062">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="463" name="Line" x="1414.33" y="1787.5" width="139.333" height="33">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="464" name="Obstacle" x="1545" y="1056.83">
+   <polyline points="0,0 206.75,91.0833"/>
+  </object>
+  <object id="465" name="Obstacle" x="1543.67" y="1057.16">
+   <polyline points="0,0 31.3333,-28"/>
+  </object>
+  <object id="466" name="Obstacle" x="1714" y="1060.16">
+   <polyline points="0,0 -139.667,-31"/>
+  </object>
+  <object id="467" name="Line" x="1544.33" y="1028.83" width="30.3333" height="29">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="468" name="Line" x="1544.67" y="1061.5" width="207.242" height="86.8788">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="469" name="Line" x="1574.33" y="1028.83" width="139.333" height="33">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="471" name="Obstacle" x="1293" y="1708.5">
+   <polyline points="0,0 75.5,68.25"/>
+  </object>
+  <object id="472" name="Obstacle" x="1350" y="1801.79">
+   <polyline points="0,0 18.4903,-25.0641"/>
+  </object>
+  <object id="473" name="Obstacle" x="1256.19" y="1771.25">
+   <polyline points="0,0 93.8115,30.5393"/>
+  </object>
+  <object id="474" name="Obstacle" x="1256.19" y="1771.25">
+   <polyline points="0,0 36.7899,-62.8672"/>
+  </object>
+  <object id="476" name="Line" x="1256.19" y="1708.38" width="36.8125" height="62.9063">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="477" name="Line" x="1292.95" y="1708.47" width="75.6168" height="68.3451">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="478" name="Line" x="1256.22" y="1771.28" width="93.7794" height="30.5269">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="479" name="Line" x="1350" y="1776.56" width="18.5" height="25.25">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="515" name="Line" x="1899.22" y="1705.83" width="36.8125" height="62.9063">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="516" name="Obstacle" x="1899.22" y="1768.7">
+   <polyline points="0,0 36.7899,-62.8672"/>
+  </object>
+  <object id="517" name="Line" x="1993.03" y="1774.01" width="18.5" height="25.25">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="518" name="Line" x="1935.98" y="1705.92" width="75.6168" height="68.3451">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="519" name="Obstacle" x="1993.03" y="1799.24">
+   <polyline points="0,0 18.4903,-25.0641"/>
+  </object>
+  <object id="520" name="Line" x="1899.25" y="1768.73" width="93.7794" height="30.5269">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="521" name="Obstacle" x="1899.22" y="1768.7">
+   <polyline points="0,0 93.8115,30.5393"/>
+  </object>
+  <object id="522" name="Obstacle" x="1936.03" y="1705.95">
+   <polyline points="0,0 75.5,68.25"/>
+  </object>
+  <object id="523" name="Obstacle" x="1375.09" y="1714.55" width="47.0909" height="64.7273"/>
+  <object id="527" name="Line" x="1713.64" y="1060" width="38.3636" height="20.5455">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="529" name="Obstacle" x="1480" y="1120" width="40" height="40"/>
+  <object id="530" name="Obstacle" x="1520" y="1120" width="40" height="40"/>
+  <object id="531" name="Obstacle" x="1560" y="1160" width="40" height="40"/>
+  <object id="532" name="Obstacle" x="1600" y="1160" width="40" height="40"/>
+  <object id="534" name="Obstacle" x="1480" y="1080" width="40" height="40"/>
+  <object id="535" name="Obstacle" x="1600" y="1120" width="40" height="40"/>
+  <object id="536" name="Obstacle" x="1560" y="1080" width="40" height="40"/>
+  <object id="544" name="Obstacle" x="1638" y="2566.67" width="101.333" height="63"/>
+  <object id="545" name="Obstacle" x="1638.06" y="2566.81">
+   <polyline points="0,0 46.4931,-23.5403"/>
+  </object>
+  <object id="546" name="Obstacle" x="1684.5" y="2543.25">
+   <polyline points="0,0 54.875,23.4844"/>
+  </object>
+  <object id="547" name="Line" x="1638.06" y="2543.25" width="46.4375" height="23.4375">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="548" name="Line" x="1684.5" y="2543.23" width="54.9091" height="23.5455">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="549" name="Obstacle" x="1316" y="2570" width="37.6667" height="57"/>
+  <object id="550" name="Obstacle" x="1328" y="2542" width="19" height="28"/>
+  <object id="552" name="Line" x="1631.36" y="2740.3" width="46.4375" height="23.4375">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="553" name="Obstacle" x="1631.3" y="2763.72" width="101.333" height="63"/>
+  <object id="554" name="Line" x="1677.8" y="2740.28" width="54.9091" height="23.5455">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="555" name="Obstacle" x="1631.36" y="2763.86">
+   <polyline points="0,0 46.4931,-23.5403"/>
+  </object>
+  <object id="556" name="Obstacle" x="1677.8" y="2740.3">
+   <polyline points="0,0 54.875,23.4844"/>
+  </object>
+  <object id="557" name="Line" x="676.355" y="2943.8" width="46.4375" height="23.4375">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="558" name="Obstacle" x="676.295" y="2967.22" width="101.333" height="63"/>
+  <object id="559" name="Line" x="722.795" y="2943.78" width="54.9091" height="23.5455">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="560" name="Obstacle" x="676.355" y="2967.36">
+   <polyline points="0,0 46.4931,-23.5403"/>
+  </object>
+  <object id="561" name="Obstacle" x="722.795" y="2943.8">
+   <polyline points="0,0 54.875,23.4844"/>
+  </object>
+  <object id="572" name="Line" x="2513.02" y="1459.13" width="46.4375" height="23.4375">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="573" name="Obstacle" x="2512.96" y="1482.55" width="101.333" height="63"/>
+  <object id="574" name="Line" x="2559.46" y="1459.11" width="54.9091" height="23.5455">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="575" name="Obstacle" x="2513.02" y="1482.69">
+   <polyline points="0,0 46.4931,-23.5403"/>
+  </object>
+  <object id="576" name="Obstacle" x="2559.46" y="1459.13">
+   <polyline points="0,0 54.875,23.4844"/>
+  </object>
+  <object id="582" name="Line" x="3435.54" y="1260.07" width="46.4375" height="23.4375">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="583" name="Obstacle" x="3435.48" y="1283.49" width="101.333" height="63"/>
+  <object id="584" name="Line" x="3481.98" y="1260.05" width="54.9091" height="23.5455">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="585" name="Obstacle" x="3435.54" y="1283.63">
+   <polyline points="0,0 46.4931,-23.5403"/>
+  </object>
+  <object id="586" name="Obstacle" x="3481.98" y="1260.07">
+   <polyline points="0,0 54.875,23.4844"/>
+  </object>
+  <object id="587" name="Line" x="990.689" y="2022.13" width="46.4375" height="23.4375">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="588" name="Obstacle" x="990.629" y="2045.55" width="101.333" height="63"/>
+  <object id="589" name="Line" x="1037.13" y="2022.11" width="54.9091" height="23.5455">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="590" name="Obstacle" x="990.689" y="2045.69">
+   <polyline points="0,0 46.4931,-23.5403"/>
+  </object>
+  <object id="591" name="Obstacle" x="1037.13" y="2022.13">
+   <polyline points="0,0 54.875,23.4844"/>
+  </object>
+  <object id="596" name="Obstacle" x="1160" y="2040" width="40" height="40"/>
+  <object id="598" name="Obstacle" x="1160" y="2000" width="40" height="40"/>
+  <object id="599" name="Obstacle" x="1200" y="2000" width="40" height="40"/>
+  <object id="601" name="Line" x="1200.02" y="2048.89" width="74" height="31.3333">
+   <properties>
+    <property name="Slope" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="603" name="Line" x="1240.5" y="2000.07" width="33.75" height="49.0682">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="605" name="Obstacle" x="1160" y="1960" width="40" height="40"/>
+  <object id="606" name="Obstacle" x="1200" y="1960" width="40" height="40"/>
+  <object id="607" name="Obstacle" x="1120" y="1960" width="40" height="40"/>
+  <object id="608" name="Obstacle" x="1120" y="1920" width="40" height="40"/>
+  <object id="610" name="Obstacle" x="1120" y="2000" width="40" height="40"/>
+  <object id="611" name="Obstacle" x="1120" y="2040">
+   <polyline points="0,0 40,40"/>
+  </object>
+  <object id="613" name="Obstacle" x="2291" y="1660.5" width="86" height="89.5"/>
+  <object id="614" name="Obstacle" x="2287.5" y="1591.5" width="63.5" height="68.5"/>
+  <object id="616" name="Obstacle" x="2400" y="1360" width="228.333" height="40"/>
+  <object id="617" name="Obstacle" x="2400" y="1400" width="120" height="40"/>
+  <object id="631" name="Obstacle" x="2628" y="1399.75" width="29.625" height="26"/>
+  <object id="660" name="Line" x="1119.75" y="2039.25" width="40.25" height="41">
+   <properties>
+    <property name="Slope" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="661" name="Obstacle" x="1080" y="2000" width="40" height="40"/>
+  <object id="662" name="Obstacle" x="890.333" y="2241" width="62.6667" height="44.6667"/>
+  <object id="663" name="Obstacle" x="690.667" y="2239" width="67.3333" height="45.6667"/>
+  <object id="664" name="Obstacle" x="748" y="2283.82" width="22" height="29.4545"/>
+  <object id="670" name="Obstacle" x="1000" y="2200" width="80" height="80"/>
+  <object id="671" name="Obstacle" x="1080" y="2160" width="40" height="40"/>
+  <object id="672" name="Obstacle" x="1120" y="2160" width="40" height="40"/>
+  <object id="673" name="Obstacle" x="1160" y="2160" width="40" height="40"/>
+  <object id="674" name="Obstacle" x="1200" y="2160" width="40" height="40"/>
+  <object id="675" name="Obstacle" x="1240" y="2160" width="40" height="40"/>
+  <object id="676" name="Obstacle" x="1280" y="2160" width="40" height="40"/>
+  <object id="677" name="Obstacle" x="1240" y="2120" width="40" height="40"/>
+  <object id="678" name="Obstacle" x="1240" y="2080" width="40" height="40"/>
+  <object id="679" name="Obstacle" x="1200" y="2120" width="40" height="40"/>
+  <object id="680" name="Obstacle" x="1160" y="2120" width="40" height="40"/>
+  <object id="681" name="Obstacle" x="1200" y="2080" width="40" height="40"/>
  </objectgroup>
 </map>
