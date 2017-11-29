@@ -235,7 +235,7 @@ class GamePlay(GameState):
         self.imagemanager.load_inventory_image()
         self.imagemanager.load_effect_images()
         self.inventory = inv.Inventory.get_instance()
-        generator = self.imagemanager.loading_screen(7138, screen)
+        generator = self.imagemanager.loading_screen(30000, screen)
         self.gameover = False
         for group in self.sprite_groups:
             group.empty()
